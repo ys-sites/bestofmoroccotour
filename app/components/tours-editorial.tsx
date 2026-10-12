@@ -159,8 +159,13 @@ export default function ToursEditorial({ onSelectTourToBook, searchFilter = "" }
             return (
               <div
                 key={tour.id}
-                className="group flex flex-col rounded-[1.8rem] bg-white p-3.5 border border-stone-200/80 shadow-sm hover:shadow-[0_12px_35px_rgba(74,53,37,0.08)] transition-all duration-300 hover:-translate-y-1"
+                className="group flex flex-col rounded-[1.8rem] bg-white p-3.5 border border-stone-200/80 shadow-sm hover:shadow-[0_12px_35px_rgba(74,53,37,0.08)] transition-all duration-300 hover:-translate-y-1 relative overflow-hidden"
               >
+                {/* Subtle Moroccan Rosette Hallmark Watermark on card */}
+                <div className="absolute -bottom-3 -right-3 pointer-events-none transition-opacity duration-300 opacity-10 group-hover:opacity-25">
+                  <MoroccanMedallionArt size={65} />
+                </div>
+
                 {/* Clean Photo Container */}
                 <div 
                   onClick={() => setSelectedTourForModal(tour)}

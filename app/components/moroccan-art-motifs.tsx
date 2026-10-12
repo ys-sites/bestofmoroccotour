@@ -309,6 +309,266 @@ export function MoroccanCornerSpandrel({
   );
 }
 
+export function MoroccanTeapotArt({ 
+  className = "", 
+  size = 110,
+  opacity = 0.7 
+}: { 
+  className?: string; 
+  size?: number;
+  opacity?: number;
+}) {
+  return (
+    <svg
+      width={size}
+      height={size * 0.85}
+      viewBox="0 0 140 120"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      className={`pointer-events-none select-none ${className}`}
+      aria-hidden="true"
+      style={{ opacity }}
+    >
+      <defs>
+        <linearGradient id="teapotGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stopColor="#C05621" stopOpacity="0.9" />
+          <stop offset="50%" stopColor="#D97706" stopOpacity="0.75" />
+          <stop offset="100%" stopColor="#9C6E42" stopOpacity="0.5" />
+        </linearGradient>
+      </defs>
+
+      {/* Moroccan Silver Berrad Teapot */}
+      {/* Curved Tripod Feet */}
+      <path d="M 42 98 Q 40 108 35 110" stroke="url(#teapotGrad)" strokeWidth="1.6" strokeLinecap="round" />
+      <path d="M 72 98 Q 75 108 80 110" stroke="url(#teapotGrad)" strokeWidth="1.6" strokeLinecap="round" />
+      <path d="M 57 99 L 57 110" stroke="url(#teapotGrad)" strokeWidth="1.6" strokeLinecap="round" />
+
+      {/* Spherical Teapot Body with Engraved Ribs */}
+      <ellipse cx="57" cy="74" rx="28" ry="24" stroke="url(#teapotGrad)" strokeWidth="1.8" fill="url(#teapotGrad)" fillOpacity="0.06" />
+      <path d="M 40 74 C 40 60, 74 60, 74 74 C 74 88, 40 88, 40 74 Z" stroke="url(#teapotGrad)" strokeWidth="0.9" strokeDasharray="3 2" />
+      <path d="M 48 56 Q 57 74 48 92" stroke="url(#teapotGrad)" strokeWidth="0.9" />
+      <path d="M 66 56 Q 57 74 66 92" stroke="url(#teapotGrad)" strokeWidth="0.9" />
+
+      {/* Domed Lid with Pointed Finial */}
+      <path d="M 43 52 C 45 42, 69 42, 71 52 Z" stroke="url(#teapotGrad)" strokeWidth="1.6" fill="url(#teapotGrad)" fillOpacity="0.12" />
+      <path d="M 57 42 L 57 32" stroke="url(#teapotGrad)" strokeWidth="1.6" strokeLinecap="round" />
+      <circle cx="57" cy="30" r="3" fill="#D97706" />
+
+      {/* Long Elegant S-Curved Swan Spout */}
+      <path
+        d="
+          M 34 82
+          C 16 80, 5 62, 8 42
+          C 12 42, 18 48, 28 64
+        "
+        stroke="url(#teapotGrad)"
+        strokeWidth="1.8"
+        strokeLinecap="round"
+        fill="url(#teapotGrad)"
+        fillOpacity="0.08"
+      />
+
+      {/* Ornate Scrolled Handle */}
+      <path
+        d="
+          M 78 58
+          C 102 54, 106 82, 80 88
+        "
+        stroke="url(#teapotGrad)"
+        strokeWidth="2.2"
+        strokeLinecap="round"
+      />
+
+      {/* Stream of Tea Arching Down from Spout into Glass */}
+      <path
+        d="M 8 42 C 6 28, 25 10, 50 12 C 75 14, 105 28, 115 54"
+        stroke="url(#teapotGrad)"
+        strokeWidth="1.2"
+        strokeDasharray="4 3"
+        strokeLinecap="round"
+      />
+
+      {/* Moroccan Mint Tea Glass (Kass) */}
+      <path
+        d="M 108 58 L 110 82 C 110 85, 124 85, 124 82 L 126 58 Z"
+        stroke="url(#teapotGrad)"
+        strokeWidth="1.4"
+        fill="url(#teapotGrad)"
+        fillOpacity="0.08"
+      />
+      <line x1="109" y1="67" x2="125" y2="67" stroke="url(#teapotGrad)" strokeWidth="0.9" />
+      <line x1="110" y1="72" x2="124" y2="72" stroke="url(#teapotGrad)" strokeWidth="0.9" />
+
+      {/* Fresh Mint Sprig */}
+      <path d="M 117 58 C 119 50, 123 48, 126 45" stroke="url(#teapotGrad)" strokeWidth="1.3" strokeLinecap="round" />
+      <path d="M 116 57 C 114 51, 110 50, 107 48" stroke="url(#teapotGrad)" strokeWidth="1.3" strokeLinecap="round" />
+
+      {/* Delicate Steam Flourish */}
+      <path d="M 117 42 Q 115 32 120 25" stroke="url(#teapotGrad)" strokeWidth="0.9" strokeLinecap="round" opacity="0.6" />
+    </svg>
+  );
+}
+
+export function MoroccanTagineArt({ 
+  className = "", 
+  size = 90,
+  opacity = 0.65 
+}: { 
+  className?: string; 
+  size?: number;
+  opacity?: number;
+}) {
+  return (
+    <svg
+      width={size}
+      height={size * 0.9}
+      viewBox="0 0 100 90"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      className={`pointer-events-none select-none ${className}`}
+      aria-hidden="true"
+      style={{ opacity }}
+    >
+      <defs>
+        <linearGradient id="tagineGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stopColor="#C05621" stopOpacity="0.9" />
+          <stop offset="100%" stopColor="#D97706" stopOpacity="0.6" />
+        </linearGradient>
+      </defs>
+
+      {/* Bottom Clay Dish */}
+      <path
+        d="M 14 70 C 18 84, 82 84, 86 70 Z"
+        stroke="url(#tagineGrad)"
+        strokeWidth="1.8"
+        fill="url(#tagineGrad)"
+        fillOpacity="0.08"
+      />
+      <line x1="10" y1="70" x2="90" y2="70" stroke="url(#tagineGrad)" strokeWidth="1.4" strokeLinecap="round" />
+
+      {/* Conical Fluted Lid */}
+      <path
+        d="
+          M 18 68
+          C 30 50, 42 26, 46 18
+          L 54 18
+          C 58 26, 70 50, 82 68
+          Z
+        "
+        stroke="url(#tagineGrad)"
+        strokeWidth="1.8"
+        fill="url(#tagineGrad)"
+        fillOpacity="0.06"
+      />
+
+      {/* Top Knob Handle */}
+      <ellipse cx="50" cy="14" rx="6" ry="4.5" stroke="url(#tagineGrad)" strokeWidth="1.5" fill="url(#tagineGrad)" fillOpacity="0.2" />
+
+      {/* Traditional Berber Zig-Zag & Diamond Etchings */}
+      <path
+        d="
+          M 30 58 Q 50 63 70 58
+          M 36 46 Q 50 50 64 46
+          M 42 34 Q 50 37 58 34
+        "
+        stroke="url(#tagineGrad)"
+        strokeWidth="1.0"
+        strokeLinecap="round"
+      />
+
+      {/* Gentle Steam Curls */}
+      <path d="M 48 8 Q 45 2 49 -4" stroke="url(#tagineGrad)" strokeWidth="1.0" strokeLinecap="round" opacity="0.6" />
+      <path d="M 53 7 Q 56 1 52 -5" stroke="url(#tagineGrad)" strokeWidth="1.0" strokeLinecap="round" opacity="0.6" />
+    </svg>
+  );
+}
+
+export function MoroccanCamelDuneArt({ 
+  className = "", 
+  size = 140,
+  opacity = 0.5 
+}: { 
+  className?: string; 
+  size?: number;
+  opacity?: number;
+}) {
+  return (
+    <svg
+      width={size}
+      height={size * 0.65}
+      viewBox="0 0 160 100"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      className={`pointer-events-none select-none ${className}`}
+      aria-hidden="true"
+      style={{ opacity }}
+    >
+      <defs>
+        <linearGradient id="camelGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stopColor="#C05621" stopOpacity="0.8" />
+          <stop offset="100%" stopColor="#D97706" stopOpacity="0.5" />
+        </linearGradient>
+      </defs>
+
+      {/* Sahara Erg Chebbi Dunes Horizon */}
+      <path
+        d="
+          M 0 95
+          C 35 75, 75 92, 110 78
+          C 130 70, 145 80, 160 76
+        "
+        stroke="url(#camelGrad)"
+        strokeWidth="1.3"
+        strokeLinecap="round"
+      />
+      <path
+        d="
+          M 20 95
+          C 55 88, 90 94, 140 92
+        "
+        stroke="url(#camelGrad)"
+        strokeWidth="0.8"
+        strokeDasharray="4 3"
+      />
+
+      {/* Dromedary Camel Silhouette */}
+      <path
+        d="
+          M 60 78
+          C 60 66, 64 60, 70 60
+          C 74 52, 82 48, 89 56
+          C 93 58, 99 60, 102 66
+          C 105 62, 109 50, 112 40
+          C 113 37, 116 34, 120 35
+          C 123 36, 124 39, 122 42
+          C 119 46, 117 53, 116 64
+          C 115 72, 111 76, 108 78
+        "
+        stroke="url(#camelGrad)"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        fill="url(#camelGrad)"
+        fillOpacity="0.08"
+      />
+      {/* Camel Legs */}
+      <path d="M 65 70 L 64 85 L 67 96 M 70 72 L 69 84 L 72 95" stroke="url(#camelGrad)" strokeWidth="1.3" strokeLinecap="round" />
+      <path d="M 104 74 L 103 85 L 106 96 M 100 75 L 99 84 L 101 95" stroke="url(#camelGrad)" strokeWidth="1.3" strokeLinecap="round" />
+      {/* Little Tail */}
+      <path d="M 61 68 Q 58 75 60 80" stroke="url(#camelGrad)" strokeWidth="1.2" strokeLinecap="round" />
+
+      {/* 8-Point Moroccan Evening Star in Sahara Sky */}
+      <g transform="translate(138, 22)">
+        <polygon
+          points="0,-8 2.5,-2.5 8,0 2.5,2.5 0,8 -2.5,2.5 -8,0 -2.5,-2.5"
+          fill="#D97706"
+          opacity="0.8"
+        />
+        <circle cx="0" cy="0" r="1.5" fill="#C05621" />
+      </g>
+    </svg>
+  );
+}
+
 export function MoroccanFriezeDivider({ className = "" }: { className?: string }) {
   return (
     <div className={`w-full flex items-center justify-center gap-3 py-6 ${className}`}>

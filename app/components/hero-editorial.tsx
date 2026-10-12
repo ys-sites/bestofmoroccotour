@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import Image from "next/image";
 import { Search, Calendar, Compass } from "lucide-react";
+import { MoroccanCornerSpandrel } from "./moroccan-art-motifs";
 
 interface HeroProps {
   onSearch: (city: string) => void;
@@ -57,6 +58,14 @@ export default function HeroEditorial({ onSearch }: HeroProps) {
     <section className="relative w-full pb-16 sm:pb-20">
       {/* Hero Panoramic Window Frame matching Ui.jpg */}
       <div className="relative w-full h-[620px] sm:h-[680px] lg:h-[720px] rounded-[2.5rem] overflow-hidden shadow-[0_20px_50px_rgba(74,53,37,0.12)] bg-[#2A231C]">
+        {/* Subtle Palace Corner Arabesques inside Hero Frame */}
+        <div className="absolute top-5 left-5 z-20 pointer-events-none hidden sm:block">
+          <MoroccanCornerSpandrel size={68} opacity={0.45} />
+        </div>
+        <div className="absolute top-5 right-5 z-20 pointer-events-none hidden sm:block">
+          <MoroccanCornerSpandrel size={68} opacity={0.45} flip={true} />
+        </div>
+
         {/* Background Image Carousel with Smooth Fade */}
         {slides.map((slide, index) => (
           <div

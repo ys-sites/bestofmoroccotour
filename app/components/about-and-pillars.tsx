@@ -3,7 +3,7 @@
 import Image from "next/image";
 import { ShieldCheck, Award, Users, HeartHandshake, MapPin, GraduationCap } from "lucide-react";
 import { siteConfig } from "@/data/bestOfMoroccoData";
-import { MoroccanArchWatermark } from "./moroccan-art-motifs";
+import { MoroccanArchWatermark, MoroccanTeapotArt, MoroccanCamelDuneArt } from "./moroccan-art-motifs";
 
 export default function AboutAndPillars() {
   return (
@@ -15,7 +15,7 @@ export default function AboutAndPillars() {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
           <div className="lg:col-span-6 space-y-6 relative">
             {/* Subtle authentic Moroccan Archway Watermark */}
-            <MoroccanArchWatermark className="absolute -top-14 -left-10 w-72 sm:w-80 h-auto opacity-15 pointer-events-none text-[#C05621] -z-10 hidden sm:block" />
+            <MoroccanArchWatermark className="absolute -top-14 -left-10 w-72 sm:w-84 h-auto pointer-events-none text-[#C05621] -z-10 hidden sm:block" opacity={0.32} />
 
             <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-amber-50 border border-amber-200 text-[#C05621] text-xs font-semibold uppercase tracking-wider">
               <span>Our Heritage & Philosophy</span>
@@ -32,8 +32,13 @@ export default function AboutAndPillars() {
               Established with a simple ideal: <strong className="font-semibold text-stone-900">life-seeing with native local guides instead of crowded sightseeing</strong>. For over two decades, Best of Morocco Tours has built enduring relationships with licensed scholars, historic riads, and desert nomad families to provide travelers an intimate, authentic Moroccan welcome.
             </p>
 
-            <blockquote className="text-xs sm:text-sm text-stone-700 leading-relaxed font-light italic pl-5 border-l-2 border-[#C05621] bg-stone-50 py-3.5 pr-4 rounded-r-2xl">
-              &ldquo;We embrace the philosophy of our late King Hassan II: traveling removes barriers and brings people closer. Our calling is to use tourism to promote peace, celebrate our Amazigh and Moorish culture, and give every guest memories that last a lifetime.&rdquo;
+            <blockquote className="relative text-xs sm:text-sm text-stone-700 leading-relaxed font-light italic pl-5 border-l-2 border-[#C05621] bg-stone-50 py-3.5 pr-4 rounded-r-2xl overflow-hidden">
+              <div className="absolute right-2 -bottom-2 pointer-events-none hidden sm:block">
+                <MoroccanTeapotArt size={65} opacity={0.25} />
+              </div>
+              <span className="relative z-10 block">
+                &ldquo;We embrace the philosophy of our late King Hassan II: traveling removes barriers and brings people closer. Our calling is to use tourism to promote peace, celebrate our Amazigh and Moorish culture, and give every guest memories that last a lifetime.&rdquo;
+              </span>
             </blockquote>
 
             {/* Direct Core Commitments (Clean horizontal badges instead of generic AI boxes) */}
@@ -84,9 +89,14 @@ export default function AboutAndPillars() {
                 className="object-cover"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-transparent to-transparent" />
-              <div className="absolute bottom-5 left-5 right-5 text-white">
-                <span className="text-[10px] uppercase font-bold text-amber-300 tracking-wider block">Erg Chebbi Merzouga</span>
-                <span className="font-serif font-bold text-base sm:text-lg">Royal Berber Desert Bivouacs</span>
+              <div className="absolute bottom-5 left-5 right-5 text-white flex items-end justify-between">
+                <div>
+                  <span className="text-[10px] uppercase font-bold text-amber-300 tracking-wider block">Erg Chebbi Merzouga</span>
+                  <span className="font-serif font-bold text-base sm:text-lg">Royal Berber Desert Bivouacs</span>
+                </div>
+                <div className="hidden sm:block shrink-0">
+                  <MoroccanCamelDuneArt size={80} opacity={0.75} />
+                </div>
               </div>
             </div>
           </div>

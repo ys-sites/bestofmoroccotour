@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { ChevronDown, HelpCircle } from "lucide-react";
 import { siteFaqs } from "@/data/bestOfMoroccoData";
+import { MoroccanMedallionArt, MoroccanFriezeDivider } from "./moroccan-art-motifs";
 
 export default function FaqAndPolicies() {
   const [openIndex, setOpenIndex] = useState<number | null>(0);
@@ -14,10 +15,16 @@ export default function FaqAndPolicies() {
   return (
     <section id="faq" className="bg-transparent py-20 px-4 sm:px-8 text-stone-900 border-t border-stone-200/60">
       <div className="max-w-4xl mx-auto space-y-10">
+        <MoroccanFriezeDivider className="pb-2 opacity-50" />
+
         <div className="text-center space-y-2">
-          <span className="text-[#C5A880] font-serif italic text-lg capitalize block">
-            Essential Questions
-          </span>
+          <div className="flex items-center justify-center gap-2">
+            <MoroccanMedallionArt size={32} opacity={0.65} />
+            <span className="text-[#C05621] font-serif italic text-lg capitalize block">
+              Essential Questions
+            </span>
+            <MoroccanMedallionArt size={32} opacity={0.65} />
+          </div>
           <h3 className="font-serif text-3xl sm:text-4xl font-bold text-stone-900">
             Frequently Asked Questions & Policies
           </h3>

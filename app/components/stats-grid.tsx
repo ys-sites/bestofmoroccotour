@@ -1,3 +1,5 @@
+'use client';
+
 import { MoroccanMedallionArt } from "./moroccan-art-motifs";
 
 export default function StatsGrid() {

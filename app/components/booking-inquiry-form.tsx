@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import { Send, Phone, Mail, Clock, ShieldCheck, Check, Sparkles } from "lucide-react";
 import { siteConfig, masterTours } from "@/data/bestOfMoroccoData";
-import { MoroccanArchWatermark, MoroccanMedallionArt } from "./moroccan-art-motifs";
+import { MoroccanArchWatermark, MoroccanMedallionArt, MoroccanTagineArt } from "./moroccan-art-motifs";
 
 interface BookingFormProps {
   initialTourName?: string;
@@ -276,12 +276,15 @@ export default function BookingInquiryForm({ initialTourName = "" }: BookingForm
               </div>
             </div>
 
-            <div className="p-6 rounded-[2rem] bg-amber-50/70 border border-amber-200/80 space-y-2">
-              <span className="text-xs font-bold text-[#C05621] flex items-center gap-1.5">
+            <div className="relative p-6 rounded-[2rem] bg-amber-50/70 border border-amber-200/80 space-y-2 overflow-hidden">
+              <div className="absolute -bottom-2 -right-2 pointer-events-none hidden sm:block">
+                <MoroccanTagineArt size={75} opacity={0.22} />
+              </div>
+              <span className="relative z-10 text-xs font-bold text-[#C05621] flex items-center gap-1.5">
                 <ShieldCheck className="w-4 h-4" />
                 Best Price Guarantee Active
               </span>
-              <p className="text-xs text-stone-600 font-light leading-relaxed">
+              <p className="relative z-10 text-xs text-stone-600 font-light leading-relaxed">
                 We guarantee the best price and service in Morocco. Find a lower advertised price elsewhere on an identical package and we will match it + grant 5% extra discount.
               </p>
             </div>

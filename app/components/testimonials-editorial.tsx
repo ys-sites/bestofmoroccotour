@@ -3,18 +3,25 @@
 import Image from "next/image";
 import { Star, CheckCircle2 } from "lucide-react";
 import { clientTestimonials } from "@/data/bestOfMoroccoData";
+import { MoroccanMedallionArt, MoroccanLanternArt } from "./moroccan-art-motifs";
 
 export default function TestimonialsEditorial() {
   return (
     <section id="reviews" className="bg-transparent py-20 px-4 sm:px-8 text-stone-900 border-t border-stone-200/60">
       <div className="max-w-[1360px] mx-auto space-y-12">
-        <div className="text-center max-w-xl mx-auto space-y-2">
-          <span className="text-[#C5A880] font-serif italic text-lg capitalize block">
-            Guest Reflections
-          </span>
-          <h3 className="font-serif text-3xl sm:text-4xl font-bold text-stone-900">
-            Words from Travelers We Called Friends
-          </h3>
+        <div className="text-center max-w-xl mx-auto space-y-2 relative">
+          <div className="flex items-center justify-center gap-3">
+            <MoroccanLanternArt height={60} opacity={0.4} className="hidden sm:block" />
+            <div>
+              <span className="text-[#C05621] font-serif italic text-lg capitalize block">
+                Guest Reflections
+              </span>
+              <h3 className="font-serif text-3xl sm:text-4xl font-bold text-stone-900">
+                Words from Travelers We Called Friends
+              </h3>
+            </div>
+            <MoroccanLanternArt height={60} opacity={0.4} className="hidden sm:block" />
+          </div>
           <p className="text-xs sm:text-sm text-stone-500 font-light">
             Real guest accounts from travel operators, private families, and international explorers who experienced Morocco with Ayoub and our guides.
           </p>
@@ -24,8 +31,12 @@ export default function TestimonialsEditorial() {
           {clientTestimonials.map((t, idx) => (
             <div
               key={idx}
-              className="bg-white p-7 rounded-[2rem] border border-stone-200/80 shadow-[0_6px_25px_rgba(0,0,0,0.03)] flex flex-col justify-between space-y-5"
+              className="bg-white p-7 rounded-[2rem] border border-stone-200/80 shadow-[0_6px_25px_rgba(0,0,0,0.03)] flex flex-col justify-between space-y-5 relative overflow-hidden group"
             >
+              {/* Subtle Moroccan Rosette Hallmark Watermark on testimonial card */}
+              <div className="absolute -bottom-3 -right-3 pointer-events-none transition-opacity duration-300 opacity-5 group-hover:opacity-15">
+                <MoroccanMedallionArt size={65} />
+              </div>
               <div className="space-y-4">
                 <div className="flex items-center gap-3.5">
                   <div className="relative w-12 h-12 rounded-full overflow-hidden border-2 border-stone-200 shrink-0 bg-stone-100">
