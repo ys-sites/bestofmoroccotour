@@ -1,0 +1,684 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Client Request Image Gallery</title>
+    <style>
+        body { font-family: sans-serif; background: #1a1a1a; color: #fff; padding: 20px; }
+        .gallery { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 20px; }
+        .card { background: #2a2a2a; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 6px rgba(0,0,0,0.3); border: 1px solid #333; }
+        .card img { width: 100%; height: 180px; object-fit: cover; display: block; }
+        .info { padding: 10px; font-size: 12px; word-break: break-all; }
+        .info h3 { margin: 0 0 5px 0; font-size: 14px; color: #ffaf40; }
+    </style>
+</head>
+<body>
+    <h1>Client Request Image Gallery</h1>
+    <div class="gallery">
+
+            <div class="card">
+                <img src="temp_thumbnails/0l7a9294.png.jpg" alt="0L7A9294.png">
+                <div class="info">
+                    <h3>0L7A9294.png</h3>
+                    <p>Path: 0L7A9294.png</p>
+                </div>
+            </div>
+            
+            <div class="card">
+                <img src="temp_thumbnails/10_parcours_bleu.jpg.jpg" alt="10 parcours BLEU.jpg">
+                <div class="info">
+                    <h3>10 parcours BLEU.jpg</h3>
+                    <p>Path: 10 parcours BLEU.jpg</p>
+                </div>
+            </div>
+            
+            <div class="card">
+                <img src="temp_thumbnails/18_parcours_rouge.jpg.jpg" alt="18 parcours rouge.jpg">
+                <div class="info">
+                    <h3>18 parcours rouge.jpg</h3>
+                    <p>Path: 18 parcours rouge.jpg</p>
+                </div>
+            </div>
+            
+            <div class="card">
+                <img src="temp_thumbnails/5_blue_course.jpg.jpg" alt="5 BLUE COURSE.JPG">
+                <div class="info">
+                    <h3>5 BLUE COURSE.JPG</h3>
+                    <p>Path: 5 BLUE COURSE.JPG</p>
+                </div>
+            </div>
+            
+            <div class="card">
+                <img src="temp_thumbnails/5rouge.jpg.jpg" alt="5ROUGE.JPG">
+                <div class="info">
+                    <h3>5ROUGE.JPG</h3>
+                    <p>Path: 5ROUGE.JPG</p>
+                </div>
+            </div>
+            
+            <div class="card">
+                <img src="temp_thumbnails/7bleu_tgp.jpg.jpg" alt="7bleu TGP.JPG">
+                <div class="info">
+                    <h3>7bleu TGP.JPG</h3>
+                    <p>Path: 7bleu TGP.JPG</p>
+                </div>
+            </div>
+            
+            <div class="card">
+                <img src="temp_thumbnails/9_jaune.jpg.jpg" alt="9 JAUNE.JPG">
+                <div class="info">
+                    <h3>9 JAUNE.JPG</h3>
+                    <p>Path: 9 JAUNE.JPG</p>
+                </div>
+            </div>
+            
+            <div class="card">
+                <img src="temp_thumbnails/9bleu_matin.jpg.jpg" alt="9BLEU MATIN.JPG">
+                <div class="info">
+                    <h3>9BLEU MATIN.JPG</h3>
+                    <p>Path: 9BLEU MATIN.JPG</p>
+                </div>
+            </div>
+            
+            <div class="card">
+                <img src="temp_thumbnails/akenza_teeshot_2.jpg.jpg" alt="Akenza teeshot 2.jpg">
+                <div class="info">
+                    <h3>Akenza teeshot 2.jpg</h3>
+                    <p>Path: Akenza teeshot 2.jpg</p>
+                </div>
+            </div>
+            
+            <div class="card">
+                <img src="temp_thumbnails/akenza-102.jpg.jpg" alt="AKENZA-102.jpg">
+                <div class="info">
+                    <h3>AKENZA-102.jpg</h3>
+                    <p>Path: AKENZA-102.jpg</p>
+                </div>
+            </div>
+            
+            <div class="card">
+                <img src="temp_thumbnails/akenza-139.jpg.jpg" alt="AKENZA-139.jpg">
+                <div class="info">
+                    <h3>AKENZA-139.jpg</h3>
+                    <p>Path: AKENZA-139.jpg</p>
+                </div>
+            </div>
+            
+            <div class="card">
+                <img src="temp_thumbnails/club_house_.jpg.jpg" alt="CLUB HOUSE .JPG">
+                <div class="info">
+                    <h3>CLUB HOUSE .JPG</h3>
+                    <p>Path: CLUB HOUSE .JPG</p>
+                </div>
+            </div>
+            
+            <div class="card">
+                <img src="temp_thumbnails/coucher_d'été.jpg.jpg" alt="coucher d'été.jpg">
+                <div class="info">
+                    <h3>coucher d'été.jpg</h3>
+                    <p>Path: coucher d'été.jpg</p>
+                </div>
+            </div>
+            
+            <div class="card">
+                <img src="temp_thumbnails/hilton_taghazout_1.avif.jpg" alt="Hilton Taghazout 1.avif">
+                <div class="info">
+                    <h3>Hilton Taghazout 1.avif</h3>
+                    <p>Path: Hilton Taghazout 1.avif</p>
+                </div>
+            </div>
+            
+            <div class="card">
+                <img src="temp_thumbnails/hilton_taghazout_10.avif.jpg" alt="Hilton Taghazout 10.avif">
+                <div class="info">
+                    <h3>Hilton Taghazout 10.avif</h3>
+                    <p>Path: Hilton Taghazout 10.avif</p>
+                </div>
+            </div>
+            
+            <div class="card">
+                <img src="temp_thumbnails/hilton_taghazout_11.avif.jpg" alt="Hilton Taghazout 11.avif">
+                <div class="info">
+                    <h3>Hilton Taghazout 11.avif</h3>
+                    <p>Path: Hilton Taghazout 11.avif</p>
+                </div>
+            </div>
+            
+            <div class="card">
+                <img src="temp_thumbnails/hilton_taghazout_12.avif.jpg" alt="Hilton Taghazout 12.avif">
+                <div class="info">
+                    <h3>Hilton Taghazout 12.avif</h3>
+                    <p>Path: Hilton Taghazout 12.avif</p>
+                </div>
+            </div>
+            
+            <div class="card">
+                <img src="temp_thumbnails/hilton_taghazout_13.avif.jpg" alt="Hilton Taghazout 13.avif">
+                <div class="info">
+                    <h3>Hilton Taghazout 13.avif</h3>
+                    <p>Path: Hilton Taghazout 13.avif</p>
+                </div>
+            </div>
+            
+            <div class="card">
+                <img src="temp_thumbnails/hilton_taghazout_14.avif.jpg" alt="Hilton Taghazout 14.avif">
+                <div class="info">
+                    <h3>Hilton Taghazout 14.avif</h3>
+                    <p>Path: Hilton Taghazout 14.avif</p>
+                </div>
+            </div>
+            
+            <div class="card">
+                <img src="temp_thumbnails/hilton_taghazout_15.avif.jpg" alt="Hilton Taghazout 15.avif">
+                <div class="info">
+                    <h3>Hilton Taghazout 15.avif</h3>
+                    <p>Path: Hilton Taghazout 15.avif</p>
+                </div>
+            </div>
+            
+            <div class="card">
+                <img src="temp_thumbnails/hilton_taghazout_16.avif.jpg" alt="Hilton Taghazout 16.avif">
+                <div class="info">
+                    <h3>Hilton Taghazout 16.avif</h3>
+                    <p>Path: Hilton Taghazout 16.avif</p>
+                </div>
+            </div>
+            
+            <div class="card">
+                <img src="temp_thumbnails/hilton_taghazout_17.avif.jpg" alt="Hilton Taghazout 17.avif">
+                <div class="info">
+                    <h3>Hilton Taghazout 17.avif</h3>
+                    <p>Path: Hilton Taghazout 17.avif</p>
+                </div>
+            </div>
+            
+            <div class="card">
+                <img src="temp_thumbnails/hilton_taghazout_18.avif.jpg" alt="Hilton Taghazout 18.avif">
+                <div class="info">
+                    <h3>Hilton Taghazout 18.avif</h3>
+                    <p>Path: Hilton Taghazout 18.avif</p>
+                </div>
+            </div>
+            
+            <div class="card">
+                <img src="temp_thumbnails/hilton_taghazout_2.avif.jpg" alt="Hilton Taghazout 2.avif">
+                <div class="info">
+                    <h3>Hilton Taghazout 2.avif</h3>
+                    <p>Path: Hilton Taghazout 2.avif</p>
+                </div>
+            </div>
+            
+            <div class="card">
+                <img src="temp_thumbnails/hilton_taghazout_3.avif.jpg" alt="Hilton Taghazout 3.avif">
+                <div class="info">
+                    <h3>Hilton Taghazout 3.avif</h3>
+                    <p>Path: Hilton Taghazout 3.avif</p>
+                </div>
+            </div>
+            
+            <div class="card">
+                <img src="temp_thumbnails/hilton_taghazout_4.avif.jpg" alt="Hilton Taghazout 4.avif">
+                <div class="info">
+                    <h3>Hilton Taghazout 4.avif</h3>
+                    <p>Path: Hilton Taghazout 4.avif</p>
+                </div>
+            </div>
+            
+            <div class="card">
+                <img src="temp_thumbnails/hilton_taghazout_5.avif.jpg" alt="Hilton Taghazout 5.avif">
+                <div class="info">
+                    <h3>Hilton Taghazout 5.avif</h3>
+                    <p>Path: Hilton Taghazout 5.avif</p>
+                </div>
+            </div>
+            
+            <div class="card">
+                <img src="temp_thumbnails/hilton_taghazout_6.avif.jpg" alt="Hilton Taghazout 6.avif">
+                <div class="info">
+                    <h3>Hilton Taghazout 6.avif</h3>
+                    <p>Path: Hilton Taghazout 6.avif</p>
+                </div>
+            </div>
+            
+            <div class="card">
+                <img src="temp_thumbnails/hilton_taghazout_7.avif.jpg" alt="Hilton Taghazout 7.avif">
+                <div class="info">
+                    <h3>Hilton Taghazout 7.avif</h3>
+                    <p>Path: Hilton Taghazout 7.avif</p>
+                </div>
+            </div>
+            
+            <div class="card">
+                <img src="temp_thumbnails/hilton_taghazout_8.avif.jpg" alt="Hilton Taghazout 8.avif">
+                <div class="info">
+                    <h3>Hilton Taghazout 8.avif</h3>
+                    <p>Path: Hilton Taghazout 8.avif</p>
+                </div>
+            </div>
+            
+            <div class="card">
+                <img src="temp_thumbnails/hilton_taghazout_9.avif.jpg" alt="Hilton Taghazout 9.avif">
+                <div class="info">
+                    <h3>Hilton Taghazout 9.avif</h3>
+                    <p>Path: Hilton Taghazout 9.avif</p>
+                </div>
+            </div>
+            
+            <div class="card">
+                <img src="temp_thumbnails/img_3723.jpg.jpg" alt="IMG_3723.JPG">
+                <div class="info">
+                    <h3>IMG_3723.JPG</h3>
+                    <p>Path: IMG_3723.JPG</p>
+                </div>
+            </div>
+            
+            <div class="card">
+                <img src="temp_thumbnails/img_3752.jpg.jpg" alt="IMG_3752.JPG">
+                <div class="info">
+                    <h3>IMG_3752.JPG</h3>
+                    <p>Path: IMG_3752.JPG</p>
+                </div>
+            </div>
+            
+            <div class="card">
+                <img src="temp_thumbnails/paradise_of_flowers_.jpg.jpg" alt="PARADISE OF FLOWERS .JPG">
+                <div class="info">
+                    <h3>PARADISE OF FLOWERS .JPG</h3>
+                    <p>Path: PARADISE OF FLOWERS .JPG</p>
+                </div>
+            </div>
+            
+            <div class="card">
+                <img src="temp_thumbnails/parcours_rouge_trous_n°09-17.jpg.jpg" alt="PARCOURS ROUGE Trous n°09-17.jpg">
+                <div class="info">
+                    <h3>PARCOURS ROUGE Trous n°09-17.jpg</h3>
+                    <p>Path: PARCOURS ROUGE Trous n°09-17.jpg</p>
+                </div>
+            </div>
+            
+            <div class="card">
+                <img src="temp_thumbnails/parcours_rouge_trous_n°11-n°12.jpg.jpg" alt="PARCOURS ROUGE Trous n°11-n°12.jpg">
+                <div class="info">
+                    <h3>PARCOURS ROUGE Trous n°11-n°12.jpg</h3>
+                    <p>Path: PARCOURS ROUGE Trous n°11-n°12.jpg</p>
+                </div>
+            </div>
+            
+            <div class="card">
+                <img src="temp_thumbnails/parcours_rouge_trous_n°11.jpg.jpg" alt="PARCOURS ROUGE Trous n°11.jpg">
+                <div class="info">
+                    <h3>PARCOURS ROUGE Trous n°11.jpg</h3>
+                    <p>Path: PARCOURS ROUGE Trous n°11.jpg</p>
+                </div>
+            </div>
+            
+            <div class="card">
+                <img src="temp_thumbnails/parcours_rouge_trous_n°12.jpg.jpg" alt="PARCOURS ROUGE Trous n°12.jpg">
+                <div class="info">
+                    <h3>PARCOURS ROUGE Trous n°12.jpg</h3>
+                    <p>Path: PARCOURS ROUGE Trous n°12.jpg</p>
+                </div>
+            </div>
+            
+            <div class="card">
+                <img src="temp_thumbnails/parcours_rouge_trous_n°13.jpg.jpg" alt="PARCOURS ROUGE Trous n°13.jpg">
+                <div class="info">
+                    <h3>PARCOURS ROUGE Trous n°13.jpg</h3>
+                    <p>Path: PARCOURS ROUGE Trous n°13.jpg</p>
+                </div>
+            </div>
+            
+            <div class="card">
+                <img src="temp_thumbnails/parcours_rouge_trous_n°17.tif.jpg" alt="PARCOURS ROUGE Trous n°17.tif">
+                <div class="info">
+                    <h3>PARCOURS ROUGE Trous n°17.tif</h3>
+                    <p>Path: PARCOURS ROUGE Trous n°17.tif</p>
+                </div>
+            </div>
+            
+            <div class="card">
+                <img src="temp_thumbnails/soleil_couchant.jpg.jpg" alt="soleil couchant.JPG">
+                <div class="info">
+                    <h3>soleil couchant.JPG</h3>
+                    <p>Path: soleil couchant.JPG</p>
+                </div>
+            </div>
+            
+            <div class="card">
+                <img src="temp_thumbnails/tgz_10_side.jpg.jpg" alt="tgz 10 side.jpg">
+                <div class="info">
+                    <h3>tgz 10 side.jpg</h3>
+                    <p>Path: tgz 10 side.jpg</p>
+                </div>
+            </div>
+            
+            <div class="card">
+                <img src="temp_thumbnails/tgz_17_zoom.jpg.jpg" alt="tgz 17 zoom.jpg">
+                <div class="info">
+                    <h3>tgz 17 zoom.jpg</h3>
+                    <p>Path: tgz 17 zoom.jpg</p>
+                </div>
+            </div>
+            
+            <div class="card">
+                <img src="temp_thumbnails/tgz_18_hotel.jpg.jpg" alt="tgz 18 hotel.jpg">
+                <div class="info">
+                    <h3>tgz 18 hotel.jpg</h3>
+                    <p>Path: tgz 18 hotel.jpg</p>
+                </div>
+            </div>
+            
+            <div class="card">
+                <img src="temp_thumbnails/tgz_8th_high.jpg.jpg" alt="tgz 8th high.jpg">
+                <div class="info">
+                    <h3>tgz 8th high.jpg</h3>
+                    <p>Path: tgz 8th high.jpg</p>
+                </div>
+            </div>
+            
+            <div class="card">
+                <img src="temp_thumbnails/_xc_0779_copie.jpg.jpg" alt="_XC_0779 copie.jpg">
+                <div class="info">
+                    <h3>_XC_0779 copie.jpg</h3>
+                    <p>Path: _XC_0779 copie.jpg</p>
+                </div>
+            </div>
+            
+            <div class="card">
+                <img src="temp_thumbnails/_xc_0808_copie.jpg.jpg" alt="_XC_0808 copie.jpg">
+                <div class="info">
+                    <h3>_XC_0808 copie.jpg</h3>
+                    <p>Path: _XC_0808 copie.jpg</p>
+                </div>
+            </div>
+            
+            <div class="card">
+                <img src="temp_thumbnails/_xc_0856_copie.jpg.jpg" alt="_XC_0856 copie.jpg">
+                <div class="info">
+                    <h3>_XC_0856 copie.jpg</h3>
+                    <p>Path: _XC_0856 copie.jpg</p>
+                </div>
+            </div>
+            
+            <div class="card">
+                <img src="temp_thumbnails/more_info_0l7a9540.png.jpg" alt="0L7A9540.png">
+                <div class="info">
+                    <h3>0L7A9540.png</h3>
+                    <p>Path: More Info\0L7A9540.png</p>
+                </div>
+            </div>
+            
+            <div class="card">
+                <img src="temp_thumbnails/more_info_0l7a9547.png.jpg" alt="0L7A9547.png">
+                <div class="info">
+                    <h3>0L7A9547.png</h3>
+                    <p>Path: More Info\0L7A9547.png</p>
+                </div>
+            </div>
+            
+            <div class="card">
+                <img src="temp_thumbnails/more_info_0l7a9553.png.jpg" alt="0L7A9553.png">
+                <div class="info">
+                    <h3>0L7A9553.png</h3>
+                    <p>Path: More Info\0L7A9553.png</p>
+                </div>
+            </div>
+            
+            <div class="card">
+                <img src="temp_thumbnails/more_info_0l7a9556.png.jpg" alt="0L7A9556.png">
+                <div class="info">
+                    <h3>0L7A9556.png</h3>
+                    <p>Path: More Info\0L7A9556.png</p>
+                </div>
+            </div>
+            
+            <div class="card">
+                <img src="temp_thumbnails/more_info_0l7a9566.png.jpg" alt="0L7A9566.png">
+                <div class="info">
+                    <h3>0L7A9566.png</h3>
+                    <p>Path: More Info\0L7A9566.png</p>
+                </div>
+            </div>
+            
+            <div class="card">
+                <img src="temp_thumbnails/more_info_0l7a9573.png.jpg" alt="0L7A9573.png">
+                <div class="info">
+                    <h3>0L7A9573.png</h3>
+                    <p>Path: More Info\0L7A9573.png</p>
+                </div>
+            </div>
+            
+            <div class="card">
+                <img src="temp_thumbnails/more_info_0l7a9586.png.jpg" alt="0L7A9586.png">
+                <div class="info">
+                    <h3>0L7A9586.png</h3>
+                    <p>Path: More Info\0L7A9586.png</p>
+                </div>
+            </div>
+            
+            <div class="card">
+                <img src="temp_thumbnails/more_info_0l7a9587.png.jpg" alt="0L7A9587.png">
+                <div class="info">
+                    <h3>0L7A9587.png</h3>
+                    <p>Path: More Info\0L7A9587.png</p>
+                </div>
+            </div>
+            
+            <div class="card">
+                <img src="temp_thumbnails/more_info_0l7a9588.png.jpg" alt="0L7A9588.png">
+                <div class="info">
+                    <h3>0L7A9588.png</h3>
+                    <p>Path: More Info\0L7A9588.png</p>
+                </div>
+            </div>
+            
+            <div class="card">
+                <img src="temp_thumbnails/more_info_0l7a9592.png.jpg" alt="0L7A9592.png">
+                <div class="info">
+                    <h3>0L7A9592.png</h3>
+                    <p>Path: More Info\0L7A9592.png</p>
+                </div>
+            </div>
+            
+            <div class="card">
+                <img src="temp_thumbnails/more_info_0l7a9595_(1).png.jpg" alt="0L7A9595 (1).png">
+                <div class="info">
+                    <h3>0L7A9595 (1).png</h3>
+                    <p>Path: More Info\0L7A9595 (1).png</p>
+                </div>
+            </div>
+            
+            <div class="card">
+                <img src="temp_thumbnails/more_info_0l7a9595.png.jpg" alt="0L7A9595.png">
+                <div class="info">
+                    <h3>0L7A9595.png</h3>
+                    <p>Path: More Info\0L7A9595.png</p>
+                </div>
+            </div>
+            
+            <div class="card">
+                <img src="temp_thumbnails/more_info_0l7a9597.png.jpg" alt="0L7A9597.png">
+                <div class="info">
+                    <h3>0L7A9597.png</h3>
+                    <p>Path: More Info\0L7A9597.png</p>
+                </div>
+            </div>
+            
+            <div class="card">
+                <img src="temp_thumbnails/more_info_0l7a9602.png.jpg" alt="0L7A9602.png">
+                <div class="info">
+                    <h3>0L7A9602.png</h3>
+                    <p>Path: More Info\0L7A9602.png</p>
+                </div>
+            </div>
+            
+            <div class="card">
+                <img src="temp_thumbnails/more_info_0l7a9605.png.jpg" alt="0L7A9605.png">
+                <div class="info">
+                    <h3>0L7A9605.png</h3>
+                    <p>Path: More Info\0L7A9605.png</p>
+                </div>
+            </div>
+            
+            <div class="card">
+                <img src="temp_thumbnails/more_info_0l7a9607.png.jpg" alt="0L7A9607.png">
+                <div class="info">
+                    <h3>0L7A9607.png</h3>
+                    <p>Path: More Info\0L7A9607.png</p>
+                </div>
+            </div>
+            
+            <div class="card">
+                <img src="temp_thumbnails/more_info_0l7a9612.png.jpg" alt="0L7A9612.png">
+                <div class="info">
+                    <h3>0L7A9612.png</h3>
+                    <p>Path: More Info\0L7A9612.png</p>
+                </div>
+            </div>
+            
+            <div class="card">
+                <img src="temp_thumbnails/more_info_dji_0053.png.jpg" alt="DJI_0053.png">
+                <div class="info">
+                    <h3>DJI_0053.png</h3>
+                    <p>Path: More Info\DJI_0053.png</p>
+                </div>
+            </div>
+            
+            <div class="card">
+                <img src="temp_thumbnails/more_info_dji_0059.png.jpg" alt="DJI_0059.png">
+                <div class="info">
+                    <h3>DJI_0059.png</h3>
+                    <p>Path: More Info\DJI_0059.png</p>
+                </div>
+            </div>
+            
+            <div class="card">
+                <img src="temp_thumbnails/more_info_dji_0060.png.jpg" alt="DJI_0060.png">
+                <div class="info">
+                    <h3>DJI_0060.png</h3>
+                    <p>Path: More Info\DJI_0060.png</p>
+                </div>
+            </div>
+            
+            <div class="card">
+                <img src="temp_thumbnails/more_info_dji_0063.png.jpg" alt="DJI_0063.png">
+                <div class="info">
+                    <h3>DJI_0063.png</h3>
+                    <p>Path: More Info\DJI_0063.png</p>
+                </div>
+            </div>
+            
+            <div class="card">
+                <img src="temp_thumbnails/more_info_dji_0092.png.jpg" alt="DJI_0092.png">
+                <div class="info">
+                    <h3>DJI_0092.png</h3>
+                    <p>Path: More Info\DJI_0092.png</p>
+                </div>
+            </div>
+            
+            <div class="card">
+                <img src="temp_thumbnails/more_info_dji_0121.png.jpg" alt="DJI_0121.png">
+                <div class="info">
+                    <h3>DJI_0121.png</h3>
+                    <p>Path: More Info\DJI_0121.png</p>
+                </div>
+            </div>
+            
+            <div class="card">
+                <img src="temp_thumbnails/more_info_hilton_taghazout_19.avif.jpg" alt="Hilton Taghazout 19.avif">
+                <div class="info">
+                    <h3>Hilton Taghazout 19.avif</h3>
+                    <p>Path: More Info\Hilton Taghazout 19.avif</p>
+                </div>
+            </div>
+            
+            <div class="card">
+                <img src="temp_thumbnails/more_info_hilton_taghazout_20.avif.jpg" alt="Hilton Taghazout 20.avif">
+                <div class="info">
+                    <h3>Hilton Taghazout 20.avif</h3>
+                    <p>Path: More Info\Hilton Taghazout 20.avif</p>
+                </div>
+            </div>
+            
+            <div class="card">
+                <img src="temp_thumbnails/wetransfer_img_5158-jpg_2026-06-03_1513_img_5158.jpg.jpg" alt="IMG_5158.jpg">
+                <div class="info">
+                    <h3>IMG_5158.jpg</h3>
+                    <p>Path: wetransfer_img_5158-jpg_2026-06-03_1513\IMG_5158.jpg</p>
+                </div>
+            </div>
+            
+            <div class="card">
+                <img src="temp_thumbnails/wetransfer_img_5158-jpg_2026-06-03_1513_img_6768.jpg.jpg" alt="IMG_6768.jpg">
+                <div class="info">
+                    <h3>IMG_6768.jpg</h3>
+                    <p>Path: wetransfer_img_5158-jpg_2026-06-03_1513\IMG_6768.jpg</p>
+                </div>
+            </div>
+            
+            <div class="card">
+                <img src="temp_thumbnails/wetransfer_img_5158-jpg_2026-06-03_1513_img_6787-modifier.jpg.jpg" alt="IMG_6787-Modifier.jpg">
+                <div class="info">
+                    <h3>IMG_6787-Modifier.jpg</h3>
+                    <p>Path: wetransfer_img_5158-jpg_2026-06-03_1513\IMG_6787-Modifier.jpg</p>
+                </div>
+            </div>
+            
+            <div class="card">
+                <img src="temp_thumbnails/wetransfer_img_5158-jpg_2026-06-03_1513_img_6793-modifier.jpg.jpg" alt="IMG_6793-Modifier.jpg">
+                <div class="info">
+                    <h3>IMG_6793-Modifier.jpg</h3>
+                    <p>Path: wetransfer_img_5158-jpg_2026-06-03_1513\IMG_6793-Modifier.jpg</p>
+                </div>
+            </div>
+            
+            <div class="card">
+                <img src="temp_thumbnails/wetransfer_img_5158-jpg_2026-06-03_1513_img_7238-modifier.jpg.jpg" alt="IMG_7238-Modifier.jpg">
+                <div class="info">
+                    <h3>IMG_7238-Modifier.jpg</h3>
+                    <p>Path: wetransfer_img_5158-jpg_2026-06-03_1513\IMG_7238-Modifier.jpg</p>
+                </div>
+            </div>
+            
+            <div class="card">
+                <img src="temp_thumbnails/wetransfer_img_5158-jpg_2026-06-03_1513_img_7243.jpg.jpg" alt="IMG_7243.jpg">
+                <div class="info">
+                    <h3>IMG_7243.jpg</h3>
+                    <p>Path: wetransfer_img_5158-jpg_2026-06-03_1513\IMG_7243.jpg</p>
+                </div>
+            </div>
+            
+            <div class="card">
+                <img src="temp_thumbnails/wetransfer_img_5158-jpg_2026-06-03_1513_img_8435.jpg.jpg" alt="IMG_8435.jpg">
+                <div class="info">
+                    <h3>IMG_8435.jpg</h3>
+                    <p>Path: wetransfer_img_5158-jpg_2026-06-03_1513\IMG_8435.jpg</p>
+                </div>
+            </div>
+            
+            <div class="card">
+                <img src="temp_thumbnails/wetransfer_img_5158-jpg_2026-06-03_1513_img_9776.jpg.jpg" alt="IMG_9776.jpg">
+                <div class="info">
+                    <h3>IMG_9776.jpg</h3>
+                    <p>Path: wetransfer_img_5158-jpg_2026-06-03_1513\IMG_9776.jpg</p>
+                </div>
+            </div>
+            
+            <div class="card">
+                <img src="temp_thumbnails/wetransfer_img_5158-jpg_2026-06-03_1513_img_9832.jpg.jpg" alt="IMG_9832.jpg">
+                <div class="info">
+                    <h3>IMG_9832.jpg</h3>
+                    <p>Path: wetransfer_img_5158-jpg_2026-06-03_1513\IMG_9832.jpg</p>
+                </div>
+            </div>
+            
+            <div class="card">
+                <img src="temp_thumbnails/wetransfer_img_5158-jpg_2026-06-03_1513_img_9944.jpg.jpg" alt="IMG_9944.jpg">
+                <div class="info">
+                    <h3>IMG_9944.jpg</h3>
+                    <p>Path: wetransfer_img_5158-jpg_2026-06-03_1513\IMG_9944.jpg</p>
+                </div>
+            </div>
+            
+    </div>
+</body>
+</html>

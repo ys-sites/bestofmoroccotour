@@ -1,0 +1,343 @@
+const fs = require('fs');
+
+// We will generate an authentic cultural caricature / line-art doodle pattern of Morocco.
+// Features:
+// 1. Moroccan Camel (Dromedary)
+// 2. Moroccan Teapot (Berrad) & Mint Tea Glass
+// 3. Moroccan Tagine (Conical pot)
+// 4. Moroccan Babouche Slippers
+// 5. Moroccan Palm Tree (Oasis)
+// 6. Moroccan Lantern (Fanous)
+// 7. Fez Tarboush Hat with Tassel
+// 8. Moorish Keyhole Horseshoe Arch
+
+function generateMoroccanCulturalPattern() {
+  const width = 480;
+  const height = 480;
+  
+  // Color & Opacity:
+  // "subtle in the background, keep the same color as before, but have caricature of cultural aspect of morocco"
+  // Background color: #FAF8F5
+  // Line art stroke: #A37E58 / #936037 (warm camel/leather/sand tone) with delicate stroke-width="1.2" and opacity="0.10"
+  // It is visible ("there") but gentle and whisper-soft ("subtle").
+
+  const strokeColor = "#9C6E42";
+  const strokeOpacity = "0.085"; // subtle but there
+  const fillOpacity = "0.025";
+
+  const svg = `<svg width="${width}" height="${height}" viewBox="0 0 ${width} ${height}" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <style>
+      .morocco-sketch {
+        stroke: ${strokeColor};
+        stroke-opacity: ${strokeOpacity};
+        fill: ${strokeColor};
+        fill-opacity: ${fillOpacity};
+        stroke-linecap: round;
+        stroke-linejoin: round;
+      }
+      .sketch-line {
+        stroke: ${strokeColor};
+        stroke-opacity: ${strokeOpacity};
+        fill: none;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+      }
+      .sketch-dot {
+        fill: ${strokeColor};
+        fill-opacity: ${strokeOpacity};
+      }
+    </style>
+  </defs>
+
+  <!-- ==========================================
+       1. MOROCCAN DROMEDARY CAMEL (Top Left: 75, 75)
+       ========================================== -->
+  <g transform="translate(60, 50) scale(0.85)">
+    <!-- Camel Body, Hump, Neck, Head, Legs -->
+    <path class="sketch-line" stroke-width="1.4" d="
+      M 15 65
+      C 15 50, 20 42, 28 42
+      C 34 32, 45 28, 55 38
+      C 60 40, 68 42, 72 50
+      C 76 45, 82 30, 86 18
+      C 87 14, 91 10, 96 11
+      C 101 12, 102 16, 99 20
+      C 95 25, 93 34, 92 48
+      C 91 58, 86 64, 82 66
+    " />
+    <!-- Camel Ears & Muzzle -->
+    <path class="sketch-line" stroke-width="1.2" d="M 94 10 C 95 7, 97 8, 97 10" />
+    <circle cx="96" cy="14" r="1" class="sketch-dot" />
+    <path class="sketch-line" stroke-width="1.2" d="M 101 16 C 103 17, 103 19, 100 19" />
+    <!-- Camel Legs -->
+    <!-- Back Leg 1 -->
+    <path class="sketch-line" stroke-width="1.3" d="M 22 55 L 20 75 L 24 95 L 20 96" />
+    <!-- Back Leg 2 -->
+    <path class="sketch-line" stroke-width="1.1" d="M 28 58 L 26 73 L 30 93 L 27 94" />
+    <!-- Front Leg 1 -->
+    <path class="sketch-line" stroke-width="1.3" d="M 76 65 L 75 78 L 78 95 L 82 96" />
+    <!-- Front Leg 2 -->
+    <path class="sketch-line" stroke-width="1.1" d="M 71 66 L 70 78 L 72 93 L 75 94" />
+    <!-- Tail -->
+    <path class="sketch-line" stroke-width="1.2" d="M 16 60 C 13 65, 12 72, 14 76" />
+    <!-- Desert Dune Ripple beneath Camel -->
+    <path class="sketch-line" stroke-width="1.0" d="M 5 96 C 25 93, 50 97, 85 94 C 100 93, 115 96, 125 96" />
+  </g>
+
+  <!-- ==========================================
+       2. MOROCCAN TEAPOT (BERRAD) & MINT GLASS (Top Right: 320, 60)
+       ========================================== -->
+  <g transform="translate(320, 50) scale(0.85)">
+    <!-- Teapot Body (Ornate Moroccan Berrad) -->
+    <ellipse cx="50" cy="55" rx="22" ry="18" class="morocco-sketch" stroke-width="1.3" />
+    <!-- Teapot Base Legs -->
+    <path class="sketch-line" stroke-width="1.2" d="M 38 72 L 35 78 M 62 72 L 65 78 M 50 73 L 50 78" />
+    <!-- Teapot Lid & Top Finial -->
+    <path class="sketch-line" stroke-width="1.3" d="M 36 40 C 38 32, 62 32, 64 40 Z" />
+    <circle cx="50" cy="29" r="2.5" class="morocco-sketch" stroke-width="1.2" />
+    <path class="sketch-line" stroke-width="1.2" d="M 50 32 L 50 36" />
+    <!-- Curved Spout -->
+    <path class="sketch-line" stroke-width="1.4" d="
+      M 32 60
+      C 18 58, 8 45, 10 32
+      C 13 32, 18 36, 26 48
+    " />
+    <!-- Handle -->
+    <path class="sketch-line" stroke-width="1.4" d="
+      M 68 46
+      C 84 46, 88 64, 70 68
+    " />
+    <!-- Moroccan Mint Tea Glass (Kass) -->
+    <path class="sketch-line" stroke-width="1.2" d="M 92 58 L 94 76 C 94 78, 106 78, 106 76 L 108 58 Z" />
+    <!-- Glass Pattern Band -->
+    <path class="sketch-line" stroke-width="0.8" d="M 93 64 L 107 64 M 93 68 L 107 68" />
+    <!-- Mint Leaves Sticking Out & Steam Curl -->
+    <path class="sketch-line" stroke-width="1.0" d="M 100 58 C 102 52, 106 50, 108 48 M 98 57 C 96 52, 94 51, 92 50" />
+    <!-- Steam Swirls from Spout to Glass -->
+    <path class="sketch-line" stroke-width="0.9" d="M 10 28 C 15 22, 25 20, 35 24 M 100 44 C 102 38, 98 34, 101 28" />
+  </g>
+
+  <!-- ==========================================
+       3. CONICAL TAGINE WITH STEAM (Bottom Left: 60, 300)
+       ========================================== -->
+  <g transform="translate(60, 300) scale(0.85)">
+    <!-- Bottom Clay Dish -->
+    <path class="sketch-line" stroke-width="1.4" d="
+      M 15 70
+      C 20 82, 80 82, 85 70
+      Z
+    " />
+    <path class="sketch-line" stroke-width="1.0" d="M 12 70 L 88 70" />
+    <!-- Conical Lid -->
+    <path class="morocco-sketch" stroke-width="1.3" d="
+      M 20 68
+      C 32 50, 44 26, 47 18
+      L 53 18
+      C 56 26, 68 50, 80 68
+      Z
+    " />
+    <!-- Top Knob Handle -->
+    <ellipse cx="50" cy="14" rx="5" ry="4" class="morocco-sketch" stroke-width="1.2" />
+    <!-- Moroccan Painted Berber Swirls on Lid -->
+    <path class="sketch-line" stroke-width="0.9" d="
+      M 32 56 Q 50 60 68 56
+      M 38 46 Q 50 49 62 46
+      M 44 36 Q 50 38 56 36
+    " />
+    <!-- Steam Curls rising from Tagine knob -->
+    <path class="sketch-line" stroke-width="0.9" d="
+      M 48 8 C 45 2, 53 -2, 49 -8
+      M 53 7 C 56 1, 50 -3, 54 -9
+    " />
+  </g>
+
+  <!-- ==========================================
+       4. OASIS PALM TREE (Bottom Right: 330, 290)
+       ========================================== -->
+  <g transform="translate(330, 290) scale(0.85)">
+    <!-- Curved Palm Trunk with Ring Ridges -->
+    <path class="sketch-line" stroke-width="2.0" d="M 50 95 C 48 65, 54 40, 52 20" />
+    <!-- Trunk Hatchings -->
+    <path class="sketch-line" stroke-width="1.0" d="
+      M 46 80 L 52 82
+      M 47 68 L 53 70
+      M 48 55 L 54 57
+      M 49 42 L 55 44
+      M 50 30 L 55 31
+    " />
+    <!-- Spreading Palm Fronds -->
+    <!-- Frond 1 (Top Left) -->
+    <path class="sketch-line" stroke-width="1.3" d="M 52 20 C 35 15, 18 20, 8 32" />
+    <!-- Frond 2 (High Left) -->
+    <path class="sketch-line" stroke-width="1.3" d="M 52 20 C 38 5, 25 5, 15 12" />
+    <!-- Frond 3 (Top Crown) -->
+    <path class="sketch-line" stroke-width="1.3" d="M 52 20 C 50 2, 53 -5, 52 -10" />
+    <!-- Frond 4 (High Right) -->
+    <path class="sketch-line" stroke-width="1.3" d="M 52 20 C 65 5, 78 5, 88 12" />
+    <!-- Frond 5 (Right Droop) -->
+    <path class="sketch-line" stroke-width="1.3" d="M 52 20 C 70 16, 85 22, 94 34" />
+    <!-- Little Date Clusters hanging -->
+    <circle cx="48" cy="25" r="1.5" class="sketch-dot" />
+    <circle cx="51" cy="27" r="1.5" class="sketch-dot" />
+    <circle cx="55" cy="25" r="1.5" class="sketch-dot" />
+    <!-- Little Oasis Ground Hill -->
+    <path class="sketch-line" stroke-width="1.0" d="M 30 96 C 45 93, 60 94, 75 97" />
+  </g>
+
+  <!-- ==========================================
+       5. MOROCCAN BABOUCHE SLIPPERS (Center: 200, 190)
+       ========================================== -->
+  <g transform="translate(195, 185) scale(0.85)">
+    <!-- Left Babouche with upturned pointed toe -->
+    <path class="morocco-sketch" stroke-width="1.3" d="
+      M 20 40
+      C 15 35, 12 25, 15 15
+      C 18 5, 28 5, 36 12
+      C 44 19, 52 26, 62 30
+      C 70 33, 76 32, 80 25
+      C 77 38, 62 44, 45 44
+      C 30 44, 23 42, 20 40
+      Z
+    " />
+    <!-- Babouche Opening & Decorative Stitching -->
+    <path class="sketch-line" stroke-width="1.0" d="M 30 18 C 38 24, 48 28, 56 30" />
+    <path class="sketch-line" stroke-width="0.8" d="M 28 28 C 32 30, 36 32, 42 32" />
+    <circle cx="28" cy="12" r="1.2" class="sketch-dot" />
+    <!-- Right Babouche (Pair) angled -->
+    <path class="morocco-sketch" stroke-width="1.2" d="
+      M 35 55
+      C 30 50, 28 42, 32 34
+      C 36 26, 44 26, 52 32
+      C 58 37, 66 43, 75 46
+      C 82 48, 88 47, 92 42
+      C 88 53, 75 58, 60 58
+      C 46 58, 38 56, 35 55
+      Z
+    " />
+    <path class="sketch-line" stroke-width="0.9" d="M 44 36 C 52 42, 60 45, 68 47" />
+  </g>
+
+  <!-- ==========================================
+       6. MOROCCAN HANGING FANOUS LANTERN (Center Top & Center Bottom)
+       ========================================== -->
+  <!-- Center Top (215, 20) -->
+  <g transform="translate(220, 15) scale(0.75)">
+    <!-- Hanging Chain -->
+    <path class="sketch-line" stroke-width="1.0" d="M 30 0 L 30 15" />
+    <circle cx="30" cy="17" r="2" class="sketch-line" stroke-width="1.0" />
+    <!-- Top Cap Dome -->
+    <path class="sketch-line" stroke-width="1.2" d="M 20 28 C 24 20, 36 20, 40 28 Z" />
+    <!-- Hexagonal Glass Body -->
+    <path class="morocco-sketch" stroke-width="1.2" d="
+      M 16 30
+      L 44 30
+      L 38 58
+      L 22 58
+      Z
+    " />
+    <!-- Inner Star & Lattice Panes -->
+    <line x1="30" y1="30" x2="30" y2="58" class="sketch-line" stroke-width="0.9" />
+    <path class="sketch-line" stroke-width="0.8" d="M 24 42 L 36 42" />
+    <!-- Bottom Finial Teardrop -->
+    <path class="sketch-line" stroke-width="1.2" d="M 26 58 L 30 68 L 34 58" />
+    <circle cx="30" cy="71" r="1.5" class="sketch-dot" />
+  </g>
+
+  <!-- ==========================================
+       7. FEZ TARBOUSH HAT (Left Center: 20, 190)
+       ========================================== -->
+  <g transform="translate(15, 185) scale(0.8)">
+    <!-- Conical Felt Hat Body -->
+    <path class="morocco-sketch" stroke-width="1.3" d="
+      M 18 45
+      L 26 15
+      C 32 13, 50 13, 56 15
+      L 64 45
+      C 56 48, 26 48, 18 45
+      Z
+    " />
+    <!-- Top Oval Crown -->
+    <ellipse cx="41" cy="15" rx="15" ry="3.5" class="morocco-sketch" stroke-width="1.1" />
+    <circle cx="41" cy="15" r="1.8" class="sketch-dot" />
+    <!-- Long Hanging Silk Tassel -->
+    <path class="sketch-line" stroke-width="1.1" d="
+      M 41 15
+      C 48 18, 58 22, 60 30
+      C 62 36, 60 42, 61 50
+    " />
+    <!-- Tassel Fringe Bush -->
+    <path class="sketch-line" stroke-width="1.4" d="M 60 50 L 59 60 M 61 50 L 62 61 M 62 50 L 65 59" />
+  </g>
+
+  <!-- ==========================================
+       8. MOORISH KEYHOLE HORSESHOE ARCH (Right Center: 410, 185)
+       ========================================== -->
+  <g transform="translate(405, 175) scale(0.8)">
+    <!-- Classic Moorish Horseshoe Archway -->
+    <path class="sketch-line" stroke-width="1.3" d="
+      M 12 70
+      L 12 40
+      C 6 35, 8 20, 20 12
+      C 32 4, 48 4, 60 12
+      C 72 20, 74 35, 68 40
+      L 68 70
+    " />
+    <!-- Inner Horseshoe Arch -->
+    <path class="sketch-line" stroke-width="1.0" d="
+      M 20 70
+      L 20 42
+      C 16 38, 18 26, 26 20
+      C 34 14, 46 14, 54 20
+      C 62 26, 64 38, 60 42
+      L 60 70
+    " />
+    <!-- Keystone / Rosette at top of arch -->
+    <circle cx="40" cy="8" r="2.2" class="sketch-dot" />
+    <line x1="12" y1="70" x2="68" y2="70" class="sketch-line" stroke-width="1.0" />
+  </g>
+
+  <!-- ==========================================
+       9. TINY DELICATE ACCENT DOODLES (Scattered in open areas)
+       ========================================== -->
+  <!-- 8-pointed Moroccan Berber Star (170, 70) -->
+  <g transform="translate(175, 75) scale(0.6)">
+    <polygon points="15,0 19,10 30,15 19,20 15,30 11,20 0,15 11,10" class="morocco-sketch" stroke-width="1.0" />
+    <circle cx="15" cy="15" r="1.5" class="sketch-dot" />
+  </g>
+
+  <!-- Khamsa (Hand of Fatima) charm doodle (235, 380) -->
+  <g transform="translate(225, 370) scale(0.7)">
+    <path class="sketch-line" stroke-width="1.1" d="
+      M 20 45
+      C 15 45, 12 36, 12 30
+      C 12 24, 18 22, 20 28
+      L 20 15
+      C 20 10, 26 10, 26 15
+      L 26 26
+      L 26 10
+      C 26 5, 32 5, 32 10
+      L 32 26
+      L 32 15
+      C 32 10, 38 10, 38 15
+      L 38 28
+      C 40 22, 46 24, 46 30
+      C 46 36, 43 45, 38 45
+      Z
+    " />
+    <circle cx="29" cy="35" r="2.5" class="morocco-sketch" stroke-width="0.9" />
+  </g>
+
+  <!-- Sahara Desert Dune Wave (bottom border seam: wraps seamlessly) -->
+  <path class="sketch-line" stroke-width="0.8" d="
+    M 0 470 C 60 465, 120 475, 180 470 C 240 465, 300 475, 360 470 C 420 465, 460 472, 480 470
+    M 0 10 C 60 5, 120 15, 180 10 C 240 5, 300 15, 360 10 C 420 5, 460 12, 480 10
+  " />
+
+</svg>`;
+
+  fs.writeFileSync('public/images/moroccan-cultural-doodles.svg', svg.trim());
+  console.log('Saved public/images/moroccan-cultural-doodles.svg successfully');
+}
+
+generateMoroccanCulturalPattern();

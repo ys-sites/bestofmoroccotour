@@ -1,0 +1,85 @@
+# Next.js build and dependency directories
+node_modules/
+.next/
+out/
+
+# Temp folders and scratch areas
+temp_clone/
+temp_clone_hallmark/
+
+# Operating system files
+.DS_Store
+Thumbs.db
+
+# Local environment files
+.env*.local
+*.opdownload
+
+# TypeScript compiler cache
+tsconfig.tsbuildinfo
+
+# OS metadata archives
+__MACOSX/
+
+# Unreferenced asset and temporary folders
+public/*-20260616T*/
+public/PORTFOLIO _ GALLERY _ GOLF DU SOLEIL -20260616T200850Z-3-001/
+public/Reportage2-20260616T200941Z-3-001/
+public/Reportage2-20260616T200941Z-3-002/
+public/Reportage2-20260616T201004Z-3-001/
+public/Agadir Hotels with itineraries-20260616T204655Z-3-001/
+public/temp_thumbnails/
+
+# Exclude raw high-res images and zip files
+public/images/*.heic
+public/images/*.HEIC
+public/images/*.tif
+public/images/*.TIF
+public/images/*.zip
+public/images/0L7A9294.png
+public/images/DJI_0053.png
+public/images/tgz 10 side.jpg
+public/images/tgz 17 zoom.jpg
+public/images/tgz 18 hotel.jpg
+public/images/tgz 8th high.jpg
+public/images/PARCOURS ROUGE Trous n°*
+public/images/PARCOURS ROUGE Trous no*
+public/images/CLUB HOUSE .JPG
+public/images/PARADISE OF FLOWERS .JPG
+public/images/TOURNAMENTS .heic
+public/images/FUN DISCOVERY.heic
+public/images/IMG_6717.heic
+public/images/2 JAUNE.heic
+public/images/17 CHAMPIONSHIP.heic
+public/images/*.docx
+public/images/*.pdf
+
+# Exclude large local video assets
+public/video/*
+!public/video/Films Destinations/
+public/video/Films Destinations/*
+!public/video/Films Destinations/Golf in Morocco.mp4
+
+# Exclude local build binary tools
+.bin/
+
+# Local video and poster asset downloads (uploaded to R2 separately)
+videos/
+posters/
+upload-to-cloudflare/
+upload-hero/
+
+# Python Virtual Environment and Scratch Folders
+.venv/
+001 Main/
+Client Request/
+scratch/
+temp_thumbnails/
+*.zip
+*.heic
+*.HEIC
+public/Client Request must be added/
+public/google images/
+public/video/
+
+
