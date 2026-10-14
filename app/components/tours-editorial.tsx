@@ -8,7 +8,9 @@ import {
 } from "lucide-react";
 import { masterTours, catalogTours, TourItem } from "@/data/bestOfMoroccoData";
 import ItineraryModal from "./itinerary-modal";
-import { MoroccanMedallionArt, MoroccanFriezeDivider } from "./moroccan-art-motifs";
+import { MoroccanMedallionArt, MoroccanFriezeDivider, MoroccanArchWatermark } from "./moroccan-art-motifs";
+import { motion, AnimatePresence } from "motion/react";
+import { easeOutExpo } from "@/lib/animations";
 
 interface ToursProps {
   onSelectTourToBook: (tourName: string) => void;
@@ -77,13 +79,22 @@ export default function ToursEditorial({ onSelectTourToBook, searchFilter = "" }
   };
 
   return (
-    <section id="tours" className="bg-transparent pt-20 pb-20 px-4 sm:px-8 text-stone-900">
-      <div className="max-w-[1240px] mx-auto space-y-8">
+    <section id="tours" className="bg-transparent pt-20 pb-20 px-4 sm:px-8 text-stone-900 relative overflow-hidden">
+      {/* Subtle authentic Moroccan Archway Watermark in Tours Section */}
+      <MoroccanArchWatermark className="absolute -top-10 -right-24 w-96 h-auto pointer-events-none text-[#C05621] -z-10 hidden lg:block" opacity={0.25} />
+
+      <div className="max-w-[1240px] mx-auto space-y-8 relative z-10">
         
         {/* =========================================================================
             HEADER: "Special for you" (matching Ui.jpg exactly!)
            ========================================================================= */}
-        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-6 border-b border-stone-200/70 pb-6">
+        <motion.div 
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-50px" }}
+          transition={{ duration: 0.65, ease: easeOutExpo }}
+          className="flex flex-col sm:flex-row sm:items-end justify-between gap-6 border-b border-stone-200/70 pb-6"
+        >
           <div className="flex items-center gap-3.5">
             <MoroccanMedallionArt size={42} className="text-[#C05621] opacity-75 shrink-0 hidden sm:block" />
             <div>
@@ -108,30 +119,36 @@ export default function ToursEditorial({ onSelectTourToBook, searchFilter = "" }
 
             {/* Slider Navigation Arrows matching Ui.jpg */}
             <div className="flex items-center gap-2">
-              <button
+              <motion.button
+                whileHover={{ scale: 1.08 }}
+                whileTap={{ scale: 0.94 }}
                 onClick={handlePrev}
                 aria-label="Previous tours"
                 className="w-10 h-10 rounded-full bg-white border border-stone-200 hover:border-stone-400 hover:bg-stone-50 flex items-center justify-center text-stone-700 transition-colors shadow-sm cursor-pointer"
               >
                 <ChevronLeft className="w-4 h-4" />
-              </button>
-              <button
+              </motion.button>
+              <motion.button
+                whileHover={{ scale: 1.08 }}
+                whileTap={{ scale: 0.94 }}
                 onClick={handleNext}
                 aria-label="Next tours"
                 className="w-10 h-10 rounded-full bg-white border border-stone-200 hover:border-stone-400 hover:bg-stone-50 flex items-center justify-center text-stone-700 transition-colors shadow-sm cursor-pointer"
               >
                 <ChevronRight className="w-4 h-4" />
-              </button>
+              </motion.button>
             </div>
           </div>
-        </div>
+        </motion.div>
 
         {/* Minimalist Pill Filter Tabs */}
         <div className="flex items-center gap-2 overflow-x-auto pb-2 scrollbar-none">
           {categories.map((cat) => {
             const isActive = activeCategory === cat.id;
             return (
-              <button
+              <motion.button
+                whileHover={{ scale: 1.03 }}
+                whileTap={{ scale: 0.97 }}
                 key={cat.id}
                 onClick={() => {
                   setActiveCategory(cat.id);
@@ -144,25 +161,30 @@ export default function ToursEditorial({ onSelectTourToBook, searchFilter = "" }
                 }`}
               >
                 {cat.label}
-              </button>
+              </motion.button>
             );
           })}
         </div>
 
         {/* =========================================================================
-            CARDS GRID: 3 Breathable Cards (matching Ui.jpg Section 4)
+            CARDS GRID: 3 Breathable Cards with Staggered Rise-up
            ========================================================================= */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 pt-2">
-          {visibleTours.map((tour) => {
+          {visibleTours.map((tour, idx) => {
             const pricing = priceMap[tour.id] || { crossed: "$2,450 CAD", current: "$1,890 CAD" };
 
             return (
-              <div
+              <motion.div
                 key={tour.id}
-                className="group flex flex-col rounded-[1.8rem] bg-white p-3.5 border border-stone-200/80 shadow-sm hover:shadow-[0_12px_35px_rgba(74,53,37,0.08)] transition-all duration-300 hover:-translate-y-1 relative overflow-hidden"
+                initial={{ opacity: 0, y: 35 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-40px" }}
+                transition={{ duration: 0.65, delay: idx * 0.12, ease: easeOutExpo }}
+                whileHover={{ y: -6 }}
+                className="group flex flex-col rounded-[1.8rem] bg-white p-3.5 border border-stone-200/80 shadow-sm hover:shadow-[0_16px_40px_rgba(74,53,37,0.12)] transition-all duration-300 relative overflow-hidden"
               >
                 {/* Subtle Moroccan Rosette Hallmark Watermark on card */}
-                <div className="absolute -bottom-3 -right-3 pointer-events-none transition-opacity duration-300 opacity-10 group-hover:opacity-25">
+                <div className="absolute -bottom-3 -right-3 pointer-events-none transition-all duration-500 opacity-10 group-hover:opacity-25 group-hover:rotate-45">
                   <MoroccanMedallionArt size={65} />
                 </div>
 
@@ -237,15 +259,17 @@ export default function ToursEditorial({ onSelectTourToBook, searchFilter = "" }
                     </div>
 
                     {/* Clean Pill BOOK Button */}
-                    <button
+                    <motion.button
+                      whileHover={{ scale: 1.05 }}
+                      whileTap={{ scale: 0.95 }}
                       onClick={() => onSelectTourToBook(tour.name)}
                       className="rounded-full bg-[#4A3525] hover:bg-[#322318] px-6 py-2.5 text-[11px] font-bold uppercase tracking-wider text-white transition-all duration-300 shadow-sm hover:shadow-md cursor-pointer"
                     >
                       BOOK
-                    </button>
+                    </motion.button>
                   </div>
                 </div>
-              </div>
+              </motion.div>
             );
           })}
         </div>
@@ -269,11 +293,16 @@ export default function ToursEditorial({ onSelectTourToBook, searchFilter = "" }
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-            {masterTours.map((t) => (
-              <div
+            {masterTours.map((t, idx) => (
+              <motion.div
                 key={t.id}
+                initial={{ opacity: 0, y: 24 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-30px" }}
+                transition={{ duration: 0.55, delay: idx * 0.08, ease: easeOutExpo }}
+                whileHover={{ y: -4, scale: 1.01 }}
                 onClick={() => setSelectedTourForModal(t)}
-                className="bg-white p-4 rounded-2xl border border-stone-200/80 shadow-xs hover:border-[#C05621] hover:shadow-md transition-all duration-300 cursor-pointer flex flex-col justify-between space-y-3"
+                className="bg-white/95 backdrop-blur-sm p-4 rounded-2xl border border-stone-200/80 shadow-xs hover:border-[#C05621] hover:shadow-md transition-all duration-300 cursor-pointer flex flex-col justify-between space-y-3"
               >
                 <div className="relative h-32 w-full rounded-xl overflow-hidden bg-stone-100">
                   <Image src={t.image} alt={t.name} fill className="object-cover" />
@@ -295,7 +324,7 @@ export default function ToursEditorial({ onSelectTourToBook, searchFilter = "" }
                     View Days →
                   </span>
                 </div>
-              </div>
+              </motion.div>
             ))}
           </div>
         </div>

@@ -78,9 +78,9 @@ export default function Footer() {
         <div className="flex flex-col gap-4">
           <div className="flex items-center">
             <img 
-              src="/images/logo.png" 
-              className="h-24 md:h-28 w-auto object-contain hover:opacity-90 transition-opacity duration-300" 
-              alt="Merveilles et Voyages Logo" 
+              src="/logo-gold.svg" 
+              className="h-20 md:h-24 w-auto object-contain hover:opacity-90 transition-opacity duration-300 drop-shadow-[0_2px_12px_rgba(197,168,128,0.25)]" 
+              alt="H & A Voyage et Tourisme Inc. - Artisan du Bonheur" 
             />
           </div>
           <p className="text-[12px] text-white/50 leading-relaxed font-light max-w-[240px]">

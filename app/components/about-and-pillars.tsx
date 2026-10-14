@@ -3,7 +3,9 @@
 import Image from "next/image";
 import { ShieldCheck, Award, Users, HeartHandshake, MapPin, GraduationCap } from "lucide-react";
 import { siteConfig } from "@/data/bestOfMoroccoData";
-import { MoroccanArchWatermark, MoroccanTeapotArt, MoroccanCamelDuneArt } from "./moroccan-art-motifs";
+import { MoroccanArchWatermark, MoroccanTeapotArt, MoroccanCamelDuneArt, MoroccanMedallionArt } from "./moroccan-art-motifs";
+import { motion } from "motion/react";
+import { easeOutExpo } from "@/lib/animations";
 
 export default function AboutAndPillars() {
   return (
@@ -13,12 +15,18 @@ export default function AboutAndPillars() {
             SECTION 1: FOUNDER STORY & KING HASSAN II PHILOSOPHY
            ========================================================================= */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-          <div className="lg:col-span-6 space-y-6 relative">
+          <motion.div 
+            initial={{ opacity: 0, x: -28 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true, margin: "-50px" }}
+            transition={{ duration: 0.7, ease: easeOutExpo }}
+            className="lg:col-span-6 space-y-6 relative"
+          >
             {/* Subtle authentic Moroccan Archway Watermark */}
             <MoroccanArchWatermark className="absolute -top-14 -left-10 w-72 sm:w-84 h-auto pointer-events-none text-[#C05621] -z-10 hidden sm:block" opacity={0.32} />
 
             <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-amber-50 border border-amber-200 text-[#C05621] text-xs font-semibold uppercase tracking-wider">
-              <span>Our Heritage & Philosophy</span>
+              <span>Our Heritage &amp; Philosophy</span>
             </div>
 
             <h2 className="font-serif text-3xl sm:text-5xl font-bold text-stone-900 tracking-tight leading-[1.12]">
@@ -41,9 +49,9 @@ export default function AboutAndPillars() {
               </span>
             </blockquote>
 
-            {/* Direct Core Commitments (Clean horizontal badges instead of generic AI boxes) */}
+            {/* Direct Core Commitments */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
-              <div className="flex items-start gap-3 p-3.5 rounded-2xl bg-[#FAF8F5] border border-stone-200/80">
+              <div className="flex items-start gap-3 p-3.5 rounded-2xl bg-white/90 border border-stone-200/90 shadow-xs hover:border-[#C5A880] transition-colors">
                 <ShieldCheck className="w-5 h-5 text-[#C05621] shrink-0 mt-0.5" />
                 <div>
                   <h4 className="font-serif font-bold text-sm text-stone-900">Wholly Moroccan-Owned</h4>
@@ -53,7 +61,7 @@ export default function AboutAndPillars() {
                 </div>
               </div>
 
-              <div className="flex items-start gap-3 p-3.5 rounded-2xl bg-[#FAF8F5] border border-stone-200/80">
+              <div className="flex items-start gap-3 p-3.5 rounded-2xl bg-white/90 border border-stone-200/90 shadow-xs hover:border-[#C5A880] transition-colors">
                 <Award className="w-5 h-5 text-[#D97706] shrink-0 mt-0.5" />
                 <div>
                   <h4 className="font-serif font-bold text-sm text-stone-900">Best Price Guarantee</h4>
@@ -63,30 +71,36 @@ export default function AboutAndPillars() {
                 </div>
               </div>
             </div>
-          </div>
+          </motion.div>
 
           {/* Real Photo Mosaic with Atmospheric Captioning */}
-          <div className="lg:col-span-6 grid grid-cols-2 gap-4">
-            <div className="relative h-80 sm:h-96 rounded-3xl overflow-hidden shadow-lg border border-stone-200">
+          <motion.div 
+            initial={{ opacity: 0, x: 28 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true, margin: "-50px" }}
+            transition={{ duration: 0.7, ease: easeOutExpo }}
+            className="lg:col-span-6 grid grid-cols-2 gap-4"
+          >
+            <div className="relative h-80 sm:h-96 rounded-3xl overflow-hidden shadow-lg border border-stone-200 group">
               <Image
                 src="/images/bestofmorocco/img_carousel_riad.jpg"
                 alt="Authentic Moorish Riad in Fes Medina"
                 fill
-                className="object-cover"
+                className="object-cover transition-transform duration-700 group-hover:scale-105"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-transparent to-transparent" />
               <div className="absolute bottom-5 left-5 right-5 text-white">
                 <span className="text-[10px] uppercase font-bold text-amber-300 tracking-wider block">Boutique Heritage</span>
-                <span className="font-serif font-bold text-base sm:text-lg">Historic Riads & Courtyards</span>
+                <span className="font-serif font-bold text-base sm:text-lg">Historic Riads &amp; Courtyards</span>
               </div>
             </div>
 
-            <div className="relative h-80 sm:h-96 rounded-3xl overflow-hidden shadow-lg border border-stone-200 mt-6 sm:mt-8">
+            <div className="relative h-80 sm:h-96 rounded-3xl overflow-hidden shadow-lg border border-stone-200 mt-6 sm:mt-8 group">
               <Image
                 src="/images/bestofmorocco/img_carousel_sahara.jpg"
                 alt="Royal Luxury Desert Camp in Erg Chebbi"
                 fill
-                className="object-cover"
+                className="object-cover transition-transform duration-700 group-hover:scale-105"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-transparent to-transparent" />
               <div className="absolute bottom-5 left-5 right-5 text-white flex items-end justify-between">
@@ -99,13 +113,20 @@ export default function AboutAndPillars() {
                 </div>
               </div>
             </div>
-          </div>
+          </motion.div>
         </div>
 
         {/* =========================================================================
             SECTION 2: FOUNDER & LICENSED TOUR GUIDES SPOTLIGHT
            ========================================================================= */}
-        <div id="guides" className="pt-12 border-t border-stone-200/80 space-y-8">
+        <motion.div 
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-40px" }}
+          transition={{ duration: 0.7, ease: easeOutExpo }}
+          id="guides" 
+          className="pt-12 border-t border-stone-200/80 space-y-8"
+        >
           <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4">
             <div>
               <span className="text-xs font-semibold uppercase tracking-widest text-[#C5A880]">
@@ -121,13 +142,17 @@ export default function AboutAndPillars() {
           </div>
 
           {/* Founder Bio Card */}
-          <div className="bg-white/95 backdrop-blur-sm rounded-[2.5rem] p-6 sm:p-10 border border-stone-200/90 shadow-[0_8px_30px_rgba(0,0,0,0.03)] grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-            <div className="lg:col-span-4 relative h-72 sm:h-80 w-full rounded-2xl overflow-hidden shadow-md">
+          <motion.div 
+            whileHover={{ y: -4 }}
+            transition={{ duration: 0.3 }}
+            className="bg-white/95 backdrop-blur-sm rounded-[2.5rem] p-6 sm:p-10 border border-stone-200/90 shadow-[0_8px_30px_rgba(0,0,0,0.03)] hover:shadow-[0_16px_40px_rgba(74,53,37,0.08)] transition-all duration-300 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center"
+          >
+            <div className="lg:col-span-4 relative h-72 sm:h-80 w-full rounded-2xl overflow-hidden shadow-md group">
               <Image
                 src="/images/bestofmorocco/img_team_team-1.jpg"
                 alt="Ayoub Sadeddine - CEO & Licensed National Tour Guide"
                 fill
-                className="object-cover object-top"
+                className="object-cover object-top transition-transform duration-700 group-hover:scale-105"
               />
               <div className="absolute bottom-3 left-3 bg-black/75 backdrop-blur-md px-3 py-1 rounded-full text-[10px] font-bold text-amber-300 border border-amber-400/30">
                 Licence No. 2816
@@ -137,7 +162,7 @@ export default function AboutAndPillars() {
             <div className="lg:col-span-8 space-y-4">
               <div className="space-y-1">
                 <span className="text-xs font-mono font-bold tracking-wider uppercase text-[#C05621]">
-                  CEO & Founder · Licensed National Tour Guide
+                  CEO &amp; Founder · Licensed National Tour Guide
                 </span>
                 <h4 className="font-serif text-2xl sm:text-3xl font-bold text-stone-900">
                   Ayoub Sadeddine
@@ -163,7 +188,7 @@ export default function AboutAndPillars() {
                 </div>
                 <div className="flex items-center gap-2">
                   <GraduationCap className="w-4 h-4 text-[#C05621] shrink-0" />
-                  <span>ISAT Fes Tourism & Hotel Management</span>
+                  <span>ISAT Fes Tourism &amp; Hotel Management</span>
                 </div>
                 <div className="flex items-center gap-2">
                   <GraduationCap className="w-4 h-4 text-[#C05621] shrink-0" />
@@ -171,8 +196,8 @@ export default function AboutAndPillars() {
                 </div>
               </div>
             </div>
-          </div>
-        </div>
+          </motion.div>
+        </motion.div>
       </div>
     </section>
   );

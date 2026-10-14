@@ -19,18 +19,18 @@ export default function FooterEditorial() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-12">
           {/* Brand Info */}
           <div className="lg:col-span-5 space-y-5">
-            <Link href="/" className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-amber-500 to-amber-700 flex items-center justify-center p-0.5">
-                <div className="w-full h-full bg-[#0F1015] rounded-[10px] flex items-center justify-center">
-                  <Compass className="w-5 h-5 text-amber-400" />
-                </div>
-              </div>
+            <Link href="/" className="flex items-center gap-4 group">
+              <img
+                src="/logo-gold.svg"
+                alt="H & A Voyage et Tourisme Inc. - Artisan du Bonheur"
+                className="h-16 w-auto object-contain transition-transform duration-300 group-hover:scale-105 drop-shadow-[0_2px_12px_rgba(197,168,128,0.25)]"
+              />
               <div className="flex flex-col">
-                <span className="font-serif text-xl font-bold tracking-tight text-white leading-tight">
-                  Best of Morocco <span className="text-amber-400 font-editorial italic font-normal text-2xl">Tours</span>
+                <span className="font-serif text-lg sm:text-xl font-bold tracking-tight text-white leading-tight">
+                  H &amp; A Voyage <span className="text-amber-400 font-editorial italic font-normal text-xl sm:text-2xl">et Tourisme</span>
                 </span>
-                <span className="text-[10px] uppercase tracking-[0.2em] text-zinc-400 font-medium">
-                  Customized Private Morocco Tours
+                <span className="text-[10px] uppercase tracking-[0.22em] text-amber-200/80 font-medium mt-0.5">
+                  Artisan du Bonheur &middot; Best of Morocco
                 </span>
               </div>
             </Link>
@@ -145,12 +145,37 @@ export default function FooterEditorial() {
           </div>
         </div>
 
-        {/* Bottom Bar: Copyright & Attribution */}
-        <div className="pt-8 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-zinc-500">
-          <p>© {new Date().getFullYear()} Best of Morocco Tours. All rights reserved.</p>
-          <div className="flex items-center gap-4 text-zinc-400">
+        {/* Bottom Bar: Copyright, YS Agency Signature & Legal */}
+        <div className="pt-8 border-t border-white/10 grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-4 items-center text-xs text-zinc-500">
+          {/* Left: Copyright */}
+          <p className="text-center md:text-left order-3 md:order-none">
+            © {new Date().getFullYear()} Best of Morocco Tours. All rights reserved.
+          </p>
+
+          {/* Center: YS Marketing Solutions Signature */}
+          <div className="flex justify-center items-center order-1 md:order-none">
+            <a 
+              href="https://www.ysdev.ca" 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              className="ys-signature-btn"
+              title="YS Marketing Solutions - Agency"
+            >
+              <img 
+                src="/YS.png" 
+                alt="YS Logo" 
+                className="ys-sig-logo" 
+              />
+              <span className="ys-sig-text">
+                Made by <strong className="ys-sig-highlight">YS Marketing Solutions</strong> <span className="ys-sig-divider">|</span> Marketing Agency
+              </span>
+            </a>
+          </div>
+
+          {/* Right: Legal links */}
+          <div className="flex justify-center md:justify-end items-center gap-4 text-zinc-400 order-2 md:order-none">
             <a href="#faq" className="hover:text-amber-400 transition-colors">
-              Terms & Conditions
+              Terms &amp; Conditions
             </a>
             <span>·</span>
             <a href="#faq" className="hover:text-amber-400 transition-colors">
@@ -158,7 +183,7 @@ export default function FooterEditorial() {
             </a>
             <span>·</span>
             <a href="#guides" className="hover:text-amber-400 transition-colors">
-              CEO & Founder Profile
+              Founder Profile
             </a>
           </div>
         </div>

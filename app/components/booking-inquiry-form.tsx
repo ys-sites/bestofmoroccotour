@@ -4,6 +4,8 @@ import { useState, useEffect } from "react";
 import { Send, Phone, Mail, Clock, ShieldCheck, Check, Sparkles } from "lucide-react";
 import { siteConfig, masterTours } from "@/data/bestOfMoroccoData";
 import { MoroccanArchWatermark, MoroccanMedallionArt, MoroccanTagineArt } from "./moroccan-art-motifs";
+import { motion } from "motion/react";
+import { easeOutExpo } from "@/lib/animations";
 
 interface BookingFormProps {
   initialTourName?: string;
@@ -49,7 +51,13 @@ export default function BookingInquiryForm({ initialTourName = "" }: BookingForm
       <MoroccanArchWatermark className="absolute -bottom-16 -right-12 w-80 sm:w-96 h-auto opacity-15 pointer-events-none text-[#C05621] -z-10 hidden lg:block" />
 
       <div className="max-w-[1360px] mx-auto space-y-12 relative z-10">
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 border-b border-stone-200 pb-6">
+        <motion.div 
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-50px" }}
+          transition={{ duration: 0.65, ease: easeOutExpo }}
+          className="flex flex-col md:flex-row md:items-end justify-between gap-6 border-b border-stone-200 pb-6"
+        >
           <div className="flex items-center gap-3.5">
             <MoroccanMedallionArt size={42} opacity={0.75} className="shrink-0 hidden sm:block" />
             <div>
@@ -64,11 +72,17 @@ export default function BookingInquiryForm({ initialTourName = "" }: BookingForm
           <p className="text-xs sm:text-sm text-stone-500 max-w-md font-light">
             Tell us your wishes. Whether it is an 8-day Imperial circuit, Sahara glamping, or high Atlas hiking, we will prepare a complete proposal within 24 hours.
           </p>
-        </div>
+        </motion.div>
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
           {/* Main Form */}
-          <div className="lg:col-span-8 bg-white/95 backdrop-blur-sm rounded-[2.5rem] p-8 sm:p-10 border border-stone-200/90 shadow-[0_8px_30px_rgba(0,0,0,0.03)]">
+          <motion.div 
+            initial={{ opacity: 0, x: -24 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true, margin: "-40px" }}
+            transition={{ duration: 0.7, ease: easeOutExpo }}
+            className="lg:col-span-8 bg-white/95 backdrop-blur-sm rounded-[2.5rem] p-8 sm:p-10 border border-stone-200/90 shadow-[0_8px_30px_rgba(0,0,0,0.03)]"
+          >
             {submitted ? (
               <div className="py-12 text-center space-y-4">
                 <div className="w-14 h-14 rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center mx-auto">
@@ -81,6 +95,7 @@ export default function BookingInquiryForm({ initialTourName = "" }: BookingForm
                   Thank you, {formData.firstName}. Your request for <strong className="text-[#C05621]">{formData.selectedTour}</strong> has been transmitted to Tour Manager Ayoub Sadeddine. We will be in touch within 24 hours.
                 </p>
                 <button
+                  suppressHydrationWarning
                   onClick={() => setSubmitted(false)}
                   className="px-6 py-2 rounded-full text-xs font-semibold bg-stone-200 text-stone-800 hover:bg-stone-300 transition-colors cursor-pointer"
                 >
@@ -88,12 +103,13 @@ export default function BookingInquiryForm({ initialTourName = "" }: BookingForm
                 </button>
               </div>
             ) : (
-              <form onSubmit={handleSubmit} className="space-y-5">
+              <form onSubmit={handleSubmit} suppressHydrationWarning className="space-y-5">
                 <div>
                   <label className="block text-xs font-semibold uppercase tracking-wider text-stone-700 mb-1.5">
                     Selected Tour or Circuit
                   </label>
                   <select
+                    suppressHydrationWarning
                     value={formData.selectedTour}
                     onChange={(e) => setFormData({ ...formData, selectedTour: e.target.value })}
                     className="w-full px-4 py-3 rounded-xl bg-white border border-stone-300 text-stone-900 text-xs sm:text-sm focus:outline-none focus:border-[#C05621]"
@@ -113,6 +129,7 @@ export default function BookingInquiryForm({ initialTourName = "" }: BookingForm
                   <div>
                     <label className="block text-xs text-stone-700 mb-1 font-medium">First Name *</label>
                     <input
+                      suppressHydrationWarning
                       type="text"
                       required
                       placeholder="e.g. Marie"
@@ -124,6 +141,7 @@ export default function BookingInquiryForm({ initialTourName = "" }: BookingForm
                   <div>
                     <label className="block text-xs text-stone-700 mb-1 font-medium">Last Name *</label>
                     <input
+                      suppressHydrationWarning
                       type="text"
                       required
                       placeholder="e.g. Dubois"
@@ -138,6 +156,7 @@ export default function BookingInquiryForm({ initialTourName = "" }: BookingForm
                   <div>
                     <label className="block text-xs text-stone-700 mb-1 font-medium">Email Address *</label>
                     <input
+                      suppressHydrationWarning
                       type="email"
                       required
                       placeholder="marie@example.com"
@@ -149,6 +168,7 @@ export default function BookingInquiryForm({ initialTourName = "" }: BookingForm
                   <div>
                     <label className="block text-xs text-stone-700 mb-1 font-medium">Phone Number (with Country Code) *</label>
                     <input
+                      suppressHydrationWarning
                       type="tel"
                       required
                       placeholder="+1 (555) 000-0000"
@@ -163,6 +183,7 @@ export default function BookingInquiryForm({ initialTourName = "" }: BookingForm
                   <div>
                     <label className="block text-xs text-stone-700 mb-1 font-medium">Estimated Travel Dates / Month</label>
                     <input
+                      suppressHydrationWarning
                       type="text"
                       placeholder="e.g. October 2026"
                       value={formData.travelDate}
@@ -173,6 +194,7 @@ export default function BookingInquiryForm({ initialTourName = "" }: BookingForm
                   <div>
                     <label className="block text-xs text-stone-700 mb-1 font-medium">Party Size</label>
                     <input
+                      suppressHydrationWarning
                       type="text"
                       placeholder="e.g. 2 Adults, 2 Children"
                       value={formData.travelers}
@@ -185,6 +207,7 @@ export default function BookingInquiryForm({ initialTourName = "" }: BookingForm
                 <div>
                   <label className="block text-xs text-stone-700 mb-1 font-medium">Special Requests & Preferences</label>
                   <textarea
+                    suppressHydrationWarning
                     rows={3}
                     placeholder="Tell us what matters most to you (authentic riad architecture, camel rides, desert stargazing, cooking class, kosher options, private vehicle)..."
                     value={formData.message}
@@ -196,6 +219,7 @@ export default function BookingInquiryForm({ initialTourName = "" }: BookingForm
                 <div className="flex flex-col sm:flex-row sm:items-center gap-3 p-3.5 rounded-xl bg-white border border-stone-200">
                   <span className="text-xs text-stone-700 font-medium">Human verification: What is 3 + 1? *</span>
                   <input
+                    suppressHydrationWarning
                     type="text"
                     required
                     placeholder="Answer"
@@ -206,19 +230,28 @@ export default function BookingInquiryForm({ initialTourName = "" }: BookingForm
                   {error && <span className="text-xs text-red-600 font-medium">{error}</span>}
                 </div>
 
-                <button
+                <motion.button
+                  suppressHydrationWarning
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
                   type="submit"
                   className="w-full py-3.5 rounded-full bg-[#1E1B18] hover:bg-[#C05621] text-white font-bold text-xs uppercase tracking-[0.2em] transition-all shadow-md cursor-pointer flex items-center justify-center gap-2"
                 >
                   <Send className="w-4 h-4 text-white" />
-                  <span>SUBMIT INQUIRY & RECEIVE PROPOSAL</span>
-                </button>
+                  <span>SUBMIT INQUIRY &amp; RECEIVE PROPOSAL</span>
+                </motion.button>
               </form>
             )}
-          </div>
+          </motion.div>
 
           {/* Right Column: Direct Contact Info */}
-          <div className="lg:col-span-4 space-y-5">
+          <motion.div 
+            initial={{ opacity: 0, x: 24 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true, margin: "-40px" }}
+            transition={{ duration: 0.7, ease: easeOutExpo }}
+            className="lg:col-span-4 space-y-5"
+          >
             <div className="bg-[#FAF8F5] rounded-[2rem] p-7 border border-stone-200/90 space-y-5">
               <div>
                 <span className="text-[10px] font-mono uppercase tracking-widest text-[#C5A880] block font-semibold">
@@ -236,7 +269,7 @@ export default function BookingInquiryForm({ initialTourName = "" }: BookingForm
                 >
                   <Phone className="w-4 h-4 text-[#C05621] shrink-0" />
                   <div>
-                    <span className="text-[10px] text-stone-500 uppercase block font-semibold">US & Canada Direct</span>
+                    <span className="text-[10px] text-stone-500 uppercase block font-semibold">US &amp; Canada Direct</span>
                     <strong className="text-stone-900">{siteConfig.phoneUsCa}</strong>
                   </div>
                 </a>
@@ -288,7 +321,7 @@ export default function BookingInquiryForm({ initialTourName = "" }: BookingForm
                 We guarantee the best price and service in Morocco. Find a lower advertised price elsewhere on an identical package and we will match it + grant 5% extra discount.
               </p>
             </div>
-          </div>
+          </motion.div>
         </div>
       </div>
     </section>

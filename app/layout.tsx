@@ -44,6 +44,17 @@ export const metadata: Metadata = {
     alternateLocale: ["fr_CA", "en_CA"],
     images: [{ url: DEFAULT_OG_IMAGE, width: 1200, height: 630, alt: "Best of Morocco Tours" }],
   },
+  icons: {
+    icon: [
+      { url: "/icon.png", sizes: "any" },
+      { url: "/logo.svg", type: "image/svg+xml" },
+      { url: "/favicon.ico", sizes: "48x48" },
+    ],
+    apple: [
+      { url: "/icon.png" },
+    ],
+    shortcut: "/favicon.ico",
+  },
   twitter: {
     card: "summary_large_image",
     images: [DEFAULT_OG_IMAGE],
@@ -61,6 +72,9 @@ export default function RootLayout({
       className={`${playfairDisplay.variable} ${montserrat.variable} ${inter.variable} h-full antialiased`}
     >
       <head>
+        <link rel="icon" href="/icon.png" sizes="any" />
+        <link rel="icon" href="/logo.svg" type="image/svg+xml" />
+        <link rel="apple-touch-icon" href="/icon.png" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <script
@@ -80,7 +94,7 @@ export default function RootLayout({
                   "@id": "https://www.bestofmoroccotour.com/#agency",
                   "name": "Best of Morocco Tours",
                   "url": "https://www.bestofmoroccotour.com",
-                  "logo": "https://www.bestofmoroccotour.com/images/bestofmorocco/img_logo.png",
+                  "logo": "https://www.bestofmoroccotour.com/logo.png",
                   "telephone": "+15145158382",
                   "areaServed": ["United States", "Canada", "United Kingdom", "Morocco", "Worldwide"],
                   "priceRange": "$$$",

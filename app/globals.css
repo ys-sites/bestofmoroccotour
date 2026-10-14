@@ -19,6 +19,19 @@ html {
   scroll-behavior: smooth;
 }
 
+body {
+  background-color: #FAF8F5;
+  background-image: 
+    radial-gradient(ellipse 90% 60% at 50% 0%, rgba(217, 119, 6, 0.07) 0%, transparent 70%),
+    radial-gradient(ellipse 70% 50% at 100% 25%, rgba(192, 86, 33, 0.06) 0%, transparent 60%),
+    radial-gradient(ellipse 80% 60% at 0% 55%, rgba(197, 168, 128, 0.08) 0%, transparent 70%),
+    radial-gradient(ellipse 90% 70% at 90% 85%, rgba(217, 119, 6, 0.06) 0%, transparent 60%),
+    url('/images/moroccan-zellij.svg');
+  background-repeat: no-repeat, no-repeat, no-repeat, no-repeat, repeat;
+  background-size: 100% 900px, 800px 900px, 900px 1000px, 900px 1000px, 140px 140px;
+  color: #1E1B18;
+}
+
 
 :root {
   --background: 35 30% 98%; /* Warm Moroccan sand/linen off-white: #FAF8F5 */

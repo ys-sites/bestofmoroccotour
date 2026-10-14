@@ -1,56 +1,57 @@
-<svg width="120" height="120" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+<svg width="160" height="160" viewBox="0 0 160 160" xmlns="http://www.w3.org/2000/svg">
   <defs>
     <linearGradient id="terracottaGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#C05621" stop-opacity="0.12" />
-      <stop offset="100%" stop-color="#D97706" stop-opacity="0.08" />
+      <stop offset="0%" stop-color="#C05621" stop-opacity="0.18" />
+      <stop offset="50%" stop-color="#D97706" stop-opacity="0.14" />
+      <stop offset="100%" stop-color="#B45309" stop-opacity="0.16" />
     </linearGradient>
-    <linearGradient id="ochreFill" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#C5A880" stop-opacity="0.06" />
-      <stop offset="100%" stop-color="#9A7036" stop-opacity="0.03" />
+    <linearGradient id="sandGoldFill" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#C5A880" stop-opacity="0.18" />
+      <stop offset="100%" stop-color="#9A7036" stop-opacity="0.12" />
     </linearGradient>
   </defs>
 
-  <!-- Background Subtle Geometry & Radial Rings -->
-  <circle cx="60" cy="60" r="50" fill="none" stroke="#C05621" stroke-width="0.75" stroke-opacity="0.08" />
-  <circle cx="60" cy="60" r="28" fill="none" stroke="#C05621" stroke-width="0.75" stroke-opacity="0.08" />
-  <circle cx="0" cy="0" r="50" fill="none" stroke="#C05621" stroke-width="0.75" stroke-opacity="0.08" />
-  <circle cx="120" cy="0" r="50" fill="none" stroke="#C05621" stroke-width="0.75" stroke-opacity="0.08" />
-  <circle cx="0" cy="120" r="50" fill="none" stroke="#C05621" stroke-width="0.75" stroke-opacity="0.08" />
-  <circle cx="120" cy="120" r="50" fill="none" stroke="#C05621" stroke-width="0.75" stroke-opacity="0.08" />
+  <!-- Concentric Zellij Rosette Circles -->
+  <circle cx="80" cy="80" r="68" fill="none" stroke="#C05621" stroke-width="0.9" stroke-opacity="0.16" stroke-dasharray="4 3" />
+  <circle cx="80" cy="80" r="38" fill="none" stroke="#D97706" stroke-width="0.9" stroke-opacity="0.15" />
+  <circle cx="0" cy="0" r="68" fill="none" stroke="#C05621" stroke-width="0.9" stroke-opacity="0.16" stroke-dasharray="4 3" />
+  <circle cx="160" cy="0" r="68" fill="none" stroke="#C05621" stroke-width="0.9" stroke-opacity="0.16" stroke-dasharray="4 3" />
+  <circle cx="0" cy="160" r="68" fill="none" stroke="#C05621" stroke-width="0.9" stroke-opacity="0.16" stroke-dasharray="4 3" />
+  <circle cx="160" cy="160" r="68" fill="none" stroke="#C05621" stroke-width="0.9" stroke-opacity="0.16" stroke-dasharray="4 3" />
 
-  <!-- Diagonal interlaced lattice guidelines -->
-  <g stroke="#C05621" stroke-width="0.8" stroke-opacity="0.10" stroke-linecap="round">
-    <line x1="0" y1="0" x2="120" y2="120" />
-    <line x1="120" y1="0" x2="0" y2="120" />
-    <line x1="60" y1="0" x2="60" y2="120" />
-    <line x1="0" y1="60" x2="120" y2="60" />
-    <line x1="60" y1="0" x2="120" y2="60" />
-    <line x1="120" y1="60" x2="60" y2="120" />
-    <line x1="60" y1="120" x2="0" y2="60" />
-    <line x1="0" y1="60" x2="60" y2="0" />
+  <!-- Interlaced Moroccan Lattice Ribbons (Girih Strapwork) -->
+  <g stroke="#C05621" stroke-width="1.1" stroke-opacity="0.17" stroke-linecap="round">
+    <line x1="0" y1="0" x2="160" y2="160" />
+    <line x1="160" y1="0" x2="0" y2="160" />
+    <line x1="80" y1="0" x2="80" y2="160" />
+    <line x1="0" y1="80" x2="160" y2="80" />
+    <line x1="80" y1="0" x2="160" y2="80" />
+    <line x1="160" y1="80" x2="80" y2="160" />
+    <line x1="80" y1="160" x2="0" y2="80" />
+    <line x1="0" y1="80" x2="80" y2="0" />
   </g>
 
-  <!-- Corner 8-point Moroccan Stars -->
-  <polygon points="36.00,0.00 18.02,7.46 25.46,25.46 7.46,18.02 0.00,36.00 -7.46,18.02 -25.46,25.46 -18.02,7.46 -36.00,0.00 -18.02,-7.46 -25.46,-25.46 -7.46,-18.02 -0.00,-36.00 7.46,-18.02 25.46,-25.46 18.02,-7.46" fill="url(#ochreFill)" stroke="#C05621" stroke-width="1.2" stroke-opacity="0.14" />
-  <polygon points="156.00,0.00 138.02,7.46 145.46,25.46 127.46,18.02 120.00,36.00 112.54,18.02 94.54,25.46 101.98,7.46 84.00,0.00 101.98,-7.46 94.54,-25.46 112.54,-18.02 120.00,-36.00 127.46,-18.02 145.46,-25.46 138.02,-7.46" fill="url(#ochreFill)" stroke="#C05621" stroke-width="1.2" stroke-opacity="0.14" />
-  <polygon points="36.00,120.00 18.02,127.46 25.46,145.46 7.46,138.02 0.00,156.00 -7.46,138.02 -25.46,145.46 -18.02,127.46 -36.00,120.00 -18.02,112.54 -25.46,94.54 -7.46,101.98 -0.00,84.00 7.46,101.98 25.46,94.54 18.02,112.54" fill="url(#ochreFill)" stroke="#C05621" stroke-width="1.2" stroke-opacity="0.14" />
-  <polygon points="156.00,120.00 138.02,127.46 145.46,145.46 127.46,138.02 120.00,156.00 112.54,138.02 94.54,145.46 101.98,127.46 84.00,120.00 101.98,112.54 94.54,94.54 112.54,101.98 120.00,84.00 127.46,101.98 145.46,94.54 138.02,112.54" fill="url(#ochreFill)" stroke="#C05621" stroke-width="1.2" stroke-opacity="0.14" />
+  <!-- Corner 8-point Moroccan Khatam Stars -->
+  <polygon points="48.00,0.00 24.02,9.95 33.94,33.94 9.95,24.02 0.00,48.00 -9.95,24.02 -33.94,33.94 -24.02,9.95 -48.00,0.00 -24.02,-9.95 -33.94,-33.94 -9.95,-24.02 -0.00,-48.00 9.95,-24.02 33.94,-33.94 24.02,-9.95" fill="url(#sandGoldFill)" stroke="#C05621" stroke-width="1.2" stroke-opacity="0.24" />
+  <polygon points="208.00,0.00 184.02,9.95 193.94,33.94 169.95,24.02 160.00,48.00 150.05,24.02 126.06,33.94 135.98,9.95 112.00,0.00 135.98,-9.95 126.06,-33.94 150.05,-24.02 160.00,-48.00 169.95,-24.02 193.94,-33.94 184.02,-9.95" fill="url(#sandGoldFill)" stroke="#C05621" stroke-width="1.2" stroke-opacity="0.24" />
+  <polygon points="48.00,160.00 24.02,169.95 33.94,193.94 9.95,184.02 0.00,208.00 -9.95,184.02 -33.94,193.94 -24.02,169.95 -48.00,160.00 -24.02,150.05 -33.94,126.06 -9.95,135.98 -0.00,112.00 9.95,135.98 33.94,126.06 24.02,150.05" fill="url(#sandGoldFill)" stroke="#C05621" stroke-width="1.2" stroke-opacity="0.24" />
+  <polygon points="208.00,160.00 184.02,169.95 193.94,193.94 169.95,184.02 160.00,208.00 150.05,184.02 126.06,193.94 135.98,169.95 112.00,160.00 135.98,150.05 126.06,126.06 150.05,135.98 160.00,112.00 169.95,135.98 193.94,126.06 184.02,150.05" fill="url(#sandGoldFill)" stroke="#C05621" stroke-width="1.2" stroke-opacity="0.24" />
 
   <!-- Midpoint Star Medallions -->
-  <polygon points="82.00,0.00 70.16,4.21 75.56,15.56 64.21,10.16 60.00,22.00 55.79,10.16 44.44,15.56 49.84,4.21 38.00,0.00 49.84,-4.21 44.44,-15.56 55.79,-10.16 60.00,-22.00 64.21,-10.16 75.56,-15.56 70.16,-4.21" fill="none" stroke="#C05621" stroke-width="1" stroke-opacity="0.12" />
-  <polygon points="82.00,120.00 70.16,124.21 75.56,135.56 64.21,130.16 60.00,142.00 55.79,130.16 44.44,135.56 49.84,124.21 38.00,120.00 49.84,115.79 44.44,104.44 55.79,109.84 60.00,98.00 64.21,109.84 75.56,104.44 70.16,115.79" fill="none" stroke="#C05621" stroke-width="1" stroke-opacity="0.12" />
-  <polygon points="22.00,60.00 10.16,64.21 15.56,75.56 4.21,70.16 0.00,82.00 -4.21,70.16 -15.56,75.56 -10.16,64.21 -22.00,60.00 -10.16,55.79 -15.56,44.44 -4.21,49.84 -0.00,38.00 4.21,49.84 15.56,44.44 10.16,55.79" fill="none" stroke="#C05621" stroke-width="1" stroke-opacity="0.12" />
-  <polygon points="142.00,60.00 130.16,64.21 135.56,75.56 124.21,70.16 120.00,82.00 115.79,70.16 104.44,75.56 109.84,64.21 98.00,60.00 109.84,55.79 104.44,44.44 115.79,49.84 120.00,38.00 124.21,49.84 135.56,44.44 130.16,55.79" fill="none" stroke="#C05621" stroke-width="1" stroke-opacity="0.12" />
+  <polygon points="110.00,0.00 93.86,5.74 101.21,21.21 85.74,13.86 80.00,30.00 74.26,13.86 58.79,21.21 66.14,5.74 50.00,0.00 66.14,-5.74 58.79,-21.21 74.26,-13.86 80.00,-30.00 85.74,-13.86 101.21,-21.21 93.86,-5.74" fill="url(#sandGoldFill)" stroke="#C05621" stroke-width="1.1" stroke-opacity="0.20" />
+  <polygon points="110.00,160.00 93.86,165.74 101.21,181.21 85.74,173.86 80.00,190.00 74.26,173.86 58.79,181.21 66.14,165.74 50.00,160.00 66.14,154.26 58.79,138.79 74.26,146.14 80.00,130.00 85.74,146.14 101.21,138.79 93.86,154.26" fill="url(#sandGoldFill)" stroke="#C05621" stroke-width="1.1" stroke-opacity="0.20" />
+  <polygon points="30.00,80.00 13.86,85.74 21.21,101.21 5.74,93.86 0.00,110.00 -5.74,93.86 -21.21,101.21 -13.86,85.74 -30.00,80.00 -13.86,74.26 -21.21,58.79 -5.74,66.14 -0.00,50.00 5.74,66.14 21.21,58.79 13.86,74.26" fill="url(#sandGoldFill)" stroke="#C05621" stroke-width="1.1" stroke-opacity="0.20" />
+  <polygon points="190.00,80.00 173.86,85.74 181.21,101.21 165.74,93.86 160.00,110.00 154.26,93.86 138.79,101.21 146.14,85.74 130.00,80.00 146.14,74.26 138.79,58.79 154.26,66.14 160.00,50.00 165.74,66.14 181.21,58.79 173.86,74.26" fill="url(#sandGoldFill)" stroke="#C05621" stroke-width="1.1" stroke-opacity="0.20" />
 
-  <!-- Central Moroccan 8-point Star (Khatam) -->
-  <polygon points="96.00,60.00 78.02,67.46 85.46,85.46 67.46,78.02 60.00,96.00 52.54,78.02 34.54,85.46 41.98,67.46 24.00,60.00 41.98,52.54 34.54,34.54 52.54,41.98 60.00,24.00 67.46,41.98 85.46,34.54 78.02,52.54" fill="url(#terracottaGrad)" stroke="#C05621" stroke-width="1.3" stroke-opacity="0.16" />
-  <!-- Inner Rosette -->
-  <polygon points="76.63,66.89 66.72,66.72 66.89,76.63 60.00,69.50 53.11,76.63 53.28,66.72 43.37,66.89 50.50,60.00 43.37,53.11 53.28,53.28 53.11,43.37 60.00,50.50 66.89,43.37 66.72,53.28 76.63,53.11 69.50,60.00" fill="none" stroke="#D97706" stroke-width="1" stroke-opacity="0.18" />
-  <circle cx="60" cy="60" r="4" fill="#C05621" fill-opacity="0.18" />
+  <!-- Central Moroccan 8-point Khatam Suleimani Star -->
+  <polygon points="128.00,80.00 104.02,89.95 113.94,113.94 89.95,104.02 80.00,128.00 70.05,104.02 46.06,113.94 55.98,89.95 32.00,80.00 55.98,70.05 46.06,46.06 70.05,55.98 80.00,32.00 89.95,55.98 113.94,46.06 104.02,70.05" fill="url(#terracottaGrad)" stroke="#C05621" stroke-width="1.4" stroke-opacity="0.28" />
+  <!-- Inner Rosette Star -->
+  <polygon points="104.02,89.95 89.90,89.90 89.95,104.02 80.00,94.00 70.05,104.02 70.10,89.90 55.98,89.95 66.00,80.00 55.98,70.05 70.10,70.10 70.05,55.98 80.00,66.00 89.95,55.98 89.90,70.10 104.02,70.05 94.00,80.00" fill="none" stroke="#D97706" stroke-width="1.1" stroke-opacity="0.26" />
+  <circle cx="80" cy="80" r="5" fill="#C05621" fill-opacity="0.30" />
 
   <!-- Corner center dots -->
-  <circle cx="0" cy="0" r="4" fill="#C05621" fill-opacity="0.18" />
-  <circle cx="120" cy="0" r="4" fill="#C05621" fill-opacity="0.18" />
-  <circle cx="0" cy="120" r="4" fill="#C05621" fill-opacity="0.18" />
-  <circle cx="120" cy="120" r="4" fill="#C05621" fill-opacity="0.18" />
+  <circle cx="0" cy="0" r="5" fill="#C05621" fill-opacity="0.30" />
+  <circle cx="160" cy="0" r="5" fill="#C05621" fill-opacity="0.30" />
+  <circle cx="0" cy="160" r="5" fill="#C05621" fill-opacity="0.30" />
+  <circle cx="160" cy="160" r="5" fill="#C05621" fill-opacity="0.30" />
 </svg>
