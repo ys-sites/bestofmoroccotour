@@ -41,7 +41,7 @@ export default function BookingInquiryForm({ initialTourName = "" }: BookingForm
     setSubmitError("");
 
     try {
-      const response = await fetch("https://formsubmit.co/ajax/cloud@ysdev.ca", {
+      const response = await fetch("https://formsubmit.co/ajax/info@bestofmoroccotour.com", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

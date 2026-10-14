@@ -95,7 +95,7 @@ export default function MiceClient() {
     e.preventDefault();
     setIsSubmitting(true);
 
-    fetch("https://formsubmit.co/ajax/cloud@ysdev.ca", {
+    fetch("https://formsubmit.co/ajax/info@bestofmoroccotour.com", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

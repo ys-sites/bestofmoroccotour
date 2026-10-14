@@ -162,7 +162,7 @@ export default function ItineraryClient({ id, crumbs }: { id: string; crumbs: Br
     e.preventDefault();
     setIsSubmitting(true);
 
-    fetch("https://formsubmit.co/ajax/cloud@ysdev.ca", {
+    fetch("https://formsubmit.co/ajax/info@bestofmoroccotour.com", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

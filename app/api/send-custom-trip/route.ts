@@ -24,7 +24,7 @@ export async function POST(request: Request) {
     console.log("=========================================");
 
     // Forwarding to FormSubmit
-    const formSubmitResponse = await fetch("https://formsubmit.co/ajax/cloud@ysdev.ca", {
+    const formSubmitResponse = await fetch("https://formsubmit.co/ajax/info@bestofmoroccotour.com", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
