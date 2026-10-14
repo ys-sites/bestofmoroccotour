@@ -4,6 +4,7 @@ import { useState } from "react";
 import { motion } from "motion/react";
 import { Shield, CheckCircle, Mail, Phone, MessageSquare } from "lucide-react";
 import { useLang, translate } from "../context/lang-context";
+import { siteConfig } from "@/data/bestOfMoroccoData";
 
 const t = {
   tagline: { FR: "Nous Contacter", EN: "Get in Touch" },
@@ -135,7 +136,7 @@ export default function HomeContactForm() {
           >
             {/* Phone */}
             <a
-              href="tel:5149196381"
+              href={`tel:${siteConfig.phoneUsCa.replace(/\s+/g, "")}`}
               className="flex items-start gap-4 p-5 bg-zinc-50 border border-zinc-200/70 rounded-2xl hover:border-brand-gold/40 hover:bg-white transition-all duration-200 group"
             >
               <div className="w-10 h-10 rounded-xl bg-zinc-900 text-brand-gold flex items-center justify-center shrink-0 group-hover:bg-brand-gold group-hover:text-white transition-colors duration-200">
@@ -145,14 +146,14 @@ export default function HomeContactForm() {
                 <p className="font-mono text-[9px] tracking-[0.2em] uppercase text-zinc-400 mb-0.5">
                   {translate(t.callUs, lang)}
                 </p>
-                <p className="font-semibold text-zinc-800 text-sm">+1 514 919 6381</p>
-                <p className="text-zinc-400 text-[11px] font-mono mt-0.5">Lun–Ven 9h–18h</p>
+                <p className="font-semibold text-zinc-800 text-sm">{siteConfig.phoneUsCa}</p>
+                <p className="text-zinc-400 text-[11px] font-mono mt-0.5">{siteConfig.hours}</p>
               </div>
             </a>
 
             {/* Email */}
             <a
-              href="mailto:info@mevoyages.com"
+              href={`mailto:${siteConfig.email}`}
               className="flex items-start gap-4 p-5 bg-zinc-50 border border-zinc-200/70 rounded-2xl hover:border-brand-gold/40 hover:bg-white transition-all duration-200 group"
             >
               <div className="w-10 h-10 rounded-xl bg-zinc-900 text-brand-gold flex items-center justify-center shrink-0 group-hover:bg-brand-gold group-hover:text-white transition-colors duration-200">
@@ -162,13 +163,13 @@ export default function HomeContactForm() {
                 <p className="font-mono text-[9px] tracking-[0.2em] uppercase text-zinc-400 mb-0.5">
                   {translate(t.emailUs, lang)}
                 </p>
-                <p className="font-semibold text-zinc-800 text-sm">info@mevoyages.com</p>
+                <p className="font-semibold text-zinc-800 text-sm">{siteConfig.email}</p>
               </div>
             </a>
 
             {/* WhatsApp */}
             <a
-              href="https://wa.me/15149196381"
+              href={`https://wa.me/${siteConfig.phoneMa.replace(/[^0-9]/g, "")}`}
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-start gap-4 p-5 bg-zinc-50 border border-zinc-200/70 rounded-2xl hover:border-brand-gold/40 hover:bg-white transition-all duration-200 group"
@@ -180,7 +181,7 @@ export default function HomeContactForm() {
                 <p className="font-mono text-[9px] tracking-[0.2em] uppercase text-zinc-400 mb-0.5">
                   {translate(t.whatsapp, lang)}
                 </p>
-                <p className="font-semibold text-zinc-800 text-sm">+1 514 919 6381</p>
+                <p className="font-semibold text-zinc-800 text-sm">{siteConfig.phoneMa}</p>
                 <p className="text-zinc-400 text-[11px] font-mono mt-0.5">24/7</p>
               </div>
             </a>

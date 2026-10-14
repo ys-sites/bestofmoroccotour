@@ -161,7 +161,7 @@ export default function Footer() {
             <li><Link href="/#why-choose-us" className="hover:text-brand-gold transition-colors">{translate(t.about, lang)}</Link></li>
             <li><Link href="/conditions" className="hover:text-brand-gold transition-colors">{lang === "FR" ? "Conditions Générales" : "General Conditions"}</Link></li>
             <li><Link href="/contact" className="hover:text-brand-gold transition-colors">{lang === "FR" ? "Contact" : "Contact"}</Link></li>
-            <li><Link href="/conditions" className="hover:text-brand-gold transition-colors">{lang === "FR" ? "Assurance Voyage" : "Travel Insurance"}</Link></li>
+            <li><Link href="/conditions#insurance" className="hover:text-brand-gold transition-colors">{lang === "FR" ? "Assurance Voyage" : "Travel Insurance"}</Link></li>
             <li><Link href="/mice" className="hover:text-brand-gold transition-colors">{lang === "FR" ? "Services aux Entreprises (MICE)" : "Corporate Services (MICE)"}</Link></li>
             <li><Link href="/heritage" className="hover:text-brand-gold transition-colors">{lang === "FR" ? "Patrimoine & Culture Maroc" : "Morocco Heritage & Culture"}</Link></li>
             <li><Link href="/custom-trip" className="hover:text-brand-gold transition-colors">{lang === "FR" ? "Voyages Scolaires" : "School Trips"}</Link></li>

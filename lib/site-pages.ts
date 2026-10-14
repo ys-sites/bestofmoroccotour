@@ -12,4 +12,7 @@ export const sitePages: { path: string; priority: number; ogImage: string; image
   { path: "/contact", priority: 0.7, ogImage: "/og/contact.jpg", images: [] },
   { path: "/travel-stories", priority: 0.5, ogImage: "/og/home.jpg", images: [] },
   { path: "/conditions", priority: 0.3, ogImage: "/og/home.jpg", images: [] },
+  { path: "/cancellation-policy", priority: 0.3, ogImage: "/og/home.jpg", images: [] },
+  { path: "/about", priority: 0.6, ogImage: "/og/home.jpg", images: ["/images/bestofmorocco/img_carousel_riad.jpg"] },
+  { path: "/founder", priority: 0.5, ogImage: "/og/home.jpg", images: ["/images/bestofmorocco/img_team_team-1.jpg"] },
 ];

@@ -26,7 +26,7 @@ import {
   Sun
 } from "lucide-react";
 import Navbar from "../components/navbar";
-import Footer from "../components/footer";
+import FooterEditorial from "../components/footer-editorial";
 import MapSection from "../components/map-section";
 import SmartVideo from "../components/smart-video";
 import { useLang, translate } from "../context/lang-context";
@@ -1023,18 +1023,18 @@ export default function HeritageClient() {
             </motion.div>
             <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.98 }}>
               <a
-                href="tel:5149196381"
-                aria-label="Call +1 514 919 6381"
+                href="tel:+15145158382"
+                aria-label="Call +1 514 515 8382"
                 className="border border-zinc-600 hover:border-white text-zinc-200 hover:text-white font-medium text-xs tracking-[0.2em] uppercase px-8 py-4 rounded-full transition-all duration-300 block"
               >
-                {lang === "FR" ? "Appeler le 514 919 6381" : "Call +1 (514) 919-6381"}
+                {lang === "FR" ? "Appeler le 514 515 8382" : "Call +1 (514) 515-8382"}
               </a>
             </motion.div>
           </div>
         </motion.div>
       </section>
 
-      <Footer />
+      <FooterEditorial />
     </div>
   );
 }

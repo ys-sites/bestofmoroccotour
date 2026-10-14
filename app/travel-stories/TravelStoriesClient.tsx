@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
 import Navbar from "../components/navbar";
-import Footer from "../components/footer";
+import FooterEditorial from "../components/footer-editorial";
 import { useLang, translate } from "../context/lang-context";
 
 const t = {
@@ -78,7 +78,7 @@ export default function TravelStoriesClient() {
         </div>
       </main>
 
-      <Footer />
+      <FooterEditorial />
     </div>
   );
 }

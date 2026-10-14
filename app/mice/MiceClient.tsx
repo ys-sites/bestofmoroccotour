@@ -5,7 +5,7 @@ import Link from "next/link";
 import { ArrowLeft, Shield, CheckCircle, Briefcase, Award, Users, Globe, Building } from "lucide-react";
 import { motion } from "motion/react";
 import Navbar from "../components/navbar";
-import Footer from "../components/footer";
+import FooterEditorial from "../components/footer-editorial";
 import { useLang, translate } from "../context/lang-context";
 import SmartVideo from "../components/smart-video";
 import { videoSources } from "../../data/videoSources";
@@ -32,12 +32,12 @@ export default function MiceClient() {
       EN: "Exclusive corporate solutions designed to achieve your business objectives."
     },
     overviewText: {
-      FR: "Chez Merveilles et Voyages, nous sommes spécialisés dans la création d'expériences MICE d'exception au Maroc. Qu'il s'agisse d'un séminaire d'entreprise, d'un voyage de récompense (incentive), d'un congrès d'envergure, d'un lancement de produit ou d'une retraite de direction, notre équipe offre des solutions fluides, créatives et adaptées à vos objectifs commerciaux.",
-      EN: "At Merveilles et Voyages, we specialize in creating exceptional MICE experiences in Morocco. Whether you are planning a corporate meeting, incentive trip, conference, product launch, or executive retreat, our team delivers seamless, customized solutions designed to achieve your business objectives."
+      FR: "Best of Morocco Tours vous accompagne dans la planification avec des conseils pratiques. Notre expérience des destinations et de la conception d'itinéraires vous permet d'ajouter l'effet « Wow! » tout en éliminant les risques. Une équipe dédiée de planificateurs et de coordonnateurs vous est assignée et ne s'arrête qu'une fois vos attentes atteintes, puis dépassées.",
+      EN: "Best of Morocco Tours will assist you in planning with practical tips. Our experience and knowledge of both the destinations and the itinerary-building process let you add the Wow! factor while eliminating the risks. You are assigned your own dedicated team of planners and coordinators, who will not rest until they match, then exceed, your expectations."
     },
     overviewPoints: {
-      FR: "Grâce à notre expertise locale approfondie et à notre réseau de partenaires de confiance, nous gérons votre projet de A à Z avec un professionnalisme absolu.",
-      EN: "With our in-depth destination expertise and trusted local network, we provide end-to-end event management, ensuring every detail is handled with precision."
+      FR: "Notre équipe MICE experte et passionnée gère des groupes de 20 à plus de 500 personnes. Chacun de nos directeurs de circuit a déjà accompagné plus de 50 groupes et connaît parfaitement ses destinations : nous ne laissons rien au hasard.",
+      EN: "Our expert and enthusiastic MICE team handles groups from 20 to more than 500 people. Each of our tour directors has serviced more than 50 groups and knows their destinations inside out: we never leave anything to chance."
     },
     meetingsTitle: { FR: "Réunions & Séminaires", EN: "Meetings & Gatherings" },
     meetingsDesc: {
@@ -52,7 +52,7 @@ export default function MiceClient() {
     conferencesTitle: { FR: "Congrès & Conférences", EN: "Conferences & Congresses" },
     conferencesDesc: {
       FR: "Planification globale, gestion des inscriptions des délégués, coordination logistique des fournisseurs et aménagement d'espaces de réseautage.",
-      EN: "Full event planning, delegate registration, supplier coordination, and professional on-site logictics."
+      EN: "Full event planning, delegate registration, supplier coordination, and professional on-site logistics."
     },
     corporateTitle: { FR: "Événements d'Entreprise", EN: "Corporate Events" },
     corporateDesc: {
@@ -61,13 +61,13 @@ export default function MiceClient() {
     },
     whyMoroccoTitle: { FR: "Pourquoi le Maroc ?", EN: "Why Morocco?" },
     whyMoroccoDesc: {
-      FR: "Le Maroc offre un mélange parfait d'infrastructures ultra-modernes, de complexes hôteliers de classe mondiale, de paysages saisissants (désert, montagnes, océan) et d'une hospitalité légendaire. Que ce soit à Marrakech, Casablanca, Rabat ou Agadir, vos participants vivront une combinaison mémorable de travail et d'évasion.",
-      EN: "Morocco offers the perfect blend of modern infrastructure, world-class hospitality, breathtaking landscapes (desert, mountains, ocean), and rich culture. Whether in Marrakech, Casablanca, Rabat, or Agadir, participants will enjoy an unforgettable combination of business and leisure."
+      FR: "Le Maroc modernise continuellement ses infrastructures MICE (réunions, incentives, congrès et salons) : nouveaux centres de congrès de calibre mondial, aéroports modernes et la célèbre hospitalité marocaine, adaptée aux besoins de chaque visiteur. À Marrakech, Casablanca, Rabat ou Agadir, vos participants vivront un mélange inoubliable d'affaires et d'évasion.",
+      EN: "Morocco is continually upgrading its MICE (Meetings, Incentives, Conferences and Exhibitions) facilities, with world-class convention centres and modern airports, paired with famous Moroccan hospitality tailored to each visitor's requirements. Whether in Marrakech, Casablanca, Rabat or Agadir, participants enjoy an unforgettable mix of business and leisure."
     },
-    whyPartnerTitle: { FR: "Pourquoi choisir M.E. Voyages ?", EN: "Why Partner with M.E. Voyages?" },
+    whyPartnerTitle: { FR: "Services de congrès sur mesure", EN: "Conference Tours & Services" },
     whyPartnerDesc: {
-      FR: "Un chef de projet dédié du début à la fin, une tarification compétitive grâce à nos relations locales fortes, une assistance 24/7 sur place et un engagement absolu pour la qualité et le souci du détail.",
-      EN: "A dedicated project manager from start to finish, competitive pricing through strong supplier relationships, 24/7 on-site assistance, and a commitment to absolute quality and attention to detail."
+      FR: "Des services avant, pendant et après votre événement : conception de la papeterie, inspection et sélection des lieux (incluant les visites clients), site web dédié à votre événement, correspondance détaillée et rapports. Profitez aussi de nos circuits spéciaux avant ou après votre congrès.",
+      EN: "Pre- and post-conference services that build connections before, during and after your event: stationery design, venue inspection and selection (including client visits), a dedicated website for your event, detailed correspondence and reporting. You can also enjoy any of our special tours before or after your conference."
     },
     formTitle: { FR: "Planifiez Votre Événement", EN: "Plan Your Event" },
     formSubtitle: { FR: "Discutez de votre projet avec notre conciergerie corporative.", EN: "Discuss your corporate project with our concierge team." },
@@ -369,7 +369,7 @@ export default function MiceClient() {
         </motion.div>
       </section>
 
-      <Footer />
+      <FooterEditorial />
     </div>
   );
 }

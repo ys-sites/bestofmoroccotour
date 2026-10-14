@@ -5,7 +5,7 @@ import { breadcrumbJsonLd, pageMetadata } from "@/lib/seo";
 
 export const metadata: Metadata = pageMetadata({
   title: "Travel Stories — Curated Journey Journals",
-  description: "Read authentic stories, journals, and experiences from our privileged travellers exploring Morocco with Merveilles et Voyages.",
+  description: "Read authentic stories, journals, and experiences from our privileged travellers exploring Morocco with Best of Morocco Tours.",
   path: "/travel-stories",
 });
 

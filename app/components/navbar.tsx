@@ -135,6 +135,13 @@ export default function Navbar() {
               >
                 All Itineraries
               </Link>
+              <Link
+                href="/about"
+                onClick={() => setMobileMenuOpen(false)}
+                className="py-3 hover:text-[#C05621] transition-colors"
+              >
+                About Us
+              </Link>
             </nav>
 
             <div className="mt-3 pt-4 border-t border-stone-200 flex flex-col gap-2.5 text-xs">

@@ -41,7 +41,7 @@ export async function POST(request: Request) {
         "Estimation de budget / Estimated Budget": `${totalCostCAD} CAD`,
         "Villes & Haltes / Destinations": destinations.join(", "),
         "Activités / Activities": activities.join(", "),
-        _subject: `Merveilles & Voyages - Voyage Sur Mesure: ${contact.fullName}`
+        _subject: `Best of Morocco Tours - Custom Trip: ${contact.fullName}`
       })
     });
 

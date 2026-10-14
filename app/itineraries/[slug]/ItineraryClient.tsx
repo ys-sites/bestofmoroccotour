@@ -230,15 +230,15 @@ export default function ItineraryClient({ id, crumbs }: { id: string; crumbs: Br
   }
 
   return (
-    <div className="min-h-screen bg-transparent text-[#1E1B18] font-sans antialiased selection:bg-amber-200 selection:text-stone-900 relative pb-28">
+    <div className="min-h-screen bg-transparent text-[#1E1B18] font-sans antialiased selection:bg-amber-200 selection:text-stone-900 relative">
       {/* Background Moroccan Arch Watermarks */}
       <MoroccanArchWatermark 
-        className="fixed top-1/4 -left-32 xl:-left-40 w-[380px] xl:w-[460px] h-auto text-[#C05621] pointer-events-none -z-10 hidden xl:block" 
-        opacity={0.16} 
+        className="absolute top-[640px] -left-20 w-[200px] xl:w-[240px] h-auto text-[#C05621] pointer-events-none -z-10 hidden xl:block" 
+        opacity={0.1} 
       />
       <MoroccanArchWatermark 
-        className="fixed top-2/3 -right-32 xl:-right-40 w-[380px] xl:w-[460px] h-auto text-[#D97706] pointer-events-none -z-10 hidden xl:block" 
-        opacity={0.15} 
+        className="absolute top-[1500px] -right-20 w-[200px] xl:w-[240px] h-auto text-[#D97706] pointer-events-none -z-10 hidden xl:block" 
+        opacity={0.1} 
       />
 
       {/* Hanging Brass Lantern in Left Gutter */}
@@ -720,7 +720,7 @@ export default function ItineraryClient({ id, crumbs }: { id: string; crumbs: Br
       </div>
 
       {/* Footer */}
-      <div className="mt-20">
+      <div className="mt-20 bg-[#0A0B0E] pb-16 sm:pb-20">
         <FooterEditorial />
       </div>
     </div>

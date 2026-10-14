@@ -4,7 +4,7 @@ import React from "react";
 import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
 import Navbar from "../../components/navbar";
-import Footer from "../../components/footer";
+import FooterEditorial from "../../components/footer-editorial";
 import ItineraryPackageCard from "../../components/ItineraryPackageCard";
 import { useLang, translate } from "../../context/lang-context";
 import SmartVideo from "../../components/smart-video";
@@ -224,7 +224,7 @@ export default function AgadirGolfClient() {
         </div>
       </section>
 
-      <Footer />
+      <FooterEditorial />
     </div>
   );
 }

@@ -9,7 +9,7 @@ import { easeOutExpo } from "@/lib/animations";
 
 export default function AboutAndPillars() {
   return (
-    <section id="why-choose-us" className="bg-transparent py-20 px-4 sm:px-8 text-stone-900 border-t border-stone-200/60 relative overflow-hidden">
+    <section id="our-story" className="scroll-mt-28 bg-transparent py-20 px-4 sm:px-8 text-stone-900 border-t border-stone-200/60 relative overflow-hidden">
       <div className="max-w-[1280px] mx-auto space-y-20">
         {/* =========================================================================
             SECTION 1: FOUNDER STORY & KING HASSAN II PHILOSOPHY

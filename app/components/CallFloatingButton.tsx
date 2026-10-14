@@ -18,7 +18,7 @@ export default function CallFloatingButton() {
     <>
       {/* Phones: full-width bottom action bar instead of floating bubbles, so no text is ever
           covered at the screen edge. The spacer reserves room so the bar never hides the footer. */}
-      <div aria-hidden="true" className="sm:hidden h-[calc(4rem+env(safe-area-inset-bottom))] shrink-0" />
+      <div aria-hidden="true" className="sm:hidden h-[calc(4rem+env(safe-area-inset-bottom))] shrink-0 bg-[#0A0B0E]" />
       <div className="sm:hidden fixed inset-x-0 bottom-0 z-50 flex gap-2 px-3 pt-2 pb-[max(0.5rem,env(safe-area-inset-bottom))] bg-[#1E1B18]/95 backdrop-blur-xl border-t border-stone-800 shadow-[0_-10px_30px_rgba(0,0,0,0.25)]">
         <a
           href={whatsappHref}

@@ -3,6 +3,7 @@ import { Playfair_Display, Montserrat, Inter } from "next/font/google";
 import "./globals.css";
 import { LangProvider } from "./context/lang-context";
 import CallFloatingButton from "./components/CallFloatingButton";
+import FlightPathsBackground from "./components/flight-paths-background";
 import PageTransition from "./components/page-transition";
 import Script from "next/script";
 import { DEFAULT_OG_IMAGE, GBP_URL } from "@/lib/seo";
@@ -131,6 +132,7 @@ export default function RootLayout({
         </noscript>
         {/* End Google Tag Manager (noscript) */}
 
+        <FlightPathsBackground />
         <LangProvider>
           <PageTransition>
             {children}

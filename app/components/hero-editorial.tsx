@@ -3,7 +3,7 @@
 import { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { Search, Calendar, Compass, ShieldCheck, Award, MapPin, X, ArrowRight, Sparkles, CheckCircle2 } from "lucide-react";
+import { Search,Compass, ShieldCheck, Award, MapPin, X, ArrowRight, Sparkles, CheckCircle2 } from "lucide-react";
 import { motion, AnimatePresence } from "motion/react";
 import { MoroccanCornerSpandrel, MoroccanMedallionArt } from "./moroccan-art-motifs";
 import { easeOutExpo } from "@/lib/animations";
@@ -40,7 +40,6 @@ const slides = [
 export default function HeroEditorial({ onSearch }: HeroProps) {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [searchQuery, setSearchQuery] = useState("");
-  const [searchDates, setSearchDates] = useState("");
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const searchContainerRef = useRef<HTMLDivElement>(null);
 
@@ -206,7 +205,7 @@ export default function HeroEditorial({ onSearch }: HeroProps) {
           className="relative w-full rounded-[2rem] bg-white/98 backdrop-blur-xl p-2.5 sm:p-3 shadow-[0_15px_45px_rgba(74,53,37,0.14)] flex flex-col md:flex-row items-center justify-between gap-2 border border-stone-200/90 hover:shadow-[0_20px_55px_rgba(74,53,37,0.18)] transition-shadow duration-300"
         >
           {/* Input 1: Destination / Tour Name */}
-          <div className="flex-1 flex items-center gap-3 px-5 py-2.5 md:py-0 border-b md:border-b-0 md:border-r border-stone-200/80 w-full relative">
+          <div className="flex-1 flex items-center gap-3 px-5 py-2.5 md:py-0 w-full relative">
             <Search className="w-4 h-4 text-[#C05621] shrink-0" />
             <input
               suppressHydrationWarning
@@ -234,19 +233,6 @@ export default function HeroEditorial({ onSearch }: HeroProps) {
                 <X className="w-3.5 h-3.5" />
               </button>
             )}
-          </div>
-
-          {/* Input 2: Dates / Season */}
-          <div className="flex-1 flex items-center gap-3 px-5 py-2.5 md:py-0 md:border-r border-stone-200/80 w-full">
-            <Calendar className="w-4 h-4 text-[#D97706] shrink-0" />
-            <input
-              suppressHydrationWarning
-              type="text"
-              placeholder="Travel window (e.g. Oct 2026 – May 2027)"
-              value={searchDates}
-              onChange={(e) => setSearchDates(e.target.value)}
-              className="w-full bg-transparent text-xs sm:text-sm text-[#1E1B18] placeholder-stone-400 focus:outline-none font-sans font-medium"
-            />
           </div>
 
           {/* Action CTA Button */}

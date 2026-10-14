@@ -6,6 +6,7 @@ import HeroEditorial from "./components/hero-editorial";
 import StatsGrid from "./components/stats-grid";
 import ToursEditorial from "./components/tours-editorial";
 import AboutAndPillars from "./components/about-and-pillars";
+import WhyChooseUs from "./components/why-choose-us";
 import TestimonialsEditorial from "./components/testimonials-editorial";
 import BookingInquiryForm from "./components/booking-inquiry-form";
 import FaqAndPolicies from "./components/faq-and-policies";
@@ -60,12 +61,12 @@ export default function Home() {
 
       {/* Large Palace Gate Archway Watermarks in Background Margins */}
       <MoroccanArchWatermark 
-        className="fixed top-1/4 -left-28 xl:-left-36 w-[360px] xl:w-[440px] h-auto text-[#C05621] pointer-events-none -z-10 hidden xl:block" 
-        opacity={0.18} 
+        className="absolute top-[640px] -left-20 w-[200px] xl:w-[240px] h-auto text-[#C05621] pointer-events-none -z-10 hidden xl:block" 
+        opacity={0.1} 
       />
       <MoroccanArchWatermark 
-        className="fixed top-2/3 -right-28 xl:-right-36 w-[360px] xl:w-[440px] h-auto text-[#D97706] pointer-events-none -z-10 hidden xl:block" 
-        opacity={0.17} 
+        className="absolute top-[1500px] -right-20 w-[200px] xl:w-[240px] h-auto text-[#D97706] pointer-events-none -z-10 hidden xl:block" 
+        opacity={0.1} 
       />
 
       {/* Sticky Top Header with Dedicated Padding */}
@@ -88,6 +89,9 @@ export default function Home() {
 
         {/* 4 Elevated White Metric Cards (matching Ui.jpg) */}
         <StatsGrid />
+
+        {/* Six pillars from the original "Why Should You Choose Best of Morocco Tours?" */}
+        <WhyChooseUs />
 
         <MoroccanFriezeDivider className="opacity-40 max-w-5xl mx-auto py-2" />
 

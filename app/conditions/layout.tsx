@@ -4,8 +4,8 @@ import { breadcrumbJsonLd, pageMetadata } from "@/lib/seo";
 
 // page.tsx is a client component, so its metadata lives here
 export const metadata: Metadata = pageMetadata({
-  title: "Conditions Générales de Vente — Terms & Conditions",
-  description: "Nos conditions générales de vente : tarifs, modes de paiement, dépôts, politique d'annulation et modifications de réservation pour vos voyages au Maroc.",
+  title: "Terms & Conditions — Conditions générales",
+  description: "Best of Morocco Tours terms of business: booking and payment schedule, cancellations and refunds, children fares, travel insurance, travel documents and traveler responsibilities.",
   path: "/conditions",
 });
 
@@ -15,7 +15,7 @@ export default function ConditionsLayout({ children }: { children: React.ReactNo
       <JsonLd
         data={breadcrumbJsonLd([
           { name: "Home", path: "/" },
-          { name: "Conditions", path: "/conditions" },
+          { name: "Terms & Conditions", path: "/conditions" },
         ])}
       />
       {children}

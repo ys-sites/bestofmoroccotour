@@ -16,9 +16,9 @@ export default function FooterEditorial() {
         <MoroccanFriezeDivider className="pb-4 opacity-40" />
 
         {/* Main Footer Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-12">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10 lg:gap-8">
           {/* Brand Info */}
-          <div className="lg:col-span-5 space-y-5">
+          <div className="lg:col-span-4 space-y-5">
             <Link href="/" className="flex items-center gap-4 sm:gap-5 group">
               <img
                 src="/logo-gold.svg"
@@ -95,8 +95,29 @@ export default function FooterEditorial() {
             </ul>
           </div>
 
+          {/* Company & legal pages */}
+          <div className="lg:col-span-2 space-y-4">
+            <h4 className="font-serif text-base font-bold text-white tracking-wide">
+              Company
+            </h4>
+            <ul className="space-y-2.5 text-xs text-zinc-400 font-light">
+              <li>
+                <Link href="/about" className="hover:text-amber-400 transition-colors">About Us</Link>
+              </li>
+              <li>
+                <Link href="/founder" className="hover:text-amber-400 transition-colors">Founder Profile</Link>
+              </li>
+              <li>
+                <Link href="/conditions" className="hover:text-amber-400 transition-colors">Terms &amp; Conditions</Link>
+              </li>
+              <li>
+                <Link href="/cancellation-policy" className="hover:text-amber-400 transition-colors">Cancellation Policy</Link>
+              </li>
+            </ul>
+          </div>
+
           {/* Contact Direct */}
-          <div className="lg:col-span-4 space-y-4">
+          <div className="lg:col-span-3 space-y-4">
             <h4 className="font-serif text-base font-bold text-white tracking-wide">
               Direct Inquiries & Offices
             </h4>
@@ -122,7 +143,7 @@ export default function FooterEditorial() {
                 className="flex items-center gap-2.5 hover:text-amber-400 transition-colors"
               >
                 <Mail className="w-4 h-4 text-amber-400 shrink-0" />
-                <span>Email: <strong className="text-white">{siteConfig.email}</strong></span>
+                <span className="min-w-0">Email: <strong className="text-white break-all">{siteConfig.email}</strong></span>
               </a>
 
               <div className="flex items-center gap-2.5 text-zinc-400">
@@ -146,14 +167,14 @@ export default function FooterEditorial() {
         </div>
 
         {/* Bottom Bar: Copyright, YS Agency Signature & Legal */}
-        <div className="pt-8 border-t border-white/10 grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-4 items-center text-xs text-zinc-500">
+        <div className="pt-8 border-t border-white/10 grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-4 items-center text-xs text-zinc-500">
           {/* Left: Copyright */}
-          <p className="text-center md:text-left order-3 md:order-none">
+          <p className="text-center md:text-left order-2 md:order-none">
             © {new Date().getFullYear()} Best of Morocco Tours. All rights reserved.
           </p>
 
-          {/* Center: YS Marketing Solutions Signature */}
-          <div className="flex justify-center items-center order-1 md:order-none">
+          {/* Right: YS Marketing Solutions Signature */}
+          <div className="flex justify-center md:justify-end items-center order-1 md:order-none">
             <a 
               href="https://www.ysdev.ca" 
               target="_blank" 
@@ -172,20 +193,6 @@ export default function FooterEditorial() {
             </a>
           </div>
 
-          {/* Right: Legal links */}
-          <div className="flex justify-center md:justify-end items-center gap-4 text-zinc-400 order-2 md:order-none">
-            <a href="/#faq" className="hover:text-amber-400 transition-colors">
-              Terms &amp; Conditions
-            </a>
-            <span>·</span>
-            <a href="/#faq" className="hover:text-amber-400 transition-colors">
-              Cancellation Policy
-            </a>
-            <span>·</span>
-            <a href="/#guides" className="hover:text-amber-400 transition-colors">
-              Founder Profile
-            </a>
-          </div>
         </div>
       </div>
     </footer>

@@ -5,7 +5,7 @@ import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
 import { motion } from "motion/react";
 import Navbar from "../components/navbar";
-import Footer from "../components/footer";
+import FooterEditorial from "../components/footer-editorial";
 import { useLang, translate } from "../context/lang-context";
 import { toursList } from "@/data/itineraries";
 import { getTierStyle } from "../utils/tier-styles";
@@ -396,7 +396,7 @@ function ItinerariesClientContent() {
         </div>
       </section>
 
-      <Footer />
+      <FooterEditorial />
     </div>
   );
 }

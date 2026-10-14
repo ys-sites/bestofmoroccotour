@@ -1,13 +1,13 @@
 import type { Metadata } from "next";
 import Navbar from "../components/navbar";
-import Footer from "../components/footer";
+import FooterEditorial from "../components/footer-editorial";
 import HomeContactForm from "../components/home-contact-form";
 import JsonLd from "../components/json-ld";
 import { breadcrumbJsonLd, pageMetadata } from "@/lib/seo";
 
 export const metadata: Metadata = pageMetadata({
   title: "Contact — Agence de Voyage Maroc Montréal",
-  description: "Contactez notre équipe pour planifier votre voyage sur mesure au Maroc. Forfaits golf, circuits culturels, MICE. Réponse sous 24h. +1 514 919 6381",
+  description: "Contactez notre équipe pour planifier votre voyage sur mesure au Maroc. Forfaits golf, circuits culturels, MICE. Réponse sous 24h. +1 514 515 8382",
   path: "/contact",
   image: "/og/contact.jpg",
 });
@@ -27,7 +27,7 @@ export default function ContactPage() {
         <HomeContactForm />
       </main>
 
-      <Footer />
+      <FooterEditorial />
     </div>
   );
 }

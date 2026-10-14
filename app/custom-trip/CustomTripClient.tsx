@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import Link from "next/link";
 import { ArrowLeft, Check, Shield, Lock, Send, CheckCircle2 } from "lucide-react";
 import Navbar from "../components/navbar";
-import Footer from "../components/footer";
+import FooterEditorial from "../components/footer-editorial";
 import { useLang, translate } from "../context/lang-context";
 
 // Places/Experiences from Client Request itineraries
@@ -694,7 +694,7 @@ export default function CustomTripClient() {
 
       </section>
 
-      <Footer />
+      <FooterEditorial />
     </div>
   );
 }
