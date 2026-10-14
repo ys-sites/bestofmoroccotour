@@ -69,7 +69,8 @@ export function breadcrumbJsonLd(crumbs: Crumb[]) {
 }
 
 // "Starting from 3,879" -> 3879; "On request" -> null
-export function parsePrice(text: string): number | null {
+export function parsePrice(text?: string | null): number | null {
+  if (!text || typeof text !== "string") return null;
   const match = text.replace(/[\s ]/g, "").match(/(\d[\d,.]*)/);
   if (!match) return null;
   const value = Number(match[1].replace(/,/g, ""));

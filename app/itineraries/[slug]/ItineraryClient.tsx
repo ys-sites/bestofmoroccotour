@@ -687,34 +687,35 @@ export default function ItineraryClient({ id, crumbs }: { id: string; crumbs: Br
       {/* =========================================================================
           5. BOTTOM STICKY ACTION BAR (Exact match to pop-up screenshot bottom bar)
          ========================================================================= */}
-      <div className="fixed bottom-0 left-0 right-0 z-40 bg-[#1E1B18]/95 backdrop-blur-xl border-t border-stone-800 py-3 sm:py-3.5 px-4 sm:px-8 text-white flex items-center justify-between shadow-[0_-10px_30px_rgba(0,0,0,0.25)]">
+      <div className="fixed bottom-0 left-0 right-0 z-40 bg-[#1E1B18]/95 backdrop-blur-xl border-t border-stone-800 py-2.5 sm:py-3.5 px-3 sm:px-8 text-white flex items-center justify-between shadow-[0_-10px_30px_rgba(0,0,0,0.25)]">
         {/* Left: Questions? Call direct */}
-        <div className="flex items-center gap-2 text-xs sm:text-sm text-stone-300">
-          <Phone className="w-4 h-4 text-amber-400 shrink-0" />
-          <span className="hidden sm:inline">Questions? Call us direct:</span>
+        <div className="flex items-center gap-1.5 sm:gap-2 text-xs sm:text-sm text-stone-300 shrink-0">
+          <Phone className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-amber-400 shrink-0" />
+          <span className="hidden md:inline">Questions? Call direct:</span>
           <a
             href={`tel:${siteConfig.phoneUsCa.replace(/\s+/g, '')}`}
-            className="font-bold text-white hover:text-amber-300 transition-colors underline-offset-2 hover:underline"
+            className="font-bold text-white hover:text-amber-300 transition-colors underline-offset-2 hover:underline text-[11px] sm:text-sm"
           >
             {siteConfig.phoneUsCa}
           </a>
         </div>
 
         {/* Right: Request Booking Button */}
-        <div className="flex items-center gap-3 sm:gap-5">
+        <div className="flex items-center gap-2 sm:gap-5 shrink-0">
           <Link
-            href="/#tours"
-            className="text-xs font-semibold text-stone-300 hover:text-white transition-colors underline-offset-4 hover:underline"
+            href="/#catalog"
+            className="text-[11px] sm:text-xs font-semibold text-stone-300 hover:text-white transition-colors underline-offset-4 hover:underline whitespace-nowrap"
           >
             All Tours
           </Link>
           <button
             type="button"
             onClick={scrollToBooking}
-            className="inline-flex items-center gap-2 rounded-full bg-amber-400 hover:bg-amber-300 text-stone-950 px-4 sm:px-7 py-2 sm:py-2.5 text-xs font-bold uppercase tracking-wider transition-all duration-300 shadow-md hover:shadow-lg cursor-pointer transform hover:scale-105"
+            className="inline-flex items-center gap-1.5 sm:gap-2 rounded-full bg-amber-400 hover:bg-amber-300 text-stone-950 px-3 sm:px-7 py-2 sm:py-2.5 text-[10.5px] sm:text-xs font-bold uppercase tracking-wider transition-all duration-300 shadow-md hover:shadow-lg cursor-pointer transform hover:scale-105 shrink-0 whitespace-nowrap"
           >
-            <Sparkles className="w-3.5 h-3.5" />
-            <span>REQUEST BOOKING FOR THIS TOUR</span>
+            <Sparkles className="w-3.5 h-3.5 shrink-0" />
+            <span className="hidden sm:inline">REQUEST BOOKING FOR THIS TOUR</span>
+            <span className="inline sm:hidden">BOOK THIS TOUR</span>
           </button>
         </div>
       </div>

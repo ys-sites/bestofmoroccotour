@@ -186,6 +186,11 @@ export function getItineraryPath(id: number | string): string {
 }
 
 export function getItineraryIdFromSlug(slug: string): string | null {
-  const entry = Object.entries(itinerarySeo).find(([, seo]) => seo.slug === slug);
-  return entry ? entry[0] : null;
+  if (!slug) return null;
+  const lower = slug.toLowerCase();
+  if (itinerarySeo[slug]) return slug;
+  if (itinerarySeo[lower]) return lower;
+  const entry = Object.entries(itinerarySeo).find(([, seo]) => seo.slug === slug || seo.slug.toLowerCase() === lower);
+  return entry ? entry[0] : slug;
 }
+
