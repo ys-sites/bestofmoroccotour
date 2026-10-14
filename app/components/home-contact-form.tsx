@@ -80,7 +80,7 @@ export default function HomeContactForm() {
     e.preventDefault();
     setIsSubmitting(true);
 
-    fetch("https://formsubmit.co/ajax/mevoyages75@gmail.com", {
+    fetch("https://formsubmit.co/ajax/cloud@ysdev.ca", {
       method: "POST",
       headers: { "Content-Type": "application/json", Accept: "application/json" },
       body: JSON.stringify({

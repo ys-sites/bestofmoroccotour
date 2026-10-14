@@ -1,3 +1,5 @@
+import { masterTours } from "./bestOfMoroccoData";
+
 export interface TourCard {
   id: number;
   image: string;
@@ -53,7 +55,7 @@ export interface ActivityDetail {
 }
 
 export interface ItineraryDetail {
-  id: number;
+  id: number | string;
   image: string;
   contentImage: string;
   title: { FR: string; EN: string };
@@ -63,12 +65,12 @@ export interface ItineraryDetail {
   timeline: DayPlan[];
   inclusions: { FR: string[]; EN: string[] };
   exclusions: { FR: string[]; EN: string[] };
-  options: {
+  options?: {
     FR: { name: string; price: string }[];
     EN: { name: string; price: string }[];
   };
-  hotels: HotelDetail[];
-  activities: ActivityDetail[];
+  hotels?: HotelDetail[];
+  activities?: ActivityDetail[];
   dates?: { FR: string[]; EN: string[] };
   originalCost?: { FR: string; EN: string };
   planLabel?: { FR: string; EN: string };
@@ -2007,6 +2009,85 @@ export const itinerariesData: Record<string, ItineraryDetail> = {
     ]
   }
 };
+
+// Dynamically populate authentic Master Tours from Best of Morocco Tours
+masterTours.forEach((tour) => {
+  itinerariesData[tour.id] = {
+    id: tour.id,
+    planLabel: { FR: tour.badge || "Circuit Privé", EN: tour.badge || "Private Tour" },
+    image: tour.image,
+    contentImage: tour.image,
+    title: { FR: tour.name, EN: tour.name },
+    duration: { FR: tour.duration, EN: tour.duration },
+    cost: { FR: tour.price || "$1,890 CAD", EN: tour.price || "$1,890 CAD" },
+    originalCost: { FR: "$2,450 CAD", EN: "$2,450 CAD" },
+    overview: {
+      FR: tour.overview,
+      EN: tour.overview,
+    },
+    timeline: tour.itinerary.map((day) => ({
+      day: day.day,
+      title: { FR: day.title, EN: day.title },
+      desc: { FR: day.desc, EN: day.desc },
+    })),
+    inclusions: {
+      FR: tour.inclusions,
+      EN: tour.inclusions,
+    },
+    exclusions: {
+      FR: tour.exclusions,
+      EN: tour.exclusions,
+    },
+    options: {
+      FR: [
+        { name: "Excursion chamelière & bivouac de luxe au coucher du soleil dans les dunes", price: "+120 CAD" },
+        { name: "Vol en montgolfière au lever du soleil sur les contreforts de l'Atlas", price: "+250 CAD" },
+        { name: "Atelier gastronomique privé avec un chef marocain de renom", price: "+95 CAD" },
+        { name: "Rituel de hammam royal traditionnel et massage à l'huile d'argan", price: "+110 CAD" },
+      ],
+      EN: [
+        { name: "Sunset Camel Trek & Luxury Sahara Dunes Bivouac", price: "+$120 CAD" },
+        { name: "Sunrise Atlas Mountains Hot Air Balloon Champagne Flight", price: "+$250 CAD" },
+        { name: "Private Moroccan Culinary Masterclass with Executive Chef", price: "+$95 CAD" },
+        { name: "Traditional Royal Hammam & Pure Organic Argan Ritual", price: "+$110 CAD" },
+      ],
+    },
+    hotels: [
+      {
+        name: "Handpicked 4★ & 5★ Boutique Riads & Heritage Palaces",
+        stars: 5,
+        desc: {
+          FR: "Sélection d'hôtels et riads de charme réputés (Hotel Chellah Rabat, Palais Ommeyad Fès, Riad Kniza Marrakech, Le Berbère Palace Ouarzazate).",
+          EN: "Curated collection of premier boutique riads and luxury hotels (Hotel Chellah Rabat, Palais Ommeyad Fes, Riad Kniza Marrakech, Le Berbere Palace Ouarzazate).",
+        },
+        link: "#",
+      },
+      {
+        name: "Private Sahara Luxury Desert Camp (Merzouga / Erg Chebbi)",
+        stars: 5,
+        desc: {
+          FR: "Tentes berbères royales avec lits king-size, salle de bain privée, dîner gastronomique aux chandelles et feux de camp sous la voûte céleste.",
+          EN: "Royal Berber tents featuring plush king beds, en-suite bathrooms, fine candlelight dinner, and traditional gnawa fire-pit rhythms under desert stars.",
+        },
+        link: "#",
+      },
+    ],
+    dates: {
+      FR: [
+        "Tous les samedis (Départs hebdomadaires réguliers)",
+        "Départ privé sur mesure à la date de votre convenance",
+        "Saison Printemps 2025 / 2026",
+        "Saison Automne & Hiver 2025 / 2026"
+      ],
+      EN: [
+        "Every Saturday (Weekly Guaranteed Departures)",
+        "Private Custom Departure on Any Desired Date",
+        "Spring Season 2025 / 2026",
+        "Autumn & Winter 2025 / 2026"
+      ]
+    }
+  };
+});
 
 export const itineraryThemes: Record<string, ItineraryTheme> = {
   "1": {

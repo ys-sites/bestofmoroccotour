@@ -19,17 +19,17 @@ export default function FooterEditorial() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-12">
           {/* Brand Info */}
           <div className="lg:col-span-5 space-y-5">
-            <Link href="/" className="flex items-center gap-4 group">
+            <Link href="/" className="flex items-center gap-4 sm:gap-5 group">
               <img
                 src="/logo-gold.svg"
                 alt="H & A Voyage et Tourisme Inc. - Artisan du Bonheur"
-                className="h-16 w-auto object-contain transition-transform duration-300 group-hover:scale-105 drop-shadow-[0_2px_12px_rgba(197,168,128,0.25)]"
+                className="h-20 sm:h-24 w-auto object-contain transition-transform duration-300 group-hover:scale-105 drop-shadow-[0_2px_14px_rgba(197,168,128,0.3)]"
               />
               <div className="flex flex-col">
-                <span className="font-serif text-lg sm:text-xl font-bold tracking-tight text-white leading-tight">
-                  H &amp; A Voyage <span className="text-amber-400 font-editorial italic font-normal text-xl sm:text-2xl">et Tourisme</span>
+                <span className="font-serif text-xl sm:text-2xl font-bold tracking-tight text-white leading-tight">
+                  H &amp; A Voyage <span className="text-amber-400 font-editorial italic font-normal text-2xl sm:text-3xl">et Tourisme</span>
                 </span>
-                <span className="text-[10px] uppercase tracking-[0.22em] text-amber-200/80 font-medium mt-0.5">
+                <span className="text-[10.5px] uppercase tracking-[0.22em] text-amber-200/80 font-medium mt-1">
                   Artisan du Bonheur &middot; Best of Morocco
                 </span>
               </div>

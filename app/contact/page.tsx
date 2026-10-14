@@ -14,7 +14,7 @@ export const metadata: Metadata = pageMetadata({
 
 export default function ContactPage() {
   return (
-    <div className="min-h-screen bg-white text-zinc-900 font-body antialiased">
+    <div className="min-h-screen bg-transparent text-zinc-900 font-body antialiased">
       <JsonLd
         data={breadcrumbJsonLd([
           { name: "Home", path: "/" },

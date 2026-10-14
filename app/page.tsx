@@ -86,6 +86,7 @@ export default function Home() {
         <ToursEditorial
           onSelectTourToBook={handleSelectTourToBook}
           searchFilter={searchFilter}
+          onClearSearch={() => setSearchFilter("")}
         />
 
         {/* 4 Elevated White Metric Cards (matching Ui.jpg) */}

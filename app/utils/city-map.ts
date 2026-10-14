@@ -16,24 +16,31 @@ export type CityKey =
   | "ouarzazate" 
   | "essaouira";
 
-export function getCityKey(id: number): CityKey {
-  switch (id) {
-    case 11:
-    case 12:
-    case 13:
-      return "agadir";
-    case 14:
-    case 15:
-    case 16:
-    case 8: // Toubkal trekking & Marrakech
-      return "marrakech";
-    case 10:
-      return "rabat";
-    case 7:
-      return "chefchaouen";
-    case 6:
-    case 9:
-    default:
-      return "fez";
+export function getCityKey(id: number | string): CityKey {
+  const strId = String(id).toLowerCase();
+  if (strId.includes("agadir") || strId === "11" || strId === "12" || strId === "13") {
+    return "agadir";
   }
+  if (strId.includes("marrakech") || strId === "14" || strId === "15" || strId === "16" || strId === "8" || strId === "premium-tour" || strId === "jewish-heritage") {
+    return "marrakech";
+  }
+  if (strId.includes("rabat") || strId === "10") {
+    return "rabat";
+  }
+  if (strId.includes("tangier") || strId === "17") {
+    return "tangier";
+  }
+  if (strId.includes("chefchaouen") || strId === "7" || strId === "north-south") {
+    return "chefchaouen";
+  }
+  if (strId.includes("atlantic") || strId === "atlantic-ocean") {
+    return "essaouira";
+  }
+  if (strId.includes("kasbah") || strId === "south-kasbahs") {
+    return "ouarzazate";
+  }
+  if (strId.includes("imperial-cities")) {
+    return "casablanca";
+  }
+  return "fez";
 }

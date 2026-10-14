@@ -10,6 +10,22 @@
   animation: wave-scroll 1.2s linear infinite;
 }
 
+@keyframes marquee-infinite {
+  0% { transform: translateX(0%); }
+  100% { transform: translateX(-50%); }
+}
+
+.animate-marquee-infinite {
+  display: flex;
+  width: max-content;
+  animation: marquee-infinite 45s linear infinite;
+  will-change: transform;
+}
+
+.animate-marquee-infinite:hover {
+  animation-play-state: paused;
+}
+
 /* Custom transition for the clip-path animation on the filled button */
 .group-active\:\[clip-path\:polygon\(0_0\,100\%_0\,100\%_100\%\,0_100\%\)\] {
   transition: clip-path 1.2s cubic-bezier(0.215, 0.61, 0.355, 1);

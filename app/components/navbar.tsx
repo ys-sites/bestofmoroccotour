@@ -17,26 +17,31 @@ export default function Navbar() {
       className="w-full"
     >
       {/* Elevated Pill Navbar with dedicated spacing from hero image */}
-      <div className="w-full h-[66px] rounded-full px-4 sm:px-6 lg:px-7 flex items-center justify-between bg-white/95 backdrop-blur-xl border border-stone-200/90 shadow-[0_10px_35px_rgba(74,53,37,0.06)] text-[#1E1B18] transition-all duration-300">
-        {/* Left: Brand Identity Logo (Strictly 1 Line) */}
-        <Link href="/" className="flex items-center gap-2.5 sm:gap-3 group decoration-none shrink-0 py-1 whitespace-nowrap">
+      <div className="w-full h-[82px] sm:h-[88px] lg:h-[94px] rounded-full px-4 sm:px-6 lg:px-8 flex items-center justify-between bg-white/95 backdrop-blur-xl border border-stone-200/90 shadow-[0_12px_40px_rgba(74,53,37,0.08)] text-[#1E1B18] transition-all duration-300">
+        {/* Left: Brand Identity Logo (Enlarged, Clear & Highly Readable) */}
+        <Link href="/" className="flex items-center gap-3 sm:gap-4 group decoration-none shrink-0 py-1 whitespace-nowrap">
           <img
             src="/logo.png"
-            alt="H & A Voyage et Tourisme Inc. - Artisan du Bonheur"
-            className="h-10 sm:h-11 w-auto object-contain transition-transform duration-300 group-hover:scale-105 shrink-0"
+            alt="Best of Morocco Tours - H & A Voyage et Tourisme Inc."
+            className="h-14 sm:h-16 lg:h-[72px] w-auto object-contain transition-transform duration-300 group-hover:scale-105 shrink-0 drop-shadow-sm"
           />
-          <div className="flex items-baseline gap-1.5 whitespace-nowrap">
-            <span className="font-serif text-[16px] sm:text-[18px] font-bold tracking-tight text-[#1E1B18] whitespace-nowrap">
-              Best of Morocco
-            </span>
-            <span className="font-serif italic text-[16px] sm:text-[18px] text-[#C05621] whitespace-nowrap">
-              Tours
+          <div className="flex flex-col justify-center whitespace-nowrap leading-tight">
+            <div className="flex items-baseline gap-1.5 whitespace-nowrap">
+              <span className="font-serif text-[19px] sm:text-[22px] lg:text-[25px] font-bold tracking-tight text-[#1E1B18] whitespace-nowrap">
+                Best of Morocco
+              </span>
+              <span className="font-serif italic text-[19px] sm:text-[22px] lg:text-[25px] text-[#C05621] whitespace-nowrap font-medium">
+                Tours
+              </span>
+            </div>
+            <span className="hidden xs:block font-sans text-[9px] sm:text-[10px] uppercase tracking-[0.24em] text-stone-500 font-bold whitespace-nowrap mt-0.5">
+              Customized Private Morocco Tours
             </span>
           </div>
         </Link>
 
         {/* Center: Clean Navigation Links (Strictly 1 Line with No Wrapping) */}
-        <nav className="hidden lg:flex items-center gap-4 xl:gap-6 2xl:gap-7 mx-2 lg:mx-4 text-[13px] font-medium tracking-wide whitespace-nowrap shrink-0">
+        <nav className="hidden lg:flex items-center gap-3 xl:gap-5 2xl:gap-6 mx-2 lg:mx-3 text-[12.5px] xl:text-[13.5px] font-medium tracking-wide whitespace-nowrap shrink-0">
           <a
             href="#tours"
             className="text-stone-700 hover:text-[#C05621] transition-colors whitespace-nowrap inline-flex items-center gap-1"
@@ -81,20 +86,20 @@ export default function Navbar() {
           {/* Direct Phone / WhatsApp Toggle */}
           <a
             href={`tel:${siteConfig.phoneUsCa.replace(/\s+/g, '')}`}
-            className="hidden sm:inline-flex items-center gap-1.5 px-3 sm:px-3.5 py-1.5 rounded-full text-[11px] font-medium bg-stone-100 hover:bg-stone-200 border border-stone-200 text-stone-700 transition-colors whitespace-nowrap shrink-0"
+            className="hidden xl:inline-flex items-center gap-1.5 px-3.5 py-2 rounded-full text-[11.5px] font-medium bg-stone-100 hover:bg-stone-200 border border-stone-200 text-stone-700 transition-colors whitespace-nowrap shrink-0"
             title="Toll Free US & Canada Hotline"
           >
-            <Phone className="w-3 h-3 text-[#C05621] shrink-0" />
+            <Phone className="w-3.5 h-3.5 text-[#C05621] shrink-0" />
             <span className="whitespace-nowrap">US &amp; CA: {siteConfig.phoneUsCa}</span>
           </a>
 
           {/* Book / Custom Trip Capsule */}
           <a
             href="#custom-trip"
-            className="inline-flex items-center gap-1.5 px-4 sm:px-5 py-2 rounded-full text-[11px] font-bold uppercase tracking-wider bg-[#4A3525] hover:bg-[#322318] text-white transition-all duration-300 shadow-sm hover:shadow-md cursor-pointer whitespace-nowrap shrink-0"
+            className="inline-flex items-center gap-1.5 px-4 sm:px-5 py-2.5 rounded-full text-[11px] sm:text-[11.5px] font-bold uppercase tracking-wider bg-[#4A3525] hover:bg-[#322318] text-white transition-all duration-300 shadow-sm hover:shadow-md cursor-pointer whitespace-nowrap shrink-0"
           >
             <span className="whitespace-nowrap">Plan Tour</span>
-            <ArrowUpRight className="w-3 h-3 shrink-0" />
+            <ArrowUpRight className="w-3.5 h-3.5 shrink-0" />
           </a>
 
           {/* Mobile Menu Button */}

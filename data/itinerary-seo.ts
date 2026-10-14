@@ -122,6 +122,62 @@ export const itinerarySeo: Record<string, ItinerarySeo> = {
     parent: ITINERARIES,
     ogImage: "/og/tour-9.jpg",
   },
+  "imperial-cities": {
+    slug: "imperial-cities",
+    description:
+      "8-Day private Imperial Cities tour of Morocco: Casablanca, Rabat, Volubilis, Meknes, Fes, Marrakech and El Jadida with licensed native guides.",
+    destinations: ["Casablanca", "Rabat", "Meknes", "Fes", "Marrakech"],
+    parent: ITINERARIES,
+    ogImage: "/images/bestofmorocco/img_tour_list_2.jpg",
+  },
+  "imperial-sahara": {
+    slug: "imperial-sahara",
+    description:
+      "10-Day private Morocco Imperial Cities & Sahara tour: Fez, Erfoud, Merzouga golden dunes, Ait Ben Haddou and Marrakech with luxury desert camp.",
+    destinations: ["Casablanca", "Rabat", "Fes", "Merzouga", "Marrakech"],
+    parent: ITINERARIES,
+    ogImage: "/images/bestofmorocco/img_tour_list_1.jpg",
+  },
+  "north-south": {
+    slug: "north-south",
+    description:
+      "10-Day North & South of Morocco tour: Tangier, Chefchaouen blue medina, Fes, Midelt, Merzouga Sahara dunes, Ouarzazate and Marrakech.",
+    destinations: ["Tangier", "Chefchaouen", "Fes", "Merzouga", "Marrakech"],
+    parent: ITINERARIES,
+    ogImage: "/images/bestofmorocco/img_tour_list_5.jpg",
+  },
+  "atlantic-ocean": {
+    slug: "atlantic-ocean",
+    description:
+      "10-Day Morocco Atlantic Ocean Journey: Casablanca, Rabat, Asilah, Tangier, Chefchaouen, Essaouira beach ramparts and Marrakech.",
+    destinations: ["Casablanca", "Asilah", "Tangier", "Essaouira", "Marrakech"],
+    parent: ITINERARIES,
+    ogImage: "/images/bestofmorocco/img_tour_list_7.jpg",
+  },
+  "south-kasbahs": {
+    slug: "south-kasbahs",
+    description:
+      "8-Day Great South & Kasbahs of Morocco: Ouarzazate, Dades Valley, Todra Gorge, Zagora, Mhamid Sahara dunes and Taroudant.",
+    destinations: ["Marrakech", "Ouarzazate", "Dades", "Zagora", "Taroudant"],
+    parent: ITINERARIES,
+    ogImage: "/images/bestofmorocco/img_tour_list_8.jpg",
+  },
+  "jewish-heritage": {
+    slug: "jewish-heritage",
+    description:
+      "10-Day Jewish Heritage Tour of Morocco: historic Mellahs, sacred Zadiks, ancient synagogues of Fes, Marrakech, Essaouira and Casablanca.",
+    destinations: ["Casablanca", "Rabat", "Fes", "Marrakech", "Essaouira"],
+    parent: ITINERARIES,
+    ogImage: "/images/bestofmorocco/img_tour_list_10.jpg",
+  },
+  "premium-tour": {
+    slug: "premium-tour",
+    description:
+      "9-Day Sovereign Premium Morocco Tour: ultra-luxury riads, private Mercedes transfers, VIP monument access and exclusive desert glamping.",
+    destinations: ["Casablanca", "Rabat", "Fes", "Marrakech"],
+    parent: ITINERARIES,
+    ogImage: "/images/bestofmorocco/img_tour_list_2.jpg",
+  },
 };
 
 export function getItineraryPath(id: number | string): string {

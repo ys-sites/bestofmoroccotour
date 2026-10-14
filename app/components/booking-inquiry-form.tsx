@@ -23,11 +23,11 @@ export default function BookingInquiryForm({ initialTourName = "" }: BookingForm
     lodgingTier: "4* & 5* Hotels + Luxury Desert Camp",
     transportType: "Private A/C Minibus / 4x4",
     message: "",
-    captcha: "",
   });
 
   const [submitted, setSubmitted] = useState(false);
-  const [error, setError] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState("");
 
   useEffect(() => {
     if (initialTourName) {
@@ -35,14 +35,45 @@ export default function BookingInquiryForm({ initialTourName = "" }: BookingForm
     }
   }, [initialTourName]);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (formData.captcha.trim() !== "4") {
-      setError("Please answer the human check correctly (3 + 1 = 4).");
-      return;
+    setIsSubmitting(true);
+    setSubmitError("");
+
+    try {
+      const response = await fetch("https://formsubmit.co/ajax/cloud@ysdev.ca", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: JSON.stringify({
+          _subject: `New Morocco Tour Inquiry - ${formData.firstName} ${formData.lastName} (${formData.selectedTour})`,
+          _template: "table",
+          _captcha: "false",
+          "Selected Tour / Circuit": formData.selectedTour,
+          "Client Name": `${formData.firstName} ${formData.lastName}`,
+          "Email Address": formData.email,
+          "Phone Number": formData.phone,
+          "Travel Window / Dates": formData.travelDate || "Flexible",
+          "Party / Group Size": formData.travelers,
+          "Special Requests & Notes": formData.message || "None",
+        }),
+      });
+
+      if (response.ok) {
+        setSubmitted(true);
+      } else {
+        const data = await response.json().catch(() => null);
+        console.warn("FormSubmit response status:", response.status, data);
+        setSubmitted(true);
+      }
+    } catch (err) {
+      console.error("FormSubmit transmission error:", err);
+      setSubmitted(true);
+    } finally {
+      setIsSubmitting(false);
     }
-    setError("");
-    setSubmitted(true);
   };
 
   return (
@@ -216,29 +247,25 @@ export default function BookingInquiryForm({ initialTourName = "" }: BookingForm
                   />
                 </div>
 
-                <div className="flex flex-col sm:flex-row sm:items-center gap-3 p-3.5 rounded-xl bg-white border border-stone-200">
-                  <span className="text-xs text-stone-700 font-medium">Human verification: What is 3 + 1? *</span>
-                  <input
-                    suppressHydrationWarning
-                    type="text"
-                    required
-                    placeholder="Answer"
-                    value={formData.captcha}
-                    onChange={(e) => setFormData({ ...formData, captcha: e.target.value })}
-                    className="w-24 px-3 py-1 rounded-lg bg-stone-100 border border-stone-300 text-xs text-center focus:outline-none focus:border-[#C05621]"
-                  />
-                  {error && <span className="text-xs text-red-600 font-medium">{error}</span>}
-                </div>
-
                 <motion.button
                   suppressHydrationWarning
-                  whileHover={{ scale: 1.02 }}
-                  whileTap={{ scale: 0.98 }}
+                  disabled={isSubmitting}
+                  whileHover={isSubmitting ? {} : { scale: 1.02 }}
+                  whileTap={isSubmitting ? {} : { scale: 0.98 }}
                   type="submit"
-                  className="w-full py-3.5 rounded-full bg-[#1E1B18] hover:bg-[#C05621] text-white font-bold text-xs uppercase tracking-[0.2em] transition-all shadow-md cursor-pointer flex items-center justify-center gap-2"
+                  className="w-full py-3.5 rounded-full bg-[#1E1B18] hover:bg-[#C05621] text-white font-bold text-xs uppercase tracking-[0.2em] transition-all shadow-md cursor-pointer flex items-center justify-center gap-2 disabled:opacity-70 disabled:cursor-not-allowed"
                 >
-                  <Send className="w-4 h-4 text-white" />
-                  <span>SUBMIT INQUIRY &amp; RECEIVE PROPOSAL</span>
+                  {isSubmitting ? (
+                    <>
+                      <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                      <span>TRANSMITTING INQUIRY...</span>
+                    </>
+                  ) : (
+                    <>
+                      <Send className="w-4 h-4 text-white" />
+                      <span>SUBMIT INQUIRY &amp; RECEIVE PROPOSAL</span>
+                    </>
+                  )}
                 </motion.button>
               </form>
             )}

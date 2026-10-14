@@ -2,24 +2,25 @@
 
 import { useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import { 
   Calendar, MapPin, ChevronLeft, ChevronRight, User, 
-  ArrowRight, Compass, Sparkles
+  ArrowRight, Compass, Sparkles, Search, X
 } from "lucide-react";
 import { masterTours, catalogTours, TourItem } from "@/data/bestOfMoroccoData";
-import ItineraryModal from "./itinerary-modal";
 import { MoroccanMedallionArt, MoroccanFriezeDivider, MoroccanArchWatermark } from "./moroccan-art-motifs";
 import { motion, AnimatePresence } from "motion/react";
 import { easeOutExpo } from "@/lib/animations";
+import { highlightMatches, normalize, CITY_ALIASES } from "../utils/search-matcher";
 
 interface ToursProps {
-  onSelectTourToBook: (tourName: string) => void;
+  onSelectTourToBook?: (tourName: string) => void;
   searchFilter?: string;
+  onClearSearch?: () => void;
 }
 
-export default function ToursEditorial({ onSelectTourToBook, searchFilter = "" }: ToursProps) {
+export default function ToursEditorial({ onSelectTourToBook, searchFilter = "", onClearSearch }: ToursProps) {
   const [activeCategory, setActiveCategory] = useState<string>("all");
-  const [selectedTourForModal, setSelectedTourForModal] = useState<TourItem | null>(null);
   const [pageIndex, setPageIndex] = useState<number>(0);
 
   // Minimalist, high-end category filters (replacing clunky heavy photo tiles)
@@ -35,6 +36,14 @@ export default function ToursEditorial({ onSelectTourToBook, searchFilter = "" }
 
   // Authentic transparent pricing map matching Ui.jpg strikethrough logic
   const priceMap: Record<string, { crossed: string; current: string }> = {
+    "imperial-cities": { crossed: "$2,450 CAD", current: "$1,890 CAD" },
+    "imperial-sahara": { crossed: "$2,850 CAD", current: "$2,190 CAD" },
+    "north-south": { crossed: "$2,950 CAD", current: "$2,290 CAD" },
+    "atlantic-ocean": { crossed: "$2,650 CAD", current: "$2,050 CAD" },
+    "south-kasbahs": { crossed: "$2,750 CAD", current: "$2,150 CAD" },
+    "jewish-heritage": { crossed: "$2,990 CAD", current: "$2,350 CAD" },
+    "premium-tour": { crossed: "$3,850 CAD", current: "$3,150 CAD" },
+    // legacy aliases
     "imperial-cities-8d": { crossed: "$2,450 CAD", current: "$1,890 CAD" },
     "imperial-sahara-10d": { crossed: "$2,850 CAD", current: "$2,190 CAD" },
     "north-south-10d": { crossed: "$2,950 CAD", current: "$2,290 CAD" },
@@ -44,7 +53,7 @@ export default function ToursEditorial({ onSelectTourToBook, searchFilter = "" }
     "premium-palace-morocco": { crossed: "1 299 €", current: "999 €" },
   };
 
-  // Filtered tours
+  // Filtered tours with deep search matching
   const filteredTours = masterTours.filter((tour) => {
     const matchesCategory =
       activeCategory === "all" ||
@@ -55,12 +64,27 @@ export default function ToursEditorial({ onSelectTourToBook, searchFilter = "" }
       (activeCategory === "jewish" && tour.category.toLowerCase().includes("jewish")) ||
       (activeCategory === "festivals" && tour.name.toLowerCase().includes("premium"));
 
-    const query = searchFilter.toLowerCase().trim();
-    const matchesSearch =
-      !query ||
-      tour.name.toLowerCase().includes(query) ||
-      tour.destinations.some((d) => d.toLowerCase().includes(query)) ||
-      tour.category.toLowerCase().includes(query);
+    const query = normalize(searchFilter);
+    if (!query) return matchesCategory;
+
+    // Check alias matching
+    let queryTerms = [query];
+    for (const [canonical, aliases] of Object.entries(CITY_ALIASES)) {
+      if (canonical.includes(query) || aliases.some((a) => a.includes(query))) {
+        queryTerms.push(canonical, ...aliases);
+      }
+    }
+
+    const matchesSearch = queryTerms.some((t) => {
+      const hitName = normalize(tour.name).includes(t);
+      const hitDest = tour.destinations.some((d) => normalize(d).includes(t));
+      const hitCategory = normalize(tour.category).includes(t);
+      const hitOverview = normalize(tour.overview).includes(t);
+      const hitTimeline = tour.itinerary.some(
+        (day) => normalize(day.title).includes(t) || normalize(day.desc).includes(t)
+      );
+      return hitName || hitDest || hitCategory || hitOverview || hitTimeline;
+    });
 
     return matchesCategory && matchesSearch;
   });
@@ -166,6 +190,32 @@ export default function ToursEditorial({ onSelectTourToBook, searchFilter = "" }
           })}
         </div>
 
+        {/* Active Search Filter Banner */}
+        {searchFilter && (
+          <motion.div
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="flex items-center justify-between gap-4 bg-amber-50/90 border border-[#C05621]/30 rounded-2xl px-5 py-3.5 shadow-xs"
+          >
+            <div className="flex items-center gap-2.5 text-xs text-stone-800">
+              <span className="w-2.5 h-2.5 rounded-full bg-[#C05621] shrink-0 animate-pulse" />
+              <span>
+                Showing <strong>{filteredTours.length}</strong> private {filteredTours.length === 1 ? 'circuit' : 'circuits'} matching: <strong className="text-[#C05621] font-serif text-sm">&quot;{searchFilter}&quot;</strong>
+              </span>
+            </div>
+            {onClearSearch && (
+              <button
+                type="button"
+                onClick={onClearSearch}
+                className="inline-flex items-center gap-1 text-[11px] font-bold uppercase tracking-wider text-stone-600 hover:text-[#C05621] bg-white border border-stone-200/80 hover:border-[#C05621] px-3.5 py-1.5 rounded-full transition-colors cursor-pointer shrink-0 shadow-2xs"
+              >
+                <span>Clear filter</span>
+                <X className="w-3.5 h-3.5" />
+              </button>
+            )}
+          </motion.div>
+        )}
+
         {/* =========================================================================
             CARDS GRID: 3 Breathable Cards with Staggered Rise-up
            ========================================================================= */}
@@ -188,10 +238,10 @@ export default function ToursEditorial({ onSelectTourToBook, searchFilter = "" }
                   <MoroccanMedallionArt size={65} />
                 </div>
 
-                {/* Clean Photo Container */}
-                <div 
-                  onClick={() => setSelectedTourForModal(tour)}
-                  className="relative w-full h-56 rounded-2xl overflow-hidden bg-stone-100 cursor-pointer"
+                {/* Clean Photo Container linking to itinerary subpage */}
+                <Link
+                  href={`/itineraries/${tour.id}`}
+                  className="relative w-full h-56 rounded-2xl overflow-hidden bg-stone-100 cursor-pointer block"
                 >
                   <Image
                     src={tour.image}
@@ -210,27 +260,26 @@ export default function ToursEditorial({ onSelectTourToBook, searchFilter = "" }
                   <div className="absolute bottom-3 left-3 bg-white/95 backdrop-blur-md px-2.5 py-0.5 rounded-full text-[9px] font-bold uppercase tracking-wider text-[#C05621] shadow-sm">
                     {tour.badge}
                   </div>
-                </div>
+                </Link>
 
                 {/* Card Body Content */}
                 <div className="p-4 flex flex-col flex-1 justify-between space-y-4">
                   <div className="space-y-2">
                     {/* Category Route Tag */}
                     <div className="text-[10px] uppercase font-bold tracking-wider text-[#C05621] truncate">
-                      {tour.destinations.slice(0, 4).join(" · ")}
+                      {highlightMatches(tour.destinations.slice(0, 4).join(" · "), searchFilter)}
                     </div>
 
-                    {/* Title */}
-                    <h3 
-                      onClick={() => setSelectedTourForModal(tour)}
-                      className="font-serif text-lg font-bold text-[#4A3525] group-hover:text-[#C05621] transition-colors leading-snug cursor-pointer line-clamp-1"
-                    >
-                      {tour.name}
-                    </h3>
+                    {/* Title with Word Highlighting */}
+                    <Link href={`/itineraries/${tour.id}`}>
+                      <h3 className="font-serif text-lg font-bold text-[#4A3525] group-hover:text-[#C05621] transition-colors leading-snug cursor-pointer line-clamp-1">
+                        {highlightMatches(tour.name, searchFilter)}
+                      </h3>
+                    </Link>
 
-                    {/* 1-2 Line Clean Description */}
+                    {/* 1-2 Line Clean Description with Word Highlighting */}
                     <p className="text-xs text-stone-500 font-light leading-relaxed line-clamp-2">
-                      {tour.overview}
+                      {highlightMatches(tour.overview, searchFilter)}
                     </p>
                   </div>
 
@@ -247,7 +296,7 @@ export default function ToursEditorial({ onSelectTourToBook, searchFilter = "" }
                     </div>
                   </div>
 
-                  {/* Bottom Pricing & Action Row matching Ui.jpg exactly! */}
+                  {/* Bottom Pricing & Action Row */}
                   <div className="flex items-center justify-between pt-1">
                     <div className="flex flex-col">
                       <span className="text-[11px] line-through text-stone-400 font-mono">
@@ -258,15 +307,16 @@ export default function ToursEditorial({ onSelectTourToBook, searchFilter = "" }
                       </span>
                     </div>
 
-                    {/* Clean Pill BOOK Button */}
-                    <motion.button
-                      whileHover={{ scale: 1.05 }}
-                      whileTap={{ scale: 0.95 }}
-                      onClick={() => onSelectTourToBook(tour.name)}
-                      className="rounded-full bg-[#4A3525] hover:bg-[#322318] px-6 py-2.5 text-[11px] font-bold uppercase tracking-wider text-white transition-all duration-300 shadow-sm hover:shadow-md cursor-pointer"
-                    >
-                      BOOK
-                    </motion.button>
+                    {/* Direct Subpage Request Button */}
+                    <Link href={`/itineraries/${tour.id}#booking-form`}>
+                      <motion.button
+                        whileHover={{ scale: 1.05 }}
+                        whileTap={{ scale: 0.95 }}
+                        className="rounded-full bg-[#4A3525] hover:bg-[#322318] px-6 py-2.5 text-[11px] font-bold uppercase tracking-wider text-white transition-all duration-300 shadow-sm hover:shadow-md cursor-pointer"
+                      >
+                        REQUEST
+                      </motion.button>
+                    </Link>
                   </div>
                 </div>
               </motion.div>
@@ -277,7 +327,7 @@ export default function ToursEditorial({ onSelectTourToBook, searchFilter = "" }
         <MoroccanFriezeDivider className="pt-8 pb-4" />
 
         {/* =========================================================================
-            CATALOG SECTION: Full Itinerary List with Day-by-Day Modals
+            CATALOG SECTION: Full Itinerary List with Subpage Navigation
            ========================================================================= */}
         <div id="catalog" className="pt-6 border-t border-stone-200/70 space-y-6">
           <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4">
@@ -294,51 +344,46 @@ export default function ToursEditorial({ onSelectTourToBook, searchFilter = "" }
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
             {masterTours.map((t, idx) => (
-              <motion.div
+              <Link
                 key={t.id}
-                initial={{ opacity: 0, y: 24 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-30px" }}
-                transition={{ duration: 0.55, delay: idx * 0.08, ease: easeOutExpo }}
-                whileHover={{ y: -4, scale: 1.01 }}
-                onClick={() => setSelectedTourForModal(t)}
-                className="bg-white/95 backdrop-blur-sm p-4 rounded-2xl border border-stone-200/80 shadow-xs hover:border-[#C05621] hover:shadow-md transition-all duration-300 cursor-pointer flex flex-col justify-between space-y-3"
+                href={`/itineraries/${t.id}`}
+                className="block group"
               >
-                <div className="relative h-32 w-full rounded-xl overflow-hidden bg-stone-100">
-                  <Image src={t.image} alt={t.name} fill className="object-cover" />
-                  <span className="absolute top-2 right-2 px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-black/60 text-white backdrop-blur-sm">
-                    {t.duration}
-                  </span>
-                </div>
-                <div>
-                  <span className="text-[10px] font-mono uppercase tracking-wider text-[#C05621] font-semibold block">
-                    {t.category}
-                  </span>
-                  <h4 className="font-serif font-bold text-sm text-stone-900 mt-0.5 line-clamp-1">
-                    {t.name}
-                  </h4>
-                </div>
-                <div className="flex items-center justify-between text-xs pt-2 border-t border-stone-100">
-                  <span className="text-[#C2272D] font-bold font-serif">{priceMap[t.id]?.current || "$1,890 CAD"}</span>
-                  <span className="text-[11px] font-semibold text-stone-700 hover:text-[#C05621] flex items-center gap-1">
-                    View Days →
-                  </span>
-                </div>
-              </motion.div>
+                <motion.div
+                  initial={{ opacity: 0, y: 24 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: "-30px" }}
+                  transition={{ duration: 0.55, delay: idx * 0.08, ease: easeOutExpo }}
+                  whileHover={{ y: -4, scale: 1.01 }}
+                  className="bg-white/95 backdrop-blur-sm p-4 rounded-2xl border border-stone-200/80 shadow-xs group-hover:border-[#C05621] group-hover:shadow-md transition-all duration-300 cursor-pointer flex flex-col justify-between space-y-3 h-full"
+                >
+                  <div className="relative h-32 w-full rounded-xl overflow-hidden bg-stone-100">
+                    <Image src={t.image} alt={t.name} fill className="object-cover group-hover:scale-105 transition-transform duration-500" />
+                    <span className="absolute top-2 right-2 px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-black/60 text-white backdrop-blur-sm">
+                      {t.duration}
+                    </span>
+                  </div>
+                  <div>
+                    <span className="text-[10px] font-mono uppercase tracking-wider text-[#C05621] font-semibold block">
+                      {highlightMatches(t.category, searchFilter)}
+                    </span>
+                    <h4 className="font-serif font-bold text-sm text-stone-900 mt-0.5 line-clamp-1 group-hover:text-[#C05621] transition-colors">
+                      {highlightMatches(t.name, searchFilter)}
+                    </h4>
+                  </div>
+                  <div className="flex items-center justify-between text-xs pt-2 border-t border-stone-100">
+                    <span className="text-[#C2272D] font-bold font-serif">{priceMap[t.id]?.current || "$1,890 CAD"}</span>
+                    <span className="text-[11px] font-semibold text-stone-700 group-hover:text-[#C05621] flex items-center gap-1">
+                      View Tour →
+                    </span>
+                  </div>
+                </motion.div>
+              </Link>
             ))}
           </div>
         </div>
 
       </div>
-
-      {/* Interactive Full Day-by-Day Itinerary Timeline Modal */}
-      {selectedTourForModal && (
-        <ItineraryModal
-          tour={selectedTourForModal}
-          onClose={() => setSelectedTourForModal(null)}
-          onBook={onSelectTourToBook}
-        />
-      )}
     </section>
   );
 }

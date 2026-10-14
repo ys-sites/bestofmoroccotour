@@ -14,9 +14,59 @@ import SmartVideo from "../../components/smart-video";
 import { videoSources, videoAsset } from "@/data/videoSources";
 import { getCityKey } from "../../utils/city-map";
 import MichlifenFeatureBlock from "@/components/ui/michlifen-feature-block";
+import { MoroccanMedallionArt } from "../../components/moroccan-art-motifs";
 
-const getGalleryImages = (itineraryId: number) => {
-  switch (itineraryId) {
+const getGalleryImages = (itineraryId: number | string) => {
+  const strId = String(itineraryId).toLowerCase();
+  if (strId === "imperial-cities") {
+    return [
+      "/images/bestofmorocco/img_tour_list_2.jpg",
+      "/images/bestofmorocco/img_tour_list_1.jpg",
+      "/images/bestofmorocco/img_tour_list_6.jpg",
+      "/images/bestofmorocco/img_tour_list_3.jpg"
+    ];
+  }
+  if (strId === "imperial-sahara") {
+    return [
+      "/images/bestofmorocco/img_tour_list_1.jpg",
+      "/images/bestofmorocco/img_tour_list_4.jpg",
+      "/images/bestofmorocco/img_tour_list_8.jpg"
+    ];
+  }
+  if (strId === "north-south") {
+    return [
+      "/images/bestofmorocco/img_tour_list_5.jpg",
+      "/images/bestofmorocco/img_tour_list_7.jpg",
+      "/images/bestofmorocco/img_tour_list_10.jpg"
+    ];
+  }
+  if (strId === "atlantic-ocean") {
+    return [
+      "/images/bestofmorocco/img_tour_list_7.jpg",
+      "/images/bestofmorocco/img_tour_list_9.jpg"
+    ];
+  }
+  if (strId === "south-kasbahs") {
+    return [
+      "/images/bestofmorocco/img_tour_list_8.jpg",
+      "/images/bestofmorocco/img_tour_list_4.jpg"
+    ];
+  }
+  if (strId === "jewish-heritage") {
+    return [
+      "/images/bestofmorocco/img_tour_list_10.jpg",
+      "/images/bestofmorocco/img_tour_list_2.jpg"
+    ];
+  }
+  if (strId === "premium-tour") {
+    return [
+      "/images/bestofmorocco/img_tour_list_2.jpg",
+      "/images/bestofmorocco/img_tour_list_1.jpg",
+      "/images/bestofmorocco/img_tour_list_5.jpg"
+    ];
+  }
+
+  switch (Number(itineraryId)) {
     case 10:
       return [
         "/images/rgdes_parcours_rouge_18.jpg",
@@ -275,7 +325,7 @@ const INSURANCE_LINK_URL = process.env.NEXT_PUBLIC_INSURANCE_URL ?? "";
       EN: "Return to Home"
     };
     return (
-      <div className="min-h-screen bg-white text-zinc-900 flex flex-col justify-center items-center">
+      <div className="min-h-screen bg-transparent text-zinc-900 flex flex-col justify-center items-center">
         <h2 className="font-serif text-2xl mb-4 text-zinc-800">{translate(tNotFound, lang)}</h2>
         <Link href="/" className="text-brand-gold hover:underline">{translate(tReturnHome, lang)}</Link>
       </div>
@@ -286,7 +336,7 @@ const INSURANCE_LINK_URL = process.env.NEXT_PUBLIC_INSURANCE_URL ?? "";
     e.preventDefault();
     setIsSubmitting(true);
 
-    fetch("https://formsubmit.co/ajax/mevoyages75@gmail.com", {
+    fetch("https://formsubmit.co/ajax/cloud@ysdev.ca", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -303,7 +353,7 @@ const INSURANCE_LINK_URL = process.env.NEXT_PUBLIC_INSURANCE_URL ?? "";
         "Participants / Guests Count": passengerCount,
         "Âges des passagers / Guest Ages": passengerAges.join(", "),
         "Message & Demandes / Special Requests": bookingMessage,
-        _subject: `Merveilles & Voyages - Réservation: ${translate(itinerary.title, lang)}`
+        _subject: `Best of Morocco Tours - Itinerary Booking: ${translate(itinerary.title, lang)}`
       })
     })
     .then(() => {
@@ -379,7 +429,7 @@ const INSURANCE_LINK_URL = process.env.NEXT_PUBLIC_INSURANCE_URL ?? "";
   })();
 
   return (
-    <div className="min-h-screen bg-white text-zinc-900 font-body antialiased">
+    <div className="min-h-screen bg-transparent text-zinc-900 font-body antialiased">
       <Navbar />
 
       {/* Hero Header Section */}
@@ -471,7 +521,7 @@ const INSURANCE_LINK_URL = process.env.NEXT_PUBLIC_INSURANCE_URL ?? "";
               className="absolute inset-0 w-full h-full object-cover object-center opacity-40"
             />
           )}
-          <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-transparent to-white" />
+          <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-transparent to-[#FAF8F5]" />
 
           <div className="absolute inset-0 flex flex-col justify-end px-6 md:px-12 pb-12 max-w-7xl mx-auto z-10">
             <Breadcrumbs items={crumbs} className="mb-6" />
@@ -496,7 +546,7 @@ const INSURANCE_LINK_URL = process.env.NEXT_PUBLIC_INSURANCE_URL ?? "";
 
       {/* Discovery Section (with Map pins) */}
       {theme && (
-        <div className="relative bg-[#faf9f5]">
+        <div className="relative bg-transparent">
           <div className="py-12">
             <MapSection countryId={id === "4" ? "2" : id === "5" ? "3" : "1"} itineraryId={id} />
           </div>
@@ -553,7 +603,7 @@ const INSURANCE_LINK_URL = process.env.NEXT_PUBLIC_INSURANCE_URL ?? "";
       )}
 
       {/* Main Content Layout */}
-      <section className="py-16 px-6 max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 relative z-20 bg-white">
+      <section className="py-16 px-6 max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 relative z-20 bg-transparent">
 
         {/* Left Side: Overview and Day-by-Day Timeline */}
         <div className="lg:col-span-8 space-y-16" id="itinerary-details">
@@ -721,66 +771,70 @@ const INSURANCE_LINK_URL = process.env.NEXT_PUBLIC_INSURANCE_URL ?? "";
           </motion.div>
 
           {/* Premium Options */}
-          <motion.div
-            initial={{ opacity: 0, y: 25 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="space-y-5 pt-10 border-t border-zinc-100"
-          >
-            <h4 className="font-serif text-xl md:text-2xl text-zinc-900 flex items-center gap-2.5">
-              <span className="bg-brand-gold/10 text-brand-gold border border-brand-gold/20 px-2.5 py-0.5 font-mono text-[9px] uppercase tracking-wider rounded">$$$</span>
-              <span>{lang === "FR" ? "Options à la carte" : "A La Carte Options"}</span>
-            </h4>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-              {translate(itinerary.options, lang).map((opt, idx) => (
-                <div key={idx} className="p-5 bg-zinc-50/50 border border-zinc-200/60 rounded-2xl flex flex-col justify-between hover:border-brand-gold/40 transition-luxury duration-300">
-                  <span className="text-zinc-800 text-[13px] font-medium leading-snug">{opt.name}</span>
-                  <span className="text-brand-gold font-mono text-xs font-semibold mt-3 tabular-nums">{opt.price}</span>
-                </div>
-              ))}
-            </div>
-          </motion.div>
+          {itinerary.options && translate(itinerary.options, lang)?.length > 0 && (
+            <motion.div
+              initial={{ opacity: 0, y: 25 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+              className="space-y-5 pt-10 border-t border-zinc-100"
+            >
+              <h4 className="font-serif text-xl md:text-2xl text-zinc-900 flex items-center gap-2.5">
+                <span className="bg-brand-gold/10 text-brand-gold border border-brand-gold/20 px-2.5 py-0.5 font-mono text-[9px] uppercase tracking-wider rounded">$$$</span>
+                <span>{lang === "FR" ? "Options à la carte" : "A La Carte Options"}</span>
+              </h4>
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                {translate(itinerary.options, lang).map((opt, idx) => (
+                  <div key={idx} className="p-5 bg-white/80 border border-stone-200/80 rounded-2xl flex flex-col justify-between hover:border-brand-gold/40 transition-luxury duration-300">
+                    <span className="text-zinc-800 text-[13px] font-medium leading-snug">{opt.name}</span>
+                    <span className="text-brand-gold font-mono text-xs font-semibold mt-3 tabular-nums">{opt.price}</span>
+                  </div>
+                ))}
+              </div>
+            </motion.div>
+          )}
 
           {/* Featured Accommodations */}
-          <motion.div
-            initial={{ opacity: 0, y: 25 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="space-y-6 pt-10 border-t border-zinc-100"
-          >
-            <h4 className="font-serif text-xl md:text-2xl text-zinc-900 flex items-center gap-2.5">
-              <Hotel className="w-5 h-5 text-brand-gold shrink-0" />
-              <span>{lang === "FR" ? "Hébergements d'Exception" : "Featured Accommodations"}</span>
-            </h4>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              {itinerary.hotels.map((hotel, idx) => (
-                <div key={idx} className="bg-white border border-zinc-200/80 rounded-2xl overflow-hidden hover:shadow-md transition-luxury duration-300 flex flex-col h-full">
-                  <div className="p-6 flex-1 flex flex-col justify-between space-y-4">
-                    <div className="space-y-2">
-                      <div className="flex items-center justify-between">
-                        <span className="text-zinc-900 font-serif text-[16px] font-bold leading-tight">{hotel.name}</span>
-                        <div className="flex items-center gap-0.5 text-brand-gold text-[11px]">
-                          {"★".repeat(hotel.stars)}
+          {itinerary.hotels && itinerary.hotels.length > 0 && (
+            <motion.div
+              initial={{ opacity: 0, y: 25 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+              className="space-y-6 pt-10 border-t border-zinc-100"
+            >
+              <h4 className="font-serif text-xl md:text-2xl text-zinc-900 flex items-center gap-2.5">
+                <Hotel className="w-5 h-5 text-brand-gold shrink-0" />
+                <span>{lang === "FR" ? "Hébergements d'Exception" : "Featured Accommodations"}</span>
+              </h4>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                {itinerary.hotels.map((hotel, idx) => (
+                  <div key={idx} className="bg-white/90 border border-stone-200/80 rounded-2xl overflow-hidden hover:shadow-md transition-luxury duration-300 flex flex-col h-full">
+                    <div className="p-6 flex-1 flex flex-col justify-between space-y-4">
+                      <div className="space-y-2">
+                        <div className="flex items-center justify-between">
+                          <span className="text-zinc-900 font-serif text-[16px] font-bold leading-tight">{hotel.name}</span>
+                          <div className="flex items-center gap-0.5 text-brand-gold text-[11px]">
+                            {"★".repeat(hotel.stars)}
+                          </div>
                         </div>
+                        <p className="text-zinc-500 text-[13px] leading-relaxed font-light">
+                          {translate(hotel.desc, lang)}
+                        </p>
                       </div>
-                      <p className="text-zinc-500 text-[13px] leading-relaxed font-light">
-                        {translate(hotel.desc, lang)}
-                      </p>
+                      {/* Render link only if it is not '#' and not empty */}
+                      {hotel.link && hotel.link !== "#" && (
+                        <a href={hotel.link} target="_blank" rel="noopener noreferrer" className="text-brand-gold hover:text-zinc-950 font-mono text-[9px] tracking-widest uppercase inline-flex items-center gap-1.5 transition-colors pt-2">
+                          <span>{lang === "FR" ? "DÉCOUVRIR LE SITE" : "VIEW PROPERTY"}</span>
+                          <span>→</span>
+                        </a>
+                      )}
                     </div>
-                    {/* Render link only if it is not '#' and not empty */}
-                    {hotel.link && hotel.link !== "#" && (
-                      <a href={hotel.link} target="_blank" rel="noopener noreferrer" className="text-brand-gold hover:text-zinc-950 font-mono text-[9px] tracking-widest uppercase inline-flex items-center gap-1.5 transition-colors pt-2">
-                        <span>{lang === "FR" ? "DÉCOUVRIR LE SITE" : "VIEW PROPERTY"}</span>
-                        <span>→</span>
-                      </a>
-                    )}
                   </div>
-                </div>
-              ))}
-            </div>
-          </motion.div>
+                ))}
+              </div>
+            </motion.div>
+          )}
 
           {/* Booking CTA */}
           <motion.div
@@ -834,14 +888,17 @@ const INSURANCE_LINK_URL = process.env.NEXT_PUBLIC_INSURANCE_URL ?? "";
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.1 }}
-            className="bg-zinc-50/50 p-6 md:p-8 border border-zinc-200/80 shadow-md rounded-[1.5rem] relative overflow-hidden lg:sticky lg:top-28 scroll-mt-28"
+            className="bg-white/95 backdrop-blur-md p-6 md:p-8 border border-stone-200/90 shadow-[0_16px_45px_rgba(74,53,37,0.08)] rounded-[1.8rem] relative overflow-hidden lg:sticky lg:top-28 scroll-mt-28"
           >
-            <div className="absolute top-0 right-0 w-32 h-32 bg-brand-gold/5 blur-[50px] rounded-full pointer-events-none" />
+            <div className="absolute top-0 right-0 w-32 h-32 bg-[#C05621]/5 blur-[50px] rounded-full pointer-events-none" />
+            <div className="absolute -bottom-6 -right-6 pointer-events-none opacity-10 text-[#C05621]">
+              <MoroccanMedallionArt size={110} />
+            </div>
 
             {!isSubmitted ? (
-              <form onSubmit={handleBookingSubmit} className="space-y-6">
+              <form onSubmit={handleBookingSubmit} suppressHydrationWarning className="space-y-6 relative z-10">
                 <div className="text-center md:text-left border-b border-zinc-200/60 pb-4">
-                  <span className="text-brand-gold font-mono text-[9px] tracking-[0.25em] uppercase block mb-1">
+                  <span className="text-[#C05621] font-mono text-[9px] tracking-[0.25em] uppercase block mb-1 font-semibold">
                     {lang === "FR" ? "Frais de Voyage Estimés" : "Estimated Trip Cost"}
                   </span>
                   <div className="flex items-start justify-between">
@@ -867,7 +924,7 @@ const INSURANCE_LINK_URL = process.env.NEXT_PUBLIC_INSURANCE_URL ?? "";
                         </div>
                       );
                     })()}
-                    <span className="text-[9px] font-mono text-[#faf9f5] uppercase bg-[#8B2635] px-2 py-0.5 rounded shadow-sm">
+                    <span className="text-[9px] font-mono text-[#faf9f5] uppercase bg-[#8B2635] px-2.5 py-0.5 rounded-full shadow-sm font-semibold">
                       {itinerary.planLabel ? translate(itinerary.planLabel, lang) : (lang === "FR" ? "Haut de Gamme" : "All Inclusive")}
                     </span>
                   </div>
@@ -875,62 +932,66 @@ const INSURANCE_LINK_URL = process.env.NEXT_PUBLIC_INSURANCE_URL ?? "";
 
                 <div className="space-y-4">
                   <div>
-                    <label htmlFor="booking-name-input" className="block text-[9px] font-mono tracking-widest uppercase mb-1.5 text-zinc-500">
-                      {lang === "FR" ? "Votre nom" : "Your name"}
+                    <label htmlFor="booking-name-input" className="block text-[9px] font-mono tracking-widest uppercase mb-1.5 text-zinc-500 font-semibold">
+                      {lang === "FR" ? "Votre nom *" : "Your name *"}
                     </label>
                     <input
                       id="booking-name-input"
                       type="text"
                       required
+                      suppressHydrationWarning
                       value={bookingName}
                       onChange={(e) => setBookingName(e.target.value)}
                       placeholder="e.g. Sterling Hunt"
                       aria-label={lang === "FR" ? "Votre nom" : "Your name"}
-                      className="w-full bg-white border border-zinc-200 px-4 py-3 text-xs text-zinc-800 placeholder-zinc-400 focus:outline-none focus:border-brand-gold focus:ring-2 focus:ring-brand-gold/20 transition-[border-color,box-shadow] duration-300"
+                      className="w-full bg-white border border-stone-200/90 rounded-xl px-4 py-3 text-xs text-zinc-800 placeholder-zinc-400 focus:outline-none focus:border-[#C05621] focus:ring-2 focus:ring-[#C05621]/20 transition-[border-color,box-shadow] duration-300 shadow-xs"
                     />
                   </div>
                   <div>
-                    <label htmlFor="booking-email-input" className="block text-[9px] font-mono tracking-widest uppercase mb-1.5 text-zinc-500">
-                      {lang === "FR" ? "Votre adresse courriel" : "Your email address"}
+                    <label htmlFor="booking-email-input" className="block text-[9px] font-mono tracking-widest uppercase mb-1.5 text-zinc-500 font-semibold">
+                      {lang === "FR" ? "Votre adresse courriel *" : "Your email address *"}
                     </label>
                     <input
                       id="booking-email-input"
                       type="email"
                       required
+                      suppressHydrationWarning
                       value={bookingEmail}
                       onChange={(e) => setBookingEmail(e.target.value)}
                       placeholder="e.g. sterling@portfolio.com"
                       aria-label={lang === "FR" ? "Votre adresse courriel" : "Your email address"}
-                      className="w-full bg-white border border-zinc-200 px-4 py-3 text-xs text-zinc-800 placeholder-zinc-400 focus:outline-none focus:border-brand-gold focus:ring-2 focus:ring-brand-gold/20 transition-[border-color,box-shadow] duration-300"
+                      className="w-full bg-white border border-stone-200/90 rounded-xl px-4 py-3 text-xs text-zinc-800 placeholder-zinc-400 focus:outline-none focus:border-[#C05621] focus:ring-2 focus:ring-[#C05621]/20 transition-[border-color,box-shadow] duration-300 shadow-xs"
                     />
                   </div>
                   <div>
-                    <label htmlFor="booking-phone-input" className="block text-[9px] font-mono tracking-widest uppercase mb-1.5 text-zinc-500">
-                      {lang === "FR" ? "Votre numéro de téléphone" : "Your phone number"}
+                    <label htmlFor="booking-phone-input" className="block text-[9px] font-mono tracking-widest uppercase mb-1.5 text-zinc-500 font-semibold">
+                      {lang === "FR" ? "Votre numéro de téléphone *" : "Your phone number *"}
                     </label>
                     <input
                       id="booking-phone-input"
                       type="tel"
                       required
+                      suppressHydrationWarning
                       value={bookingPhone}
                       onChange={(e) => setBookingPhone(e.target.value)}
                       placeholder="e.g. +1 (514) 123-4567"
                       aria-label={lang === "FR" ? "Votre numéro de téléphone" : "Your phone number"}
-                      className="w-full bg-white border border-zinc-200 px-4 py-3 text-xs text-zinc-800 placeholder-zinc-400 focus:outline-none focus:border-brand-gold focus:ring-2 focus:ring-brand-gold/20 transition-[border-color,box-shadow] duration-300"
+                      className="w-full bg-white border border-stone-200/90 rounded-xl px-4 py-3 text-xs text-zinc-800 placeholder-zinc-400 focus:outline-none focus:border-[#C05621] focus:ring-2 focus:ring-[#C05621]/20 transition-[border-color,box-shadow] duration-300 shadow-xs"
                     />
                   </div>
                   {itinerary.dates && (
                     <div>
-                      <label htmlFor="booking-date-select" className="block text-[9px] font-mono tracking-widest uppercase mb-1.5 text-zinc-500">
+                      <label htmlFor="booking-date-select" className="block text-[9px] font-mono tracking-widest uppercase mb-1.5 text-zinc-500 font-semibold">
                         {lang === "FR" ? "Date de départ souhaitée" : "Desired Departure Date"}
                       </label>
                       <select
                         id="booking-date-select"
                         required
+                        suppressHydrationWarning
                         value={selectedDate}
                         onChange={(e) => setSelectedDate(e.target.value)}
                         aria-label={lang === "FR" ? "Date de départ souhaitée" : "Desired Departure Date"}
-                        className="w-full bg-white border border-zinc-200 px-4 py-3 text-xs text-zinc-800 placeholder-zinc-400 focus:outline-none focus:border-brand-gold focus:ring-2 focus:ring-brand-gold/20 transition-[border-color,box-shadow] duration-300 cursor-pointer"
+                        className="w-full bg-white border border-stone-200/90 rounded-xl px-4 py-3 text-xs text-zinc-800 placeholder-zinc-400 focus:outline-none focus:border-[#C05621] focus:ring-2 focus:ring-[#C05621]/20 transition-[border-color,box-shadow] duration-300 cursor-pointer shadow-xs"
                       >
                         <option value="">
                           {lang === "FR" ? "-- Sélectionnez une date de départ --" : "-- Select a departure date --"}
@@ -944,36 +1005,39 @@ const INSURANCE_LINK_URL = process.env.NEXT_PUBLIC_INSURANCE_URL ?? "";
                     </div>
                   )}
                   <div>
-                    <label htmlFor="booking-message-input" className="block text-[9px] font-mono tracking-widest uppercase mb-1.5 text-zinc-500 text-wrap leading-tight">
+                    <label htmlFor="booking-message-input" className="block text-[9px] font-mono tracking-widest uppercase mb-1.5 text-zinc-500 text-wrap leading-tight font-semibold">
                       {lang === "FR" ? "Vos souhaits particuliers, besoins alimentaires ou occasions spéciales ?" : "Any special wishes, dietary needs, or occasions we should know about?"}
                     </label>
                     <textarea
                       id="booking-message-input"
                       rows={4}
+                      suppressHydrationWarning
                       value={bookingMessage}
                       onChange={(e) => setBookingMessage(e.target.value)}
-                      placeholder={lang === "FR" ? "Ex. Régimes alimentaires, hélicoptère privé..." : "e.g. Jet charter transfers, close protection, dietaries..."}
+                      placeholder={lang === "FR" ? "Ex. Régimes alimentaires, hélicoptère privé, guide francophone..." : "e.g. Jet charter transfers, close protection, dietaries, private celebrations..."}
                       aria-label={lang === "FR" ? "Vos souhaits particuliers" : "Special wishes"}
-                      className="w-full bg-white border border-zinc-200 px-4 py-3 text-xs text-zinc-800 placeholder-zinc-400 focus:outline-none focus:border-brand-gold focus:ring-2 focus:ring-brand-gold/20 transition-[border-color,box-shadow] duration-300 resize-none"
+                      className="w-full bg-white border border-stone-200/90 rounded-xl px-4 py-3 text-xs text-zinc-800 placeholder-zinc-400 focus:outline-none focus:border-[#C05621] focus:ring-2 focus:ring-[#C05621]/20 transition-[border-color,box-shadow] duration-300 resize-none shadow-xs"
                     />
                   </div>
                 </div>
 
                 {/* Travelling party (Passengers) */}
-                <div className="bg-white border border-zinc-200/80 rounded-2xl px-5 py-4 space-y-4">
+                <div className="bg-white/80 border border-stone-200/90 rounded-2xl px-5 py-4 space-y-4 shadow-2xs">
                   <div className="flex items-center justify-between">
-                    <label className="text-[9px] font-mono tracking-widest uppercase text-brand-gold font-bold">
+                    <label className="text-[9px] font-mono tracking-widest uppercase text-[#C05621] font-bold">
                       {lang === "FR" ? "Groupe de voyage" : "Travelling party"}
                     </label>
                     <div className="flex items-center gap-2">
                       <button
                         type="button"
+                        suppressHydrationWarning
                         onClick={() => updatePassengerCount(-1)}
                         className="w-7 h-7 rounded-full border border-zinc-200 bg-zinc-50 hover:bg-zinc-100 flex items-center justify-center text-zinc-700 font-bold text-sm transition-colors cursor-pointer"
                       >−</button>
                       <span className="text-[14px] font-bold text-zinc-900 font-heading tabular-nums w-5 text-center">{passengerCount}</span>
                       <button
                         type="button"
+                        suppressHydrationWarning
                         onClick={() => updatePassengerCount(1)}
                         className="w-7 h-7 rounded-full border border-zinc-200 bg-zinc-50 hover:bg-zinc-100 flex items-center justify-center text-zinc-700 font-bold text-sm transition-colors cursor-pointer"
                       >+</button>
@@ -992,6 +1056,7 @@ const INSURANCE_LINK_URL = process.env.NEXT_PUBLIC_INSURANCE_URL ?? "";
                             type="number"
                             min={0}
                             max={120}
+                            suppressHydrationWarning
                             value={age === 0 ? "" : age}
                             onChange={(e) => updatePassengerAge(idx, parseInt(e.target.value) || 0)}
                             placeholder="Age"
@@ -1004,18 +1069,18 @@ const INSURANCE_LINK_URL = process.env.NEXT_PUBLIC_INSURANCE_URL ?? "";
                   </div>
                 </div>
 
-
                 {/* Submit and Reassurance */}
                 <div className="space-y-4">
                   <div className="flex items-start space-x-2 text-[10px] text-zinc-500 font-mono leading-relaxed">
-                    <Shield className="text-brand-gold w-4 h-4 shrink-0 mt-0.5" />
-                    <span>{lang === "FR" ? "Aucun paiement n'est effectué à ce stade. Notre conciergerie vous contactera dans les 24 heures pour commencer à concevoir votre passage." : "No payment is taken at this stage. Our concierge will contact you within 24 hours to begin crafting your passage."}</span>
+                    <Shield className="text-[#C05621] w-4 h-4 shrink-0 mt-0.5" />
+                    <span>{lang === "FR" ? "Aucun paiement n'est exigé à ce stade. Notre équipe locale vous répondra sous 24h pour affiner chaque détail de votre circuit." : "No payment is taken at this stage. Our local Moroccan travel team will respond within 24 hours to fine-tune your itinerary."}</span>
                   </div>
                   <div className="flex flex-col gap-3">
                     <button
                       type="submit"
                       disabled={isSubmitting}
-                      className="w-full bg-[#8B2635] hover:bg-[#72202b] text-[#faf9f5] font-semibold text-[11px] tracking-[0.2em] uppercase py-4 rounded-full transition-luxury hover:-translate-y-0.5 border border-[#8B2635] shadow-md cursor-pointer disabled:opacity-50"
+                      suppressHydrationWarning
+                      className="w-full bg-[#4A3525] hover:bg-[#322318] text-white font-semibold text-[11px] tracking-[0.2em] uppercase py-4 rounded-full transition-all duration-300 hover:-translate-y-0.5 shadow-md cursor-pointer disabled:opacity-50"
                     >
                       {isSubmitting 
                         ? (lang === "FR" ? "ENVOI EN COURS..." : "TRANSMITTING...") 
@@ -1025,7 +1090,7 @@ const INSURANCE_LINK_URL = process.env.NEXT_PUBLIC_INSURANCE_URL ?? "";
                     {INSURANCE_LINK_URL && (
                       <a
                         href={INSURANCE_LINK_URL}
-                        className="w-full inline-flex items-center justify-center gap-2 rounded-full border border-zinc-300 bg-white text-zinc-700 font-semibold text-[11px] tracking-[0.2em] uppercase py-4 transition-luxury hover:bg-zinc-50 shadow-sm cursor-pointer text-center"
+                        className="w-full inline-flex items-center justify-center gap-2 rounded-full border border-stone-300 bg-white text-zinc-700 font-semibold text-[11px] tracking-[0.2em] uppercase py-4 transition-luxury hover:bg-stone-50 shadow-xs cursor-pointer text-center"
                       >
                         {lang === "FR" ? "ASSURANCE VOYAGE" : "TRAVEL INSURANCE"}
                       </a>
@@ -1034,27 +1099,28 @@ const INSURANCE_LINK_URL = process.env.NEXT_PUBLIC_INSURANCE_URL ?? "";
                 </div>
               </form>
             ) : (
-              <div className="text-center py-12 flex flex-col items-center justify-center space-y-6">
-                <div className="w-16 h-16 rounded-full bg-brand-gold/10 flex items-center justify-center border border-brand-gold/30">
-                  <CheckCircle className="text-brand-gold w-7 h-7" />
+              <div className="text-center py-12 flex flex-col items-center justify-center space-y-6 relative z-10">
+                <div className="w-16 h-16 rounded-full bg-[#C05621]/10 flex items-center justify-center border border-[#C05621]/30">
+                  <CheckCircle className="text-[#C05621] w-8 h-8" />
                 </div>
                 <div className="space-y-1">
-                  <span className="text-brand-gold font-mono text-[10px] tracking-[0.25em] uppercase block">
-                    {lang === "FR" ? "Transmission Chiffrée" : "Transmission Secured"}
+                  <span className="text-[#C05621] font-mono text-[10px] tracking-[0.25em] uppercase block font-semibold">
+                    {lang === "FR" ? "Demande Reçue avec Succès" : "Inquiry Successfully Received"}
                   </span>
-                  <h3 className="font-serif text-2xl text-zinc-900 tracking-wide uppercase">
-                    {lang === "FR" ? "Réservation Initiée" : "Reservation Active"}
+                  <h3 className="font-serif text-2xl text-zinc-900 tracking-wide uppercase font-bold">
+                    {lang === "FR" ? "Demande Envoyée" : "Request Received"}
                   </h3>
                 </div>
-                <p className="text-zinc-600 text-xs leading-relaxed max-w-[240px] mx-auto font-light">
+                <p className="text-zinc-600 text-xs leading-relaxed max-w-[280px] mx-auto font-light">
                   {lang === "FR"
-                    ? `Merci, ${bookingName}. Votre conseiller en voyages prépare les protocoles pour ${itinerary.title.FR}.`
-                    : `Thank you, ${bookingName}. Your dedicated travel architect is initiating protocols for ${itinerary.title.EN}.`
+                    ? `Merci, ${bookingName}. Votre conseiller chez Best of Morocco Tours a bien reçu votre demande pour ${itinerary.title.FR} et vous contactera sous 24 heures pour finaliser votre itinéraire.`
+                    : `Thank you, ${bookingName}. Your dedicated travel architect at Best of Morocco Tours has received your request for ${itinerary.title.EN} and will contact you within 24 hours to customize your private journey.`
                   }
                 </p>
                 <button
                   onClick={() => setIsSubmitted(false)}
-                  className="border border-zinc-200 bg-white hover:bg-zinc-900 hover:text-white hover:border-zinc-900 text-zinc-700 font-mono text-[9px] tracking-[0.15em] uppercase px-6 py-2.5 transition-luxury rounded-full shadow-sm"
+                  suppressHydrationWarning
+                  className="border border-stone-200 bg-white hover:bg-[#4A3525] hover:text-white hover:border-[#4A3525] text-stone-700 font-mono text-[9px] tracking-[0.15em] uppercase px-6 py-2.5 transition-all duration-300 rounded-full shadow-xs cursor-pointer"
                 >
                   {lang === "FR" ? "Modifier la requête" : "Modify inquiry"}
                 </button>

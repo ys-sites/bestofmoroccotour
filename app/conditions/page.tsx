@@ -27,13 +27,13 @@ export default function ConditionsPage() {
   const { lang } = useLang();
 
   return (
-    <div className="min-h-screen bg-white text-zinc-900 font-body antialiased">
+    <div className="min-h-screen bg-transparent text-zinc-900 font-body antialiased">
       <Navbar />
 
       {/* Header section with radial background mask */}
       <section className="relative h-[35vh] w-full overflow-hidden bg-zinc-950 flex flex-col justify-end pb-10 px-6 md:px-12">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(197,168,128,0.05)_0%,transparent_70%)] pointer-events-none" />
-        <div className="absolute inset-0 bg-gradient-to-t from-white to-transparent pointer-events-none" />
+        <div className="absolute inset-0 bg-gradient-to-t from-[#FAF8F5] to-transparent pointer-events-none" />
         
         <div className="max-w-4xl mx-auto w-full z-10 space-y-4">
           <Link
@@ -55,7 +55,7 @@ export default function ConditionsPage() {
       </section>
 
       {/* Terms & Conditions Content Section */}
-      <section className="py-16 px-6 max-w-4xl mx-auto bg-white">
+      <section className="py-16 px-6 max-w-4xl mx-auto bg-transparent">
         <div className="prose prose-zinc max-w-none space-y-10 text-[13px] md:text-[14px] leading-relaxed text-zinc-600 font-light">
           
           <p className="font-medium text-zinc-900">

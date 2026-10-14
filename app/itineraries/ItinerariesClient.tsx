@@ -117,7 +117,7 @@ function ItinerariesClientContent() {
   });
 
   return (
-    <div className="min-h-screen bg-white text-zinc-900 font-body antialiased">
+    <div className="min-h-screen bg-transparent text-zinc-900 font-body antialiased">
       {/* Shimmer keyframes */}
       <style>{`
         @keyframes shimmer {
@@ -136,7 +136,7 @@ function ItinerariesClientContent() {
           className="absolute inset-0 w-full h-full object-cover object-center opacity-40"
         />
         <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/20 to-transparent pointer-events-none" />
-        <div className="absolute inset-0 bg-gradient-to-t from-white via-transparent to-transparent pointer-events-none" />
+        <div className="absolute inset-0 bg-gradient-to-t from-[#FAF8F5] via-transparent to-transparent pointer-events-none" />
         
         <div className="max-w-6xl mx-auto w-full z-10 space-y-4">
           <Link
@@ -159,7 +159,7 @@ function ItinerariesClientContent() {
 
 
       {/* Grid of Cards */}
-      <section className="pb-24 pt-6 px-6 max-w-6xl mx-auto z-20 relative bg-white">
+      <section className="pb-24 pt-6 px-6 max-w-6xl mx-auto z-20 relative bg-transparent">
         
         {/* Combined Filter Section */}
         <div className="flex flex-col items-center space-y-6 mb-12 max-w-3xl mx-auto">

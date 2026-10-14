@@ -1,11 +1,14 @@
 'use client';
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import Image from "next/image";
-import { Search, Calendar, Compass, ShieldCheck, Award } from "lucide-react";
-import { motion } from "motion/react";
+import Link from "next/link";
+import { Search, Calendar, Compass, ShieldCheck, Award, MapPin, X, ArrowRight, Sparkles, CheckCircle2 } from "lucide-react";
+import { motion, AnimatePresence } from "motion/react";
 import { MoroccanCornerSpandrel, MoroccanMedallionArt } from "./moroccan-art-motifs";
 import { easeOutExpo } from "@/lib/animations";
+import { searchTours, highlightMatches, POPULAR_CITIES, SearchMatchResult } from "../utils/search-matcher";
+import { masterTours } from "@/data/bestOfMoroccoData";
 
 interface HeroProps {
   onSearch: (city: string) => void;
@@ -38,6 +41,8 @@ export default function HeroEditorial({ onSearch }: HeroProps) {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [searchQuery, setSearchQuery] = useState("");
   const [searchDates, setSearchDates] = useState("");
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const searchContainerRef = useRef<HTMLDivElement>(null);
 
   // Subtle auto-advance every 7 seconds
   useEffect(() => {
@@ -47,13 +52,34 @@ export default function HeroEditorial({ onSearch }: HeroProps) {
     return () => clearInterval(timer);
   }, []);
 
+  // Close dropdown on click outside
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (searchContainerRef.current && !searchContainerRef.current.contains(event.target as Node)) {
+        setIsDropdownOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
+
+  // Compute live match suggestions
+  const searchResults: SearchMatchResult[] = searchTours(masterTours, searchQuery);
+
   const handleSearchSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (searchQuery) {
       onSearch(searchQuery);
     }
+    setIsDropdownOpen(false);
     const el = document.getElementById("tours");
     if (el) el.scrollIntoView({ behavior: "smooth" });
+  };
+
+  const handleSelectCityChip = (city: string) => {
+    setSearchQuery(city);
+    onSearch(city);
+    setIsDropdownOpen(true);
   };
 
   return (
@@ -168,10 +194,11 @@ export default function HeroEditorial({ onSearch }: HeroProps) {
 
       {/* Floating Search Pill Overlapping Bottom Edge matching Ui.jpg */}
       <motion.div 
+        ref={searchContainerRef}
         initial={{ opacity: 0, y: 35, scale: 0.98 }}
         animate={{ opacity: 1, y: 0, scale: 1 }}
         transition={{ duration: 0.75, delay: 0.45, ease: easeOutExpo }}
-        className="absolute left-1/2 bottom-0 w-full max-w-[1020px] -translate-x-1/2 translate-y-1/2 z-30 px-4"
+        className="absolute left-1/2 bottom-0 w-full max-w-[1040px] -translate-x-1/2 translate-y-1/2 z-30 px-4"
       >
         <form
           onSubmit={handleSearchSubmit}
@@ -179,16 +206,34 @@ export default function HeroEditorial({ onSearch }: HeroProps) {
           className="relative w-full rounded-[2rem] bg-white/98 backdrop-blur-xl p-2.5 sm:p-3 shadow-[0_15px_45px_rgba(74,53,37,0.14)] flex flex-col md:flex-row items-center justify-between gap-2 border border-stone-200/90 hover:shadow-[0_20px_55px_rgba(74,53,37,0.18)] transition-shadow duration-300"
         >
           {/* Input 1: Destination / Tour Name */}
-          <div className="flex-1 flex items-center gap-3 px-5 py-2.5 md:py-0 border-b md:border-b-0 md:border-r border-stone-200/80 w-full">
+          <div className="flex-1 flex items-center gap-3 px-5 py-2.5 md:py-0 border-b md:border-b-0 md:border-r border-stone-200/80 w-full relative">
             <Search className="w-4 h-4 text-[#C05621] shrink-0" />
             <input
               suppressHydrationWarning
               type="text"
-              placeholder="Enter tour name or city (e.g. Marrakech, Fes, Merzouga...)"
+              placeholder="Enter tour name or city (e.g. Rabat, Marrakech, Fes, Merzouga...)"
               value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full bg-transparent text-xs sm:text-sm text-[#1E1B18] placeholder-stone-400 focus:outline-none font-sans font-medium"
+              onFocus={() => setIsDropdownOpen(true)}
+              onChange={(e) => {
+                setSearchQuery(e.target.value);
+                setIsDropdownOpen(true);
+              }}
+              className="w-full bg-transparent text-xs sm:text-sm text-[#1E1B18] placeholder-stone-400 focus:outline-none font-sans font-medium pr-6"
             />
+            {searchQuery && (
+              <button
+                type="button"
+                onClick={() => {
+                  setSearchQuery("");
+                  onSearch("");
+                  setIsDropdownOpen(false);
+                }}
+                className="absolute right-4 text-stone-400 hover:text-stone-700 p-1"
+                aria-label="Clear search"
+              >
+                <X className="w-3.5 h-3.5" />
+              </button>
+            )}
           </div>
 
           {/* Input 2: Dates / Season */}
@@ -215,6 +260,155 @@ export default function HeroEditorial({ onSearch }: HeroProps) {
             SEARCH TOURS
           </motion.button>
         </form>
+
+        {/* =========================================================================
+            INTERACTIVE SMART SEARCH SUGGESTION MODAL / DROPDOWN
+            "Do you mean this itinerary?" with Word Highlighting & Direct Navigation
+           ========================================================================= */}
+        <AnimatePresence>
+          {isDropdownOpen && searchQuery.trim().length > 0 && (
+            <motion.div
+              initial={{ opacity: 0, y: 12, scale: 0.98 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              exit={{ opacity: 0, y: 8, scale: 0.98 }}
+              transition={{ duration: 0.35, ease: easeOutExpo }}
+              className="absolute top-full left-4 right-4 mt-3 rounded-[2rem] bg-white/98 backdrop-blur-2xl border border-stone-200/95 shadow-[0_25px_65px_rgba(74,53,37,0.22)] p-5 sm:p-6 z-50 text-left overflow-hidden"
+            >
+              {/* Header: "Do you mean this itinerary?" */}
+              <div className="flex items-start justify-between border-b border-stone-200/70 pb-4 mb-4">
+                <div className="flex items-center gap-2.5">
+                  <div className="w-8 h-8 rounded-full bg-[#C05621]/10 flex items-center justify-center text-[#C05621] shrink-0">
+                    <Sparkles className="w-4 h-4" />
+                  </div>
+                  <div>
+                    <h3 className="font-serif text-lg sm:text-xl font-bold text-stone-900 leading-snug">
+                      Do you mean this itinerary?
+                    </h3>
+                    <p className="text-xs text-stone-500 font-light mt-0.5">
+                      {searchResults.length > 0
+                        ? `Found ${searchResults.length} private Moroccan ${searchResults.length === 1 ? 'circuit' : 'circuits'} matching your destination`
+                        : `No preset tour directly matched "${searchQuery}"`}
+                    </p>
+                  </div>
+                </div>
+
+                <button
+                  type="button"
+                  onClick={() => setIsDropdownOpen(false)}
+                  className="w-8 h-8 rounded-full bg-stone-100 hover:bg-stone-200 flex items-center justify-center text-stone-600 transition-colors cursor-pointer"
+                  aria-label="Close suggestions"
+                >
+                  <X className="w-4 h-4" />
+                </button>
+              </div>
+
+              {/* Suggestions List */}
+              {searchResults.length > 0 ? (
+                <div className="space-y-3 max-h-[380px] overflow-y-auto pr-1 scrollbar-thin">
+                  {searchResults.slice(0, 4).map(({ tour, matchReason, snippet }) => (
+                    <Link
+                      key={tour.id}
+                      href={`/itineraries/${tour.id}`}
+                      onClick={() => setIsDropdownOpen(false)}
+                      className="group flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 p-3.5 rounded-2xl bg-stone-50/70 hover:bg-amber-50/50 border border-stone-200/70 hover:border-[#C05621]/40 transition-all duration-300 cursor-pointer block"
+                    >
+                      {/* Left: Thumbnail & Route */}
+                      <div className="flex items-start gap-3.5 flex-1 min-w-0">
+                        <div className="relative w-20 h-16 sm:w-24 sm:h-20 rounded-xl overflow-hidden bg-stone-200 shrink-0 shadow-2xs">
+                          <Image
+                            src={tour.image}
+                            alt={tour.name}
+                            fill
+                            className="object-cover group-hover:scale-105 transition-transform duration-500"
+                          />
+                          <span className="absolute bottom-1 right-1 bg-black/65 backdrop-blur-xs text-[9px] font-bold text-white px-1.5 py-0.5 rounded">
+                            {tour.duration.split(" ")[0]}D
+                          </span>
+                        </div>
+
+                        <div className="flex-1 min-w-0 space-y-1">
+                          <div className="flex items-center gap-2">
+                            <span className="text-[10px] font-mono uppercase tracking-wider text-[#C05621] font-semibold bg-[#C05621]/10 px-2 py-0.5 rounded-full inline-flex items-center gap-1">
+                              <MapPin className="w-2.5 h-2.5" />
+                              <span>{matchReason}</span>
+                            </span>
+                          </div>
+
+                          {/* Itinerary Title with Matched Word Highlighted */}
+                          <h4 className="font-serif font-bold text-sm sm:text-base text-[#4A3525] group-hover:text-[#C05621] transition-colors line-clamp-1 leading-snug">
+                            {highlightMatches(tour.name, searchQuery)}
+                          </h4>
+
+                          {/* Matched Context Excerpt with Highlighted Keyword */}
+                          <p className="text-[11px] sm:text-xs text-stone-600 font-light leading-relaxed line-clamp-2">
+                            {highlightMatches(snippet, searchQuery)}
+                          </p>
+                        </div>
+                      </div>
+
+                      {/* Right: Price & Direct Arrow CTA */}
+                      <div className="flex sm:flex-col items-center sm:items-end justify-between w-full sm:w-auto shrink-0 pt-2 sm:pt-0 border-t sm:border-t-0 border-stone-200/60">
+                        <span className="font-serif font-bold text-[#C2272D] text-sm sm:text-base">
+                          {tour.price}
+                        </span>
+                        <span className="text-[11px] font-semibold text-stone-700 group-hover:text-[#C05621] flex items-center gap-1 mt-1 transition-colors">
+                          <span>View Itinerary</span>
+                          <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
+                        </span>
+                      </div>
+                    </Link>
+                  ))}
+                </div>
+              ) : (
+                <div className="py-6 text-center space-y-3">
+                  <p className="text-xs text-stone-600 font-light">
+                    We can customize a private itinerary to any city in Morocco! Tell our travel architect where you want to go.
+                  </p>
+                  <a
+                    href="#custom-trip"
+                    onClick={() => setIsDropdownOpen(false)}
+                    className="inline-flex items-center gap-2 rounded-full bg-[#4A3525] text-white px-5 py-2.5 text-xs font-bold uppercase tracking-wider hover:bg-[#322318] transition-colors"
+                  >
+                    <span>Request Custom Trip for &quot;{searchQuery}&quot;</span>
+                    <ArrowRight className="w-3.5 h-3.5" />
+                  </a>
+                </div>
+              )}
+
+              {/* Quick City Filters Footer */}
+              <div className="mt-4 pt-4 border-t border-stone-200/70 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 text-xs">
+                <div className="flex items-center gap-1.5 flex-wrap">
+                  <span className="text-[11px] font-semibold text-stone-500 uppercase tracking-wider shrink-0">
+                    Popular:
+                  </span>
+                  {POPULAR_CITIES.map((city) => (
+                    <button
+                      key={city}
+                      type="button"
+                      onClick={() => handleSelectCityChip(city)}
+                      className={`px-2.5 py-1 rounded-full text-[11px] font-medium transition-colors cursor-pointer ${
+                        searchQuery.toLowerCase() === city.toLowerCase()
+                          ? "bg-[#4A3525] text-white"
+                          : "bg-stone-100 hover:bg-stone-200 text-stone-700"
+                      }`}
+                    >
+                      {city}
+                    </button>
+                  ))}
+                </div>
+
+                <button
+                  type="button"
+                  onClick={handleSearchSubmit}
+                  className="font-bold text-[#C05621] hover:underline flex items-center gap-1 text-[11px] uppercase tracking-wider shrink-0 cursor-pointer"
+                >
+                  <span>Filter catalog below</span>
+                  <span>↓</span>
+                </button>
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </motion.div>
     </section>
   );

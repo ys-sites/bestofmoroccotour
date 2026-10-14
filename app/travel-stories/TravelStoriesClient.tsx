@@ -33,7 +33,7 @@ export default function TravelStoriesClient() {
   const { lang } = useLang();
 
   return (
-    <div className="min-h-screen bg-white text-zinc-900 font-body antialiased">
+    <div className="min-h-screen bg-transparent text-zinc-900 font-body antialiased">
       <Navbar />
 
       <main className="min-h-[calc(100vh-200px)] flex flex-col items-center justify-center px-6 py-20 mt-24">

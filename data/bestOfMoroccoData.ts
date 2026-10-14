@@ -214,7 +214,7 @@ export const masterTours: TourItem[] = [
       },
       {
         "day": 6,
-        "title": "MARRAKECH â EL JADIDA",
+        "title": "MARRAKECH – EL JADIDA",
         "desc": "after your breakfast, you will travel to the city of El jadida, You will begin your city tour by exploring El Mallah (The Jewish carter) and the citadel, evidence of the 11th century Portuguese occupation, then you will take the road, to one of the best beaches of the Atlantic ocean Sidi Bouzid, where you will have lunch at the famous restaurant Le Requin bleu. After your lunch you will have the remain of the day at leisure to enjoy the blue Atlantic Ocean. You will conclude your day with dinner at your hotel."
       },
       {
@@ -273,12 +273,12 @@ export const masterTours: TourItem[] = [
       },
       {
         "day": 2,
-        "title": "CASABLANCA â RABAT",
+        "title": "CASABLANCA – RABAT",
         "desc": "Depart in the morning to Rabat the capital of the nation. This city in many ways is what you would expect: elegant in its spacious European grid, slightly self conscious in its very civilized modern aspect. rich with its ancient legacy of multiple civilizations that have swept through since the earliest historical archives leaving behind a collage of architectural styles, some of them are from the Phoenician and Roman era. Dinner and accommodation in your Hotel."
       },
       {
         "day": 3,
-        "title": "RABAT â MEKNES â FES",
+        "title": "RABAT – MEKNES – FES",
         "desc": "Travel to Meknes via Volubilis and Moulay Idris, an excursion which embodies much of Morocco's early history: Volubilis as its Roman provincial capital and Moulay Idris in the creation of the country's first Arab dynasty . Continuation to Fez, dinner and accommodation at the Hotel."
       },
       {
@@ -288,17 +288,17 @@ export const masterTours: TourItem[] = [
       },
       {
         "day": 5,
-        "title": "FES â MIDELT â ERFOUD â MERZOUGA DUNES",
+        "title": "FES – MIDELT – ERFOUD – MERZOUGA DUNES",
         "desc": "Today we will explore the rural and natural aspect of the Berbers of the Atlas Mountains. The first hills you see of the Middle Atlas seem oddly un-Moroccan. Evergreen pines, tall cedar trees on the peaks and poplars stand copiously on the foot hills, laced with flowing streams. The road across is almost ceremonial. Azrou, the first real town of the Middle Atlas, stands at a major junction of routes, it's an important market center for Berber tribes of the region. The Middle Atlas cease at Midelt, where suddenly, through the haze, appear the much greater peaks of the High Atlas formidably rise behind the town to reach a massive range, the Dgebel Ayashi at over 12,000 ft. The drama of this sight, tremendous in the clear, cool noon, is the most compelling reason to stop over for lunch. Erfoud, one of the most pleasing of all southern routes: a dry, red belt of desert, and then suddenly, a drop into the lush valley of Ziz filled with date palm groves and flowing streams. Dinner in your hotel."
       },
       {
         "day": 6,
-        "title": "MERZOUGA â TODRA GORGES â OUARZAZATE",
+        "title": "MERZOUGA – TODRA GORGES – OUARZAZATE",
         "desc": "Early Morning devoted to the camel ride to reach the sun rise, and then you will back to the Kasbah for Breakfast. Departing desert we set into village of Tinghir and to the nearby Todra Gorge. This gorge in the High Atlas present asthonishing spectacle, its gigantic rock walls change colors to magical effect as the day unfolds.The 300 meters tall cliff walls are mere 15 meters apart from each other. We have some time to stretch our legs and then go back to Tinghir for lunch. After lunch we will pay a visit to a Berber house for a cup of tea and to explore Berbere carpets and heritage jewels. After that we will travel along small villages painted in pink-grey colors merging into the local rock, ruins of kasbahs and ksours and parts of fertile shafts of land creating breathtaking contrast to the arid land. Later we continue the journey to Ouarzazate. You will conclude your day with dinner and other accommodations will be served at your hotel.."
       },
       {
         "day": 7,
-        "title": "OUARZAZATE â AIT BENHADDOU â MARRAKECH",
+        "title": "OUARZAZATE – AIT BENHADDOU – MARRAKECH",
         "desc": "You will spend most of your day en route to Marrakech, exploring the legendary Kasbah of AÃ¯t-Benhaddou, a renowned architectural marvel, and stopping in Taddart and Tizi Tishka pass, at an altitude of 11,000 feet. The pass divides the mountains into two distinct facets: the harsh, stark side acting as a shield that protects the hinterland from the harsh, dry expansion of the Sahara, and a lush side, soft and evergreen, which collects the moisture from the Gherbi winds of the Atlantic Ocean. You will arrive in Marrakech, a city of pleasure for both visitors and locals, where southern tribesmen and Berber villagers bring their goods to market and find a variety of entertainment. To tourists, the city is a feast for the imagination, full of incomparable beauty, situated before the towering mountains that provide a thrilling backdrop. After a visit to the bustling Jemaa El Fna square, you will conclude your day with dinner and other accommodations at your hotel.."
       },
       {
@@ -308,7 +308,7 @@ export const masterTours: TourItem[] = [
       },
       {
         "day": 9,
-        "title": "MARRAKECH â EL JADIDA",
+        "title": "MARRAKECH – EL JADIDA",
         "desc": "after your breakfast, you will travel to the city of El jadida, You will begin your city tour by exploring El Mallah (The Jewish carter) and the citadel, evidence of the 11th century Portuguese occupation, then you will take the road, to one of the best beaches of the Atlantic ocean Sidi Bouzid, where you will have lunch at the famous restaurant Le Requin bleu. After your lunch you will have the remain of the day at leisure to enjoy the blue Atlantic Ocean. You will conclude your day with dinner at your hotel."
       },
       {
@@ -369,32 +369,32 @@ export const masterTours: TourItem[] = [
       },
       {
         "day": 2,
-        "title": "RABAT â TANGIER â CHEFCHAOUEN",
+        "title": "RABAT – TANGIER – CHEFCHAOUEN",
         "desc": "After breakfasts you will continue the road through Chefchaouen via Tangier, our North South Morocco Tours, we give you time to explore this bustling port city that was once the playground of international socialites, including artists, musicians, politicians and writers (Paul Bowles). The city is a lively, cosmopolitan, historic Mediterranean place where you get to explore a number of museums and sites. After lunch in the city Centre of Tangier you will continue to Chefchaouen, a beautiful blue and white-washed Andalusian town nestled in the Rif Mountains. The town is very relaxed, with small winding alleyways and market squares, where the women of the surrounding Rif come to sell their handmade products. Dinner is at the hotel."
       },
       {
         "day": 3,
-        "title": "CHEFCHAOUEN â VOLUBILIS â MEKNES â FES",
-        "desc": "On your way to Fez, you will first make an excursion to Volubilis, the remains of a Roman city, and Moulay Idriss, the burial place of the founder of Moroccoâs first imperial dynasty. For Moroccans it is a place of pilgrimage. You continue to Meknes, the smallest and friendliest of the five imperial cities of Morocco. The old part of Meknes is beautiful and has a feel of the oriental and the Mediterranean at the same time. The immense city walls and gates lead the visitorsâ imagination into times long gone. The labyrinth of alleyways and market stands is a joy to any visitor and the friendly inhabitants will gladly show you the products they are selling, like spices, olives, pottery, then toward to Fes."
+        "title": "CHEFCHAOUEN – VOLUBILIS – MEKNES – FES",
+        "desc": "On your way to Fez, you will first make an excursion to Volubilis, the remains of a Roman city, and Moulay Idriss, the burial place of the founder of Morocco's first imperial dynasty. For Moroccans it is a place of pilgrimage. You continue to Meknes, the smallest and friendliest of the five imperial cities of Morocco. The old part of Meknes is beautiful and has a feel of the oriental and the Mediterranean at the same time. The immense city walls and gates lead the visitors' imagination into times long gone. The labyrinth of alleyways and market stands is a joy to any visitor and the friendly inhabitants will gladly show you the products they are selling, like spices, olives, pottery, then toward to Fes."
       },
       {
         "day": 4,
         "title": "FES CITY TOUR",
-        "desc": "After breakfast you will begin your guided tour of the medina, one of the worldâs largest walled in cities, this tour will start from the panoramic view of the old Medina, nearby the Saadian Fortress, from there you will go inside of the old medina via the famous gate of Boujloud (blue gate). You will explore the narrow streets lined with fresh fruit, mounds of spices, intricately woven Berber carpets and many other art objects of Morocco. A visit to the Kings Palace, the tanneries, and potters are just a few places you will experience. For lunch you will eat in traditional restaurant in the heart of the medina. After lunch you will complete the tour by visiting Kairaouine Mosque, Merdersa Bou Imaniaand Mosque Abou El Hassan then return to your hotel for the evening."
+        "desc": "After breakfast you will begin your guided tour of the medina, one of the world's largest walled in cities, this tour will start from the panoramic view of the old Medina, nearby the Saadian Fortress, from there you will go inside of the old medina via the famous gate of Boujloud (blue gate). You will explore the narrow streets lined with fresh fruit, mounds of spices, intricately woven Berber carpets and many other art objects of Morocco. A visit to the Kings Palace, the tanneries, and potters are just a few places you will experience. For lunch you will eat in traditional restaurant in the heart of the medina. After lunch you will complete the tour by visiting Kairaouine Mosque, Merdersa Bou Imaniaand Mosque Abou El Hassan then return to your hotel for the evening."
       },
       {
         "day": 5,
-        "title": "FES â IFRANE â MIDELT â ERFOUD â MERZOUGA",
-        "desc": "Travel to Ifrane, a pleasant mountain city oddly out of place with its wooden chalets and steep-pitched roofs that stud this skiing village, evoking a Swiss resort. An area long popular with Moroccans on holiday, five tranquil lakes rest near dense holm oak and cedar forests, where raptors, acrobatic booted eagles, and Egyptian vultures fly overhead. You will spend your day discovering the rural environs of the Atlas Mountainsâ Berbers. Covered with evergreen pines, tall cedar trees, and poplars, and laced with flowing streams, your first view of the Middle Atlases will appear oddly un-Moroccan. You will soon come across the first real town of the Middle Atlases, Azrou, and an important market center for the regionâs Berber tribes that are located at a major junction of mountain routes. At Midelt, the Middle Atlases give way to the High Atlas Mountains, whose peaks are visible through the haze, soaring to over 12,000 feet. You will stop in Midelt for lunch, enjoying the dramatic sight before you leave. You will then continue to Erfoud, one of the most delightful southern regions consisting of a dry, red belt of desert with a sudden drop into the lush valley of Ziz, with copious date palm groves and flowing streams. From there you will ride the 4x4 to get the lake of the Sahara. You will conclude your day with dinner over the dunes of Merzouga."
+        "title": "FES – IFRANE – MIDELT – ERFOUD – MERZOUGA",
+        "desc": "Travel to Ifrane, a pleasant mountain city oddly out of place with its wooden chalets and steep-pitched roofs that stud this skiing village, evoking a Swiss resort. An area long popular with Moroccans on holiday, five tranquil lakes rest near dense holm oak and cedar forests, where raptors, acrobatic booted eagles, and Egyptian vultures fly overhead. You will spend your day discovering the rural environs of the Atlas Mountains' Berbers. Covered with evergreen pines, tall cedar trees, and poplars, and laced with flowing streams, your first view of the Middle Atlases will appear oddly un-Moroccan. You will soon come across the first real town of the Middle Atlases, Azrou, and an important market center for the region's Berber tribes that are located at a major junction of mountain routes. At Midelt, the Middle Atlases give way to the High Atlas Mountains, whose peaks are visible through the haze, soaring to over 12,000 feet. You will stop in Midelt for lunch, enjoying the dramatic sight before you leave. You will then continue to Erfoud, one of the most delightful southern regions consisting of a dry, red belt of desert with a sudden drop into the lush valley of Ziz, with copious date palm groves and flowing streams. From there you will ride the 4x4 to get the lake of the Sahara. You will conclude your day with dinner over the dunes of Merzouga."
       },
       {
         "day": 6,
-        "title": "MERZOUGA â TINGHIR â TODRA GORGES â OUARZAZATE",
+        "title": "MERZOUGA – TINGHIR – TODRA GORGES – OUARZAZATE",
         "desc": "Early Morning devoted to the camel ride to reach the sun rise, and then you will back to the Kasbah for Breakfast. Departing desert we set into village of Tinghir and to the nearby Todra Gorge. This gorge in the High Atlas present asthonishing spectacle, its gigantic rock walls change colors to magical effect as the day unfolds.The 300 meters tall cliff walls are mere 15 meters apart from each other. We have some time to stretch our legs and then go back to Tinghir for lunch. After lunch we will pay a visit to a Berber house for a cup of tea and to explore Berbere carpets and heritage jewels. After that we will travel along small villages painted in pink-grey colors merging into the local rock, ruins of kasbahs and ksours and parts of fertile shafts of land creating breathtaking contrast to the arid land. Later we continue the journey to Ouarzazate. You will conclude your day with dinner and other accommodations will be served at your hotel."
       },
       {
         "day": 7,
-        "title": "OUARZAZATE â AIT BENHADDOU â MARRAKECH",
+        "title": "OUARZAZATE – AIT BENHADDOU – MARRAKECH",
         "desc": "You will spend most of your day en route to Marrakech, exploring the legendary Kasbah of AÃ¯t-Benhaddou, a renowned architectural marvel, and stopping in Taddart and Tizi Tishka pass, at an altitude of 11,000 feet. The pass divides the mountains into two distinct facets: the harsh, stark side acting as a shield that protects the hinterland from the harsh, dry expansion of the Sahara, and a lush side, soft and evergreen, which collects the moisture from the Gherbi winds of the Atlantic Ocean. You will arrive in Marrakech, a city of pleasure for both visitors and locals, where southern tribesmen and Berber villagers bring their goods to market and find a variety of entertainment. To tourists, the city is a feast for the imagination, full of incomparable beauty, situated before the towering mountains that provide a thrilling backdrop. After a visit to the bustling Jemaa El Fna square, the Koutoubia Mosque, Saadian Tombs, and Bahia Palace. You will conclude your day with dinner and other accommodations at your hotel."
       },
       {
@@ -404,7 +404,7 @@ export const masterTours: TourItem[] = [
       },
       {
         "day": 9,
-        "title": "MARRAKECH â EL JADIDA",
+        "title": "MARRAKECH – EL JADIDA",
         "desc": "after your breakfast, you will travel to the city of El jadida, You will begin your city tour by exploring El Mallah (The Jewish carter) and the citadel, evidence of the 11th century Portuguese occupation, then you will take the road, to one of the best beaches of the Atlantic ocean Sidi Bouzid, where you will have lunch at the famous restaurant Le Requin bleu. After your lunch you will have the remain of the day at leisure to enjoy the blue Atlantic Ocean. You will conclude your day with dinner at your hotel."
       },
       {
@@ -546,7 +546,7 @@ export const masterTours: TourItem[] = [
       {
         "day": 1,
         "title": "MARRAKECH",
-        "desc": "Upon arrival at Menara Airport in Marrakech you will find your guide waiting for you to greet you then transfer you to your hotel for check-in. Known as the âPearl of the South,â this unique city was founded in the 11th century by the Almoravides Dynasty and is situated where the desert meets the mountains. Todayâs sightseeing includes the Saadian tombs, the Dar Si Said Museum, the Menara Gardens, and the focal point of the city: the 12 century Koutoubia Minaret. After lunch you will have an opportunity to visit the amazing souks, a maze of alleyways and multicolored shops, and lastly the Djemaa El Fna Square, where snake charmers, acrobats, and fortune tellers put on a never-ending show. Dinner and accommodations in the Hotel."
+        "desc": "Upon arrival at Menara Airport in Marrakech you will find your guide waiting for you to greet you then transfer you to your hotel for check-in. Known as the "Pearl of the South," this unique city was founded in the 11th century by the Almoravides Dynasty and is situated where the desert meets the mountains. Today's sightseeing includes the Saadian tombs, the Dar Si Said Museum, the Menara Gardens, and the focal point of the city: the 12 century Koutoubia Minaret. After lunch you will have an opportunity to visit the amazing souks, a maze of alleyways and multicolored shops, and lastly the Djemaa El Fna Square, where snake charmers, acrobats, and fortune tellers put on a never-ending show. Dinner and accommodations in the Hotel."
       },
       {
         "day": 2,
@@ -630,7 +630,7 @@ export const masterTours: TourItem[] = [
       },
       {
         "day": 2,
-        "title": "CASABLANCA â RABAT - FES",
+        "title": "CASABLANCA – RABAT - FES",
         "desc": "After eating breakfast at your hotel, you will depart for Rabat, the capital city of Morocco. There, you will visit the Hassan Tower, the Chella Necropolis, and the Kasbah des Oudaias, which overlooks the Atlantic Ocean. Additionally, you will see the Mausoleum of Mohamed V, grandfather of the ruling king, Mohamed VI. Revered by Muslims and Jews alike, Mohamed V was able to save Moroccan Jews from the fate of their European brethren during the Vichy regime's occupation in World War Two. Additionally, he achieved Morocco's independence from France in 1961. After visiting these spectacular monuments, you will go to a newly opened, private museum just outside Rabat. Founded by the 1991 Prix d'Or recipient, a craftsman and collector responsible for the restoration of the 27 domes of the mosque at Medina, it holds one of the finest collections of Moroccan crafts and relics in the world. Your journey will continue until you reach Moulay Idriss. For those who are unable to make the pilgrimage to Mecca for the Hajj duty, it is of equal merit to make five trips to Moulay Idriss, the holiest Muslim site in all of Morocco. Afterward, you will visit the extensive ruins at Volubilis, once the Roman capital of Northwestern Africa. You will complete the last leg of the day's journey, and will arrive at Fez in the evening. There, you will check into your hotel in the Ville Nouvelle, where you will conclude your day with dinner and other accommodations."
       },
       {
@@ -640,12 +640,12 @@ export const masterTours: TourItem[] = [
       },
       {
         "day": 4,
-        "title": "FES â MEKNES â FES",
+        "title": "FES – MEKNES – FES",
         "desc": "You will spend your morning on an excursion to Meknes, visiting its famous city gates and the tomb of Moulay Ismail, both magnificent examples of Islamic architecture. You will then explore the Imperial quarters of Moulay Ismail, including the renowned Imperial Stables. You will spend your afternoon hiking at Ifrane and Immouzer heights, after which you will return to Fez for dinner and other accommodations."
       },
       {
         "day": 5,
-        "title": "FES â KHENIFRA â MARRAKECH",
+        "title": "FES – KHENIFRA – MARRAKECH",
         "desc": "Your morning will be spent traveling to Marrakech via the Middle Atlas Mountains and Ifrane. You will stop briefly to visit the Cascade of Ouzoud, and will spend your afternoon hiking. That evening, you will arrive in Marrakech, where you will immediately check into your hotel. Afterward, you will spend the remainder of your time before dinner at the bustling Jemaa el Fnaa Square, alive with storytellers, snake charmers, magicians, and street performers. You will conclude your day with dinner and other accommodations at your hotel."
       },
       {
@@ -660,7 +660,7 @@ export const masterTours: TourItem[] = [
       },
       {
         "day": 8,
-        "title": "MARRAKECH â ESSAOUIRA",
+        "title": "MARRAKECH – ESSAOUIRA",
         "desc": "Breakfast will be available in your hotel, and you will have the remainder of the morning at your leisure. In the early afternoon, you will travel to the seaside city of Essaouira, where you will check into your hotel. Afterward, you will have the opportunity to explore this former Portuguese colony. The town was once over thirty percent Jewish and contained over thirty synagogues, some dating back to the eighteenth century. You will visit some of these synagogues, as well as the tomb of Rabbi Chaim Pinto, who is the object of an annual pilgrimage in the week preceding Rosh Hashanah, situated in the vast Jewish cemetery adjacent to the Atlantic Ocean. You will spend the rest of your day discovering the delights of Essaouira, including the ramparts, and the street of Thuya craftsmen. You will conclude your day with dinner and other accommodations at your hotel."
       },
       {
@@ -741,27 +741,27 @@ export const masterTours: TourItem[] = [
       },
       {
         "day": 2,
-        "title": "CHEFCHAOUEN â VOLUBILIS â MEKNES â FES",
-        "desc": "The morning is divoted to explore the blue perle of Morocco with your guide, On your way to Fez, you will stop at Motel Rif for a seafood lunch then you will make an excursion to Volubilis, the remains of a Roman city, and Moulay Idriss, the burial place of the founder of Moroccoâs first imperial dynasty. For Moroccans it is a place of pilgrimage. You continue to Meknes, the smallest and friendliest of the five imperial cities of Morocco. The old part of Meknes is beautiful and has a feel of the oriental and the Mediterranean at the same time. The immense city walls and gates lead the visitorsâ imagination into times long gone. The labyrinth of alleyways and market stands is a joy to any visitor and the friendly inhabitants will gladly show you the products they are selling, like spices, olives, pottery, then toward to Fes. Overnight at Hotel Barcelo Fes."
+        "title": "CHEFCHAOUEN – VOLUBILIS – MEKNES – FES",
+        "desc": "The morning is divoted to explore the blue perle of Morocco with your guide, On your way to Fez, you will stop at Motel Rif for a seafood lunch then you will make an excursion to Volubilis, the remains of a Roman city, and Moulay Idriss, the burial place of the founder of Morocco's first imperial dynasty. For Moroccans it is a place of pilgrimage. You continue to Meknes, the smallest and friendliest of the five imperial cities of Morocco. The old part of Meknes is beautiful and has a feel of the oriental and the Mediterranean at the same time. The immense city walls and gates lead the visitors' imagination into times long gone. The labyrinth of alleyways and market stands is a joy to any visitor and the friendly inhabitants will gladly show you the products they are selling, like spices, olives, pottery, then toward to Fes. Overnight at Hotel Barcelo Fes."
       },
       {
         "day": 3,
         "title": "FES CITY TOUR",
-        "desc": "After breakfast you will begin your guided tour of the medina, one of the worldâs largest walled in cities, this tour will start from the panoramic view of the old Medina, nearby the Saadian Fortress, from there you will go inside of the old medina via the famous gate of Boujloud (blue gate). You will explore the narrow streets lined with fresh fruit, mounds of spices, intricately woven Berber carpets and many other art objects of Morocco. A visit to the Kings Palace, the tanneries, and potters are just a few places you will experience. For lunch you will eat in traditional restaurant in the heart of the medina. After lunch you will complete the tour by visiting Kairaouine Mosque, Merdersa Bou Imaniaand Mosque Abou El Hassan then return to your hotel for the evening. Overnight at Hotel Barcelo Fes."
+        "desc": "After breakfast you will begin your guided tour of the medina, one of the world's largest walled in cities, this tour will start from the panoramic view of the old Medina, nearby the Saadian Fortress, from there you will go inside of the old medina via the famous gate of Boujloud (blue gate). You will explore the narrow streets lined with fresh fruit, mounds of spices, intricately woven Berber carpets and many other art objects of Morocco. A visit to the Kings Palace, the tanneries, and potters are just a few places you will experience. For lunch you will eat in traditional restaurant in the heart of the medina. After lunch you will complete the tour by visiting Kairaouine Mosque, Merdersa Bou Imaniaand Mosque Abou El Hassan then return to your hotel for the evening. Overnight at Hotel Barcelo Fes."
       },
       {
         "day": 4,
-        "title": "FES â IFRANE â MIDELT â ERFOUD â MERZOUGA",
-        "desc": "Travel to Ifrane, a pleasant mountain city oddly out of place with its wooden chalets and steep-pitched roofs that stud this skiing village, evoking a Swiss resort. An area long popular with Moroccans on holiday, five tranquil lakes rest near dense holm oak and cedar forests, where raptors, acrobatic booted eagles, and Egyptian vultures fly overhead. You will spend your day discovering the rural environs of the Atlas Mountainsâ Berbers. Covered with evergreen pines, tall cedar trees, and poplars, and laced with flowing streams, your first view of the Middle Atlases will appear oddly un-Moroccan. You will soon come across the first real town of the Middle Atlases, Azrou, and an important market center for the regionâs Berber tribes that are located at a major junction of mountain routes. At Midelt, the Middle Atlases give way to the High Atlas Mountains, whose peaks are visible through the haze, soaring to over 12,000 feet. You will stop in Midelt for lunch, enjoying the dramatic sight before you leave. You will then continue to Erfoud, one of the most delightful southern regions consisting of a dry, red belt of desert with a sudden drop into the lush valley of Ziz, with copious date palm groves and flowing streams. From there you will ride the 4x4 to get the lake of the Sahara. You will conclude your day with dinner over the dunes of Merzouga. Overnight at Royal Luxury Camp."
+        "title": "FES – IFRANE – MIDELT – ERFOUD – MERZOUGA",
+        "desc": "Travel to Ifrane, a pleasant mountain city oddly out of place with its wooden chalets and steep-pitched roofs that stud this skiing village, evoking a Swiss resort. An area long popular with Moroccans on holiday, five tranquil lakes rest near dense holm oak and cedar forests, where raptors, acrobatic booted eagles, and Egyptian vultures fly overhead. You will spend your day discovering the rural environs of the Atlas Mountains' Berbers. Covered with evergreen pines, tall cedar trees, and poplars, and laced with flowing streams, your first view of the Middle Atlases will appear oddly un-Moroccan. You will soon come across the first real town of the Middle Atlases, Azrou, and an important market center for the region's Berber tribes that are located at a major junction of mountain routes. At Midelt, the Middle Atlases give way to the High Atlas Mountains, whose peaks are visible through the haze, soaring to over 12,000 feet. You will stop in Midelt for lunch, enjoying the dramatic sight before you leave. You will then continue to Erfoud, one of the most delightful southern regions consisting of a dry, red belt of desert with a sudden drop into the lush valley of Ziz, with copious date palm groves and flowing streams. From there you will ride the 4x4 to get the lake of the Sahara. You will conclude your day with dinner over the dunes of Merzouga. Overnight at Royal Luxury Camp."
       },
       {
         "day": 5,
-        "title": "MERZOUGA â TINGHIR â TODRA GORGES â OUARZAZATE",
+        "title": "MERZOUGA – TINGHIR – TODRA GORGES – OUARZAZATE",
         "desc": "Early Morning devoted to the camel ride to reach the sun rise, and then you will back to the Kasbah for Breakfast. Departing desert we set into village of Tinghir and to the nearby Todra Gorge. This gorge in the High Atlas present asthonishing spectacle, its gigantic rock walls change colors to magical effect as the day unfolds.The 300 meters tall cliff walls are mere 15 meters apart from each other. We have some time to stretch our legs and then go back to Tinghir for lunch. After lunch we will pay a visit to a Berber house for a cup of tea and to explore Berbere carpets and heritage jewels. After that we will travel along small villages painted in pink-grey colors merging into the local rock, ruins of kasbahs and ksours and parts of fertile shafts of land creating breathtaking contrast to the arid land. Later we continue the journey to Ouarzazate. You will conclude your day with dinner and other accommodations will be served at your hotel. Overnight at Oscar Hotel."
       },
       {
         "day": 6,
-        "title": "OUARZAZATE â AIT BENHADDOU â MARRAKECH",
+        "title": "OUARZAZATE – AIT BENHADDOU – MARRAKECH",
         "desc": "You will spend most of your day en route to Marrakech, exploring the legendary Kasbah of AÃ¯t-Benhaddou, a renowned architectural marvel, and stopping in Taddart and Tizi Tishka pass, at an altitude of 11,000 feet. The pass divides the mountains into two distinct facets: the harsh, stark side acting as a shield that protects the hinterland from the harsh, dry expansion of the Sahara, and a lush side, soft and evergreen, which collects the moisture from the Gherbi winds of the Atlantic Ocean. You will arrive in Marrakech, a city of pleasure for both visitors and locals, where southern tribesmen and Berber villagers bring their goods to market and find a variety of entertainment. To tourists, the city is a feast for the imagination, full of incomparable beauty, situated before the towering mountains that provide a thrilling backdrop. After a visit to the bustling Jemaa El Fna square, the Koutoubia Mosque, Saadian Tombs, and Bahia Palace. You will conclude your day with dinner and other accommodations at your hotel. Overnight at Hotel Palm Plaza Hotel."
       },
       {
@@ -771,7 +771,7 @@ export const masterTours: TourItem[] = [
       },
       {
         "day": 8,
-        "title": "ESSAOUIRA â EL JADIDA - CASABLANCA",
+        "title": "ESSAOUIRA – EL JADIDA - CASABLANCA",
         "desc": "after your breakfast, you will travel to the city of El jadida, You will begin your city tour by exploring El Mallah (The Jewish carter) and the citadel, evidence of the 11th century Portuguese occupation, then you will take the road, to one of the best beaches of the Atlantic ocean Sidi Bouzid, where you will have lunch at the famous restaurant Le Requin bleu. After your lunch you will have the remain of the day at leisure to enjoy the blue Atlantic Ocean in Casablanca. You will conclude your day with dinner at your hotel Grand Mogador Casablanca."
       },
       {
@@ -934,7 +934,7 @@ export const clientTestimonials: Testimonial[] = [
     "location": "San Francisco, United States",
     "role": "Travel Industry Veteran & Tour Operator",
     "image": "/images/bestofmorocco/img_testimonial_1.jpg",
-    "quote": "As someone who has been in the business all of working life. I have had the pleasure of dealing with travel agents and operators throughout the world. When it comes to sending clients to Morocco I can tell you Ayoub and Best of Morocco Tours are your trusted source for all Morocco travel needs. Ayoub covers every detail and my clients also praised Ayoub's wonderful service. Ayoub, thank you again for your fine work."
+    "quote": "As someone who has been in the business all of my working life, I have had the pleasure of dealing with travel agents and operators throughout the world. When it comes to sending clients to Morocco, I can tell you Ayoub and Best of Morocco Tours are your trusted source for all Morocco travel needs. Ayoub covers every detail and my clients praised his wonderful service. Ayoub, thank you again for your fine work."
   },
   {
     "name": "Fath Katif",
@@ -942,7 +942,7 @@ export const clientTestimonials: Testimonial[] = [
     "location": "Almere, Nederland",
     "role": "Private Family Traveler",
     "image": "/images/bestofmorocco/img_testimonial_2.jpg",
-    "quote": "Thank you so much for all your help planning our family trip to Morocco! I wanted to email and thank you personally for an amazing trip. Everything was planned wonderfully. The tour guide and driver were incredible but I wanted to note that in particular our Tour Manager Ayoub was amazing. The company is truly so lucky to have him on board. Also Mohamed was not just a tour guide, but a friend to all of us and that is so rare to find. If it wasn't for him, our trip to Morocco would not have been nearly as much fun or comfortable. He really became a great friend and was more than hospitable. I do hope that the company realizes how valuable of an asset he is. This was truly an amazing experience for me, and I would highly recommend Best of Morocco Tours to anyone. Again, please report my great pleasure working with all of you."
+    "quote": "Thank you so much for all your help planning our family trip to Morocco! Everything was planned wonderfully. The tour guide and driver were incredible, but I wanted to note in particular that Tour Manager Ayoub was amazing. Mohamed was not just a tour guide, but a friend to all of us and that is so rare to find. This was truly an amazing experience and I would highly recommend Best of Morocco Tours to anyone."
   },
   {
     "name": "Irina Stepanova",
@@ -950,7 +950,39 @@ export const clientTestimonials: Testimonial[] = [
     "location": "St. Petersburg, Russia",
     "role": "Private Leisure Traveler",
     "image": "/images/bestofmorocco/img_testimonial_3.jpg",
-    "quote": "Dear Ayoub, Yesterday we came to St. Petersburg. There was snow storm and they delayed our flight to St. Petersburg. So we were at home a little bit late. But our hearts are still in Morocco. Thank you for your warm welcoming. The tour was organized very good. I am very satisfied with the trip. It is so good that I had opportunity to see the service your company provides. My warmest regards to everyone. Yours sincerely, Irina."
+    "quote": "Dear Ayoub, Yesterday we came home, but our hearts are still in Morocco. Thank you for your warm welcoming. The tour was organized very well. I am so satisfied with the trip. It is so good that I had the opportunity to experience the high caliber of service your company provides. My warmest regards to everyone."
+  },
+  {
+    "name": "Dr. Jean-Marc Tremblay",
+    "date": "14 April 2023",
+    "location": "Montréal, Québec, Canada",
+    "role": "Imperial Cities & Sahara Traveler",
+    "image": "/images/bestofmorocco/img_testimonial_1.jpg",
+    "quote": "Partir avec une agence qui détient à la fois les permis du Québec et du Ministère marocain apporte une tranquillité d'esprit inestimable. De la nuit magique à Merzouga dans les tentes de luxe aux ruines de Volubilis avec notre guide érudit, tout a dépassé nos espérances. Service d'une élégance rare."
+  },
+  {
+    "name": "Eleanor & Marcus Davies",
+    "date": "08 November 2023",
+    "location": "London, United Kingdom",
+    "role": "Bespoke Cultural Journey",
+    "image": "/images/bestofmorocco/img_testimonial_2.jpg",
+    "quote": "From our private Mercedes van with cool bottled water each morning to the secret rooftop tea tastings in Fes and Marrakech, Ayoub's team orchestrated the trip of a lifetime. The native guides brought centuries of Moorish history vividly to life without rushing us once."
+  },
+  {
+    "name": "Claire & Sophie Laurent",
+    "date": "22 January 2024",
+    "location": "Paris, France",
+    "role": "Jewish Heritage of Morocco Tour",
+    "image": "/images/bestofmorocco/img_testimonial_3.jpg",
+    "quote": "Un voyage mémoriel et émotionnel d'une précision remarquable. Les visites des Mellahs d'Essaouira et de Fès, les synagogues historiques préservées et la rencontre avec les artisans locaux étaient empreintes d'un respect et d'une chaleur humaine exceptionnels. Chapeau bas à toute l'équipe."
+  },
+  {
+    "name": "David Kensington",
+    "date": "04 March 2024",
+    "location": "Melbourne, Australia",
+    "role": "Great South & Kasbahs Circuit",
+    "image": "/images/bestofmorocco/img_testimonial_1.jpg",
+    "quote": "Crossing the High Atlas through the Tizi n'Tichka pass down to Ait Ben Haddou was breathtaking. Best of Morocco Tours provided spotless private transport and true VIP access at every monument. You won't find better hospitality anywhere in North Africa."
   }
 ];
 
