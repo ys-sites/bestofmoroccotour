@@ -1,10 +1,16 @@
 'use client';
 
 import React from "react";
+import { usePathname } from "next/navigation";
 import { Phone, MessageCircle } from "lucide-react";
 import { siteConfig } from "@/data/bestOfMoroccoData";
 
 export default function CallFloatingButton() {
+  const pathname = usePathname();
+  if (pathname?.startsWith('/itineraries')) {
+    return null;
+  }
+
   return (
     <div className="fixed bottom-6 right-6 md:right-8 md:bottom-8 z-50 flex flex-col items-end gap-3 pointer-events-auto">
       {/* WhatsApp Button */}

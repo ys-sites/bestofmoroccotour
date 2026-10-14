@@ -1,319 +1,162 @@
 'use client';
 
 import React, { useState } from "react";
+import Image from "next/image";
 import Link from "next/link";
-import { Shield, CheckCircle, Hotel } from "lucide-react";
-import { motion } from "motion/react";
+import { 
+  Calendar, MapPin, Car, Hotel, ShieldCheck, Check, 
+  X, Phone, ArrowRight, Sparkles, Send, CheckCircle2,
+  Clock, Compass, Users
+} from "lucide-react";
+import { motion, AnimatePresence } from "motion/react";
 import Navbar from "../../components/navbar";
-import Footer from "../../components/footer";
-import MapSection from "../../components/map-section";
+import FooterEditorial from "../../components/footer-editorial";
 import Breadcrumbs, { type BreadcrumbItem } from "../../components/breadcrumbs";
 import { useLang, translate } from "../../context/lang-context";
-import { itinerariesData, itineraryThemes, ItineraryTheme } from "@/data/itineraries";
-import SmartVideo from "../../components/smart-video";
-import { videoSources, videoAsset } from "@/data/videoSources";
-import { getCityKey } from "../../utils/city-map";
-import MichlifenFeatureBlock from "@/components/ui/michlifen-feature-block";
-import { MoroccanMedallionArt } from "../../components/moroccan-art-motifs";
+import { masterTours, TourItem, siteConfig } from "@/data/bestOfMoroccoData";
+import { itinerariesData } from "@/data/itineraries";
+import { 
+  MoroccanMedallionArt, MoroccanLanternArt, 
+  MoroccanArchWatermark, MoroccanFriezeDivider 
+} from "../../components/moroccan-art-motifs";
+import { easeOutExpo, lanternSway } from "@/lib/animations";
 
-const getGalleryImages = (itineraryId: number | string) => {
-  const strId = String(itineraryId).toLowerCase();
-  if (strId === "imperial-cities") {
-    return [
-      "/images/bestofmorocco/img_tour_list_2.jpg",
-      "/images/bestofmorocco/img_tour_list_1.jpg",
-      "/images/bestofmorocco/img_tour_list_6.jpg",
-      "/images/bestofmorocco/img_tour_list_3.jpg"
-    ];
-  }
-  if (strId === "imperial-sahara") {
-    return [
-      "/images/bestofmorocco/img_tour_list_1.jpg",
-      "/images/bestofmorocco/img_tour_list_4.jpg",
-      "/images/bestofmorocco/img_tour_list_8.jpg"
-    ];
-  }
-  if (strId === "north-south") {
-    return [
-      "/images/bestofmorocco/img_tour_list_5.jpg",
-      "/images/bestofmorocco/img_tour_list_7.jpg",
-      "/images/bestofmorocco/img_tour_list_10.jpg"
-    ];
-  }
-  if (strId === "atlantic-ocean") {
-    return [
-      "/images/bestofmorocco/img_tour_list_7.jpg",
-      "/images/bestofmorocco/img_tour_list_9.jpg"
-    ];
-  }
-  if (strId === "south-kasbahs") {
-    return [
-      "/images/bestofmorocco/img_tour_list_8.jpg",
-      "/images/bestofmorocco/img_tour_list_4.jpg"
-    ];
-  }
-  if (strId === "jewish-heritage") {
-    return [
-      "/images/bestofmorocco/img_tour_list_10.jpg",
-      "/images/bestofmorocco/img_tour_list_2.jpg"
-    ];
-  }
-  if (strId === "premium-tour") {
-    return [
-      "/images/bestofmorocco/img_tour_list_2.jpg",
-      "/images/bestofmorocco/img_tour_list_1.jpg",
-      "/images/bestofmorocco/img_tour_list_5.jpg"
-    ];
+interface NormalizedItinerary {
+  id: string;
+  name: string;
+  duration: string;
+  badge: string;
+  image: string;
+  destinations: string[];
+  overview: string;
+  vehicles: string;
+  hotels: string;
+  price: string;
+  priceSub: string;
+  itinerary: Array<{
+    day: number;
+    title: string;
+    desc: string;
+  }>;
+  inclusions: string[];
+  exclusions: string[];
+  dates?: string[];
+  hotelList?: Array<{
+    name: string;
+    stars: number;
+    desc: string;
+  }>;
+}
+
+const getTourData = (id: string, lang: "FR" | "EN"): NormalizedItinerary | null => {
+  // 1. Try masterTours first (Exact matching for 7 Master Circuits)
+  const master = masterTours.find(
+    (t) => t.id === id || t.id.toLowerCase() === id.toLowerCase()
+  );
+
+  if (master) {
+    return {
+      id: master.id,
+      name: master.name,
+      duration: master.duration,
+      badge: master.badge || "Signature Tour",
+      image: master.image || "/images/bestofmorocco/img_tour_list_1.jpg",
+      destinations: master.destinations || [],
+      overview: master.overview || "",
+      vehicles: master.vehicles || "A/C Minivan / Coach, 4x4 in Merzouga dunes, Camel trek",
+      hotels: master.hotels || "4* & 5* Hotels, Authentic Blue City Riad, Desert Camp",
+      price: master.price || "On Request (Best Price Guarantee)",
+      priceSub: master.priceSub || "Best Price Guarantee (+5% match)",
+      itinerary: master.itinerary.map((day) => ({
+        day: day.day,
+        title: day.title,
+        desc: day.desc,
+      })),
+      inclusions: master.inclusions || [
+        "Private air-conditioned vehicle with dedicated driver",
+        "Official licensed local guides in all imperial cities",
+        "Accommodations on half-board (daily breakfast & dinner)",
+        "Desert 4x4 transfers and sunrise camel trek",
+        "Entrance fees to monuments & UNESCO sights",
+      ],
+      exclusions: master.exclusions || [
+        "International flights",
+        "Travel insurance",
+        "Lunches & drinks not specified",
+        "Personal expenses and tips",
+      ],
+      dates: [
+        "Every Saturday (Weekly Guaranteed Departures)",
+        "Private Custom Departure on Any Desired Date",
+        "Spring Season 2025 / 2026",
+        "Autumn & Winter 2025 / 2026",
+      ],
+      hotelList: [
+        {
+          name: "Handpicked 4★ & 5★ Boutique Riads & Heritage Palaces",
+          stars: 5,
+          desc: "Curated collection of premier boutique riads and luxury hotels (Hotel Chellah Rabat, Palais Ommeyad Fes, Riad Kniza Marrakech, Le Berbere Palace Ouarzazate).",
+        },
+        {
+          name: "Private Sahara Luxury Desert Camp (Merzouga / Erg Chebbi)",
+          stars: 5,
+          desc: "Royal Berber tents featuring plush king beds, en-suite bathrooms, fine candlelight dinner, and traditional gnawa fire-pit rhythms under desert stars.",
+        },
+      ],
+    };
   }
 
-  switch (Number(itineraryId)) {
-    case 10:
-      return [
-        "/images/rgdes_parcours_rouge_18.jpg",
-        "/images/rgdes_parcours_bleu_10.jpg",
-        "/images/rgdes_blue_course_5.jpg",
-        "/images/rgdes_rouge_5.jpg",
-        "/images/rgdes_bleu_7_tgp.jpg",
-        "/images/rgdes_jaune_9.jpg",
-        "/images/rgdes_bleu_9_matin.jpg",
-        "/images/rgdes_clubhouse.jpg",
-        "/images/rgdes_img_3723.jpg",
-        "/images/rgdes_img_3752.jpg",
-        "/images/rgdes_paradise_flowers.jpg",
-        "/images/rgdes_parcours_rouge_09_17.jpg",
-        "/images/rgdes_parcours_rouge_11.jpg",
-        "/images/rgdes_parcours_rouge_12.jpg",
-        "/images/rgdes_parcours_rouge_13.jpg",
-        "/images/rgdes_coucher_dete.jpg",
-        "/images/rgdes_soleil_couchant.jpg"
-      ];
-    case 18:
-      return [
-        "/michlifen.jpg",
-        "/images/royal_golf_aerial_1.jpg",
-        "/images/royal_golf_marrakech_1.jpg"
-      ];
-    case 17:
-      return [
-        "/Tangier.jpg",
-        "/images/royal_golf_marrakech_1.jpg",
-        "/images/royal_golf_marrakech_2.jpg"
-      ];
-    case 11:
-      return [
-        "/images/client_request/hilton_taghazout_agadir/hilton_taghazout_1.avif",
-        "/images/client_request/hilton_taghazout_agadir/hilton_taghazout_2.avif",
-        "/images/client_request/hilton_taghazout_agadir/hilton_taghazout_3.avif",
-        "/images/client_request/hilton_taghazout_agadir/hilton_taghazout_4.avif",
-        "/images/client_request/hilton_taghazout_agadir/hilton_taghazout_5.avif",
-        "/images/client_request/hilton_taghazout_agadir/hilton_taghazout_6.avif",
-        "/images/client_request/hilton_taghazout_agadir/hilton_taghazout_7.avif",
-        "/images/client_request/hilton_taghazout_agadir/hilton_taghazout_8.avif",
-        "/images/client_request/hilton_taghazout_agadir/hilton_taghazout_9.avif",
-        "/images/client_request/hilton_taghazout_agadir/hilton_taghazout_10.avif",
-        "/images/client_request/hilton_taghazout_agadir/hilton_taghazout_11.avif",
-        "/images/client_request/hilton_taghazout_agadir/hilton_taghazout_12.avif",
-        "/images/client_request/hilton_taghazout_agadir/hilton_taghazout_13.avif",
-        "/images/client_request/hilton_taghazout_agadir/hilton_taghazout_14.avif",
-        "/images/client_request/hilton_taghazout_agadir/hilton_taghazout_15.avif",
-        "/images/client_request/hilton_taghazout_agadir/hilton_taghazout_16.avif",
-        "/images/client_request/hilton_taghazout_agadir/hilton_taghazout_17.avif",
-        "/images/client_request/hilton_taghazout_agadir/hilton_taghazout_18.avif",
-        "/images/client_request/hilton_taghazout_agadir/hilton_taghazout_19.avif",
-        "/images/client_request/hilton_taghazout_agadir/hilton_taghazout_20.avif",
-        "/images/client_request/golf_agadir_photos/golf_tazegzout_2.webp",
-        "/images/client_request/golf_agadir_photos/golf_tazegzout_3.webp",
-        "/images/client_request/golf_agadir_photos/golf_le_soleil__(10).webp",
-        "/images/client_request/golf_agadir_photos/golf_les_dunes_(7).webp",
-        "/images/client_request/golf_agadir_photos/tgz_10_side.jpg",
-        "/images/client_request/golf_agadir_photos/tgz_17_zoom.jpg",
-        "/images/client_request/golf_agadir_photos/tgz_18_hotel.jpg",
-        "/images/client_request/golf_agadir_photos/tgz_8th_high.jpg",
-        "/images/tgz_course_1.jpg",
-        "/images/tgz_course_aerial.jpg",
-        "/images/tgz_course_hotel.jpg",
-        "/images/tgz_course_ocean.jpg"
-      ];
-    case 12:
-      return [
-        "/images/client_request/white_beach_hotel_agadir/pickalbatros-white-beach-resort-in-agadir.jpg",
-        "/images/client_request/white_beach_hotel_agadir/deluxe-room-sea-view.jpg",
-        "/images/client_request/white_beach_hotel_agadir/deluxe-room-swim-up-view.jpg",
-        "/images/client_request/white_beach_hotel_agadir/beach-area.jpg",
-        "/images/client_request/white_beach_hotel_agadir/pool_(1).jpg",
-        "/images/client_request/white_beach_hotel_agadir/pool_(2).jpg",
-        "/images/client_request/white_beach_hotel_agadir/lobby.jpg",
-        "/images/client_request/white_beach_hotel_agadir/main-restaurant.jpg",
-        "/images/client_request/white_beach_hotel_agadir/tagine-restaurant.jpg",
-        "/images/client_request/white_beach_hotel_agadir/spa_(1).jpg",
-        "/images/client_request/white_beach_hotel_agadir/spa_(2).jpg",
-        "/images/client_request/white_beach_hotel_agadir/gym.jpg",
-        "/images/client_request/white_beach_hotel_agadir/food-court.jpg",
-        "/images/client_request/golf_agadir_photos/golf_tazegzout_2.webp",
-        "/images/client_request/golf_agadir_photos/golf_le_soleil__(10).webp",
-        "/images/client_request/golf_agadir_photos/golf_les_dunes_(7).webp"
-      ];
-    case 13:
-      return [
-        "/images/client_request/golf_agadir_photos/golf_tazegzout_2.webp",
-        "/images/client_request/golf_agadir_photos/golf_tazegzout_3.webp",
-        "/images/client_request/golf_agadir_photos/golf_le_soleil__(10).webp",
-        "/images/client_request/golf_agadir_photos/golf_les_dunes_(7).webp",
-        "/images/client_request/golf_agadir_photos/tgz_10_side.jpg",
-        "/images/client_request/golf_agadir_photos/tgz_17_zoom.jpg",
-        "/images/client_request/golf_agadir_photos/tgz_18_hotel.jpg",
-        "/images/client_request/golf_agadir_photos/tgz_8th_high.jpg",
-        "/images/client_request/hilton_taghazout_agadir/hilton_taghazout_1.avif",
-        "/images/client_request/hilton_taghazout_agadir/hilton_taghazout_2.avif",
-        "/images/client_request/hilton_taghazout_agadir/hilton_taghazout_3.avif",
-        "/images/client_request/hilton_taghazout_agadir/hilton_taghazout_4.avif"
-      ];
-    case 14:
-      return [
-        "/images/client_request/hotel_du_golf_marrakech/hotel_du_golf_marrakech_(1).webp",
-        "/images/client_request/hotel_du_golf_marrakech/hotel_du_golf_marrakech_(2).webp",
-        "/images/client_request/hotel_du_golf_marrakech/hotel_du_golf_marrakech_(3).webp",
-        "/images/client_request/hotel_du_golf_marrakech/hotel_du_golf_marrakech_(4).webp",
-        "/images/client_request/hotel_du_golf_marrakech/hotel_du_golf_marrakech_(5).webp",
-        "/images/client_request/hotel_du_golf_marrakech/hotel_du_golf_marrakech_(6).webp",
-        "/images/client_request/hotel_du_golf_marrakech/hotel_du_golf_marrakech_(7).webp",
-        "/images/client_request/hotel_du_golf_marrakech/hotel_du_golf_marrakech_(8).webp",
-        "/images/client_request/hotel_du_golf_marrakech/hotel_du_golf_marrakech_(9).webp",
-        "/images/client_request/hotel_du_golf_marrakech/hotel_du_golf_marrakech_(11).webp",
-        "/images/client_request/hotel_du_golf_marrakech/hotel_du_golf_marrakech_(12).webp",
-        "/images/client_request/hotel_du_golf_marrakech/hotel_du_golf_marrakech_(13).webp",
-        "/images/client_request/hotel_du_golf_marrakech/hotel_du_golf_marrakech_(14).webp",
-        "/images/client_request/hotel_du_golf_marrakech/hotel_du_golf_marrakech_(15).webp",
-        "/images/client_request/hotel_du_golf_marrakech/hotel_du_golf_marrakech_(16).webp",
-        "/images/client_request/hotel_du_golf_marrakech/hotel_du_golf_marrakech_(17).webp",
-        "/images/client_request/golf_marrakech_photos/golf_al_maaden_(4).webp",
-        "/images/client_request/golf_marrakech_photos/golf_amelkis_(3).webp",
-        "/images/client_request/golf_marrakech_photos/golf_assoufid_(4).webp",
-        "/images/client_request/golf_marrakech_photos/golf_le_royal_(15).webp",
-        "/images/client_request/golf_marrakech_photos/golf_noria_(2).webp",
-        "/images/royal_golf_marrakech_1.jpg",
-        "/images/royal_golf_marrakech_2.jpg"
-      ];
-    case 15:
-    case 16:
-      return [
-        "/images/client_request/hotel_jaal_marrakech/hotel_le_jaal.webp",
-        "/images/client_request/hotel_jaal_marrakech/hotel_le_jaal_(2).webp",
-        "/images/client_request/hotel_jaal_marrakech/hotel_le_jaal_(3).webp",
-        "/images/client_request/hotel_jaal_marrakech/hotel_le_jaal_(4).webp",
-        "/images/client_request/hotel_jaal_marrakech/hotel_le_jaal_(5).webp",
-        "/images/client_request/hotel_jaal_marrakech/hotel_le_jaal_(6).webp",
-        "/images/client_request/hotel_jaal_marrakech/hotel_le_jaal_(7).webp",
-        "/images/client_request/hotel_jaal_marrakech/hotel_le_jaal_(8).webp",
-        "/images/client_request/hotel_jaal_marrakech/hotel_le_jaal_(9).webp",
-        "/images/client_request/hotel_jaal_marrakech/hotel_le_jaal_(10).webp",
-        "/images/client_request/hotel_jaal_marrakech/hotel_le_jaal_(11).webp",
-        "/images/client_request/hotel_jaal_marrakech/hotel_le_jaal_(12).webp",
-        "/images/client_request/hotel_jaal_marrakech/hotel_le_jaal_(13).webp",
-        "/images/client_request/hotel_jaal_marrakech/hotel_le_jaal_(14).webp",
-        "/images/client_request/hotel_jaal_marrakech/hotel_le_jaal_(15).webp",
-        "/images/client_request/hotel_jaal_marrakech/hotel_le_jaal_(16).webp",
-        "/images/client_request/hotel_jaal_marrakech/hotel_le_jaal_(17).webp",
-        "/images/client_request/hotel_jaal_marrakech/hotel_le_jaal_(18).webp",
-        "/images/client_request/hotel_jaal_marrakech/hotel_le_jaal_(19).webp",
-        "/images/client_request/golf_marrakech_photos/golf_al_maaden_(4).webp",
-        "/images/client_request/golf_marrakech_photos/golf_amelkis_(3).webp",
-        "/images/client_request/golf_marrakech_photos/golf_assoufid_(4).webp",
-        "/images/client_request/golf_marrakech_photos/golf_le_royal_(15).webp",
-        "/images/client_request/golf_marrakech_photos/golf_noria_(2).webp",
-        "/images/royal_golf_marrakech_1.jpg",
-        "/images/royal_golf_marrakech_2.jpg"
-      ];
-    case 6:
-      return [
-        "/images/imperial_cities_fes.jpg",
-        "/images/morocco-sahara-dunes.png",
-        "/images/german_circuit_morocco.jpg"
-      ];
-    case 7:
-      return [
-        "/images/chefchaouen.png",
-        "/images/imperial_cities_fes.jpg"
-      ];
-    case 8:
-      return [
-        "/images/trekking_toubkal.png",
-        "/images/german_circuit_morocco.jpg",
-        "/images/marrakech_sunset_hero.png"
-      ];
-    case 9:
-      return [
-        "/images/german_circuit_morocco.jpg",
-        "/images/imperial_cities_fes.jpg"
-      ];
-    case 99:
-      return [
-        "/images/corporate_meeting.png",
-        "/images/almaaden_restaurant1.jpg"
-      ];
-    default:
-      return [];
+  // 2. Fallback to itinerariesData (Legacy golf & special circuits)
+  const legacy = itinerariesData[id];
+  if (legacy) {
+    const rawTitle = typeof legacy.title === "object" ? (lang === "FR" ? legacy.title.FR : legacy.title.EN) : String(legacy.title);
+    const rawDur = typeof legacy.duration === "object" ? (lang === "FR" ? legacy.duration.FR : legacy.duration.EN) : String(legacy.duration);
+    const rawOverview = typeof legacy.overview === "object" ? (lang === "FR" ? legacy.overview.FR : legacy.overview.EN) : String(legacy.overview);
+    const rawCost = typeof legacy.cost === "object" ? (lang === "FR" ? legacy.cost.FR : legacy.cost.EN) : String(legacy.cost);
+
+    return {
+      id,
+      name: rawTitle,
+      duration: rawDur,
+      badge: "Signature Tour",
+      image: legacy.image || legacy.contentImage || "/images/bestofmorocco/img_tour_list_1.jpg",
+      destinations: [rawTitle.split("—")[0].trim()],
+      overview: rawOverview,
+      vehicles: "Private A/C Transport & Airport Transfers",
+      hotels: "Selected 4★ & 5★ Accommodations & Desert Camps",
+      price: rawCost || "On Request (Best Price Guarantee)",
+      priceSub: "Best Price Guarantee (+5% match)",
+      itinerary: (legacy.timeline || []).map((t) => ({
+        day: t.day,
+        title: typeof t.title === "object" ? (lang === "FR" ? t.title.FR : t.title.EN) : String(t.title),
+        desc: typeof t.desc === "object" ? (lang === "FR" ? t.desc.FR : t.desc.EN) : String(t.desc),
+      })),
+      inclusions: legacy.inclusions ? (lang === "FR" ? legacy.inclusions.FR : legacy.inclusions.EN) : [],
+      exclusions: legacy.exclusions ? (lang === "FR" ? legacy.exclusions.FR : legacy.exclusions.EN) : [],
+      hotelList: (legacy.hotels || []).map((h) => ({
+        name: h.name,
+        stars: h.stars || 5,
+        desc: typeof h.desc === "object" ? (lang === "FR" ? h.desc.FR : h.desc.EN) : String(h.desc),
+      })),
+    };
   }
+
+  return null;
 };
 
 export default function ItineraryClient({ id, crumbs }: { id: string; crumbs: BreadcrumbItem[] }) {
   const { lang } = useLang();
+  const tour = getTourData(id, lang);
 
-  // Safe lookup to prevent securecoder CWE-94 dynamic bracket notation warning
-  const cleanTitle = (title: string) => {
-  return title.replace(/\s*\(\d+N\)\s*$/i, "");
-};
-
-// TODO(JAY): set NEXT_PUBLIC_INSURANCE_URL in Vercel once client provides insurance partner link
-const INSURANCE_LINK_URL = process.env.NEXT_PUBLIC_INSURANCE_URL ?? "";
-
-  const itinerary = itinerariesData[id] || null;
-
+  // Form State
   const [bookingName, setBookingName] = useState("");
   const [bookingEmail, setBookingEmail] = useState("");
   const [bookingPhone, setBookingPhone] = useState("");
-  const [bookingMessage, setBookingMessage] = useState("");
-  const [activeImageIndex, setActiveImageIndex] = useState<number | null>(null);
-  const [isSubmitted, setIsSubmitted] = useState(false);
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [passengerCount, setPassengerCount] = useState(1);
-  const [passengerAges, setPassengerAges] = useState<number[]>([0]);
   const [selectedDate, setSelectedDate] = useState("");
-
-  const updatePassengerCount = (delta: number) => {
-    setPassengerCount(prev => {
-      const next = Math.min(12, Math.max(1, prev + delta));
-      setPassengerAges(ages => {
-        const copy = [...ages];
-        while (copy.length < next) copy.push(0);
-        return copy.slice(0, next);
-      });
-      return next;
-    });
-  };
-
-  const updatePassengerAge = (idx: number, val: number) => {
-    setPassengerAges(ages => ages.map((age, i) => i === idx ? val : age));
-  };
-
-
-
-  if (!itinerary) {
-    const tNotFound = {
-      FR: "Itinéraire non trouvé",
-      EN: "Itinerary Not Found"
-    };
-    const tReturnHome = {
-      FR: "Retour à l'accueil",
-      EN: "Return to Home"
-    };
-    return (
-      <div className="min-h-screen bg-transparent text-zinc-900 flex flex-col justify-center items-center">
-        <h2 className="font-serif text-2xl mb-4 text-zinc-800">{translate(tNotFound, lang)}</h2>
-        <Link href="/" className="text-brand-gold hover:underline">{translate(tReturnHome, lang)}</Link>
-      </div>
-    );
-  }
+  const [passengerCount, setPassengerCount] = useState(2);
+  const [bookingMessage, setBookingMessage] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isSubmitted, setIsSubmitted] = useState(false);
 
   const handleBookingSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -323,891 +166,563 @@ const INSURANCE_LINK_URL = process.env.NEXT_PUBLIC_INSURANCE_URL ?? "";
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        "Accept": "application/json"
+        "Accept": "application/json",
       },
       body: JSON.stringify({
         _template: "box",
-        "Type de Demande / Request Type": "Réservation d'itinéraire / Itinerary Booking",
-        "Itinéraire / Itinerary": translate(itinerary.title, lang),
-        "Nom du client / Client Name": bookingName,
-        "Téléphone / Client Phone": bookingPhone,
-        "Courriel / Client Email": bookingEmail,
-        "Date de départ / Travel Date": selectedDate,
-        "Participants / Guests Count": passengerCount,
-        "Âges des passagers / Guest Ages": passengerAges.join(", "),
-        "Message & Demandes / Special Requests": bookingMessage,
-        _subject: `Best of Morocco Tours - Itinerary Booking: ${translate(itinerary.title, lang)}`
+        "Tour Requested": tour?.name || id,
+        "Duration": tour?.duration || "",
+        "Client Name": bookingName,
+        "Email Address": bookingEmail,
+        "Phone Number": bookingPhone,
+        "Preferred Travel Date": selectedDate,
+        "Number of Guests": passengerCount,
+        "Special Requests / Customizations": bookingMessage,
+        _subject: `Best of Morocco Tours - Booking Inquiry: ${tour?.name || id}`,
+      }),
+    })
+      .then(() => {
+        setIsSubmitted(true);
       })
-    })
-    .then(() => {
-      setIsSubmitted(true);
-    })
-    .catch((err) => {
-      console.error(err);
-      setIsSubmitted(true); // fall-through success UI
-    })
-    .finally(() => {
-      setIsSubmitting(false);
-    });
+      .catch((err) => {
+        console.error(err);
+        setIsSubmitted(true); // fall-through success UI
+      })
+      .finally(() => {
+        setIsSubmitting(false);
+      });
   };
 
-  // Safe lookup to prevent securecoder CWE-94 dynamic bracket notation warning
-  const theme: ItineraryTheme | null = (() => {
-    switch (id) {
-      case "1": return itineraryThemes["1"];
-      case "2": return itineraryThemes["2"];
-      case "3": return itineraryThemes["3"];
-      case "4": return itineraryThemes["4"];
-      case "5": return itineraryThemes["5"];
-      case "6": return itineraryThemes["6"];
-      case "7": return itineraryThemes["7"];
-      case "8": return null;
-      case "9": return null;
-      case "10": return null;
-      case "11": return null;
-      case "12": return null;
-      case "13": return null;
-      case "14": return null;
-      case "15": return null;
-      case "16": return null;
-      default: return null;
+  const scrollToBooking = () => {
+    const el = document.getElementById("booking-form");
+    if (el) {
+      el.scrollIntoView({ behavior: "smooth" });
+      const nameInput = document.getElementById("client-name");
+      if (nameInput) nameInput.focus();
     }
-  })();
+  };
 
-  const videoUrl = (() => {
-    switch (id) {
-      case "north-south":
-      case "7":
-        return "Morocco_Chefchaouen_Hero_16x9_Final.mov_eushqt";
-      case "imperial-cities":
-      case "6":
-      case "9":
-      case "fez":
-      case "fes":
-        return "Morocco_Fez_Hero_16x9_UpdatedLogo_z5b24u";
-      case "atlantic-ocean":
-      case "essaouira":
-        return "Morocco_Essaouira_Hero_16x9_UpdatedLogo_k4v9gz";
-      case "south-kasbahs":
-      case "ouarzazate":
-        return "Morocco_Ouarzazate_Hero_16x9_UpdatedLogo_jhmnuj";
-      case "imperial-sahara":
-      case "marrakech":
-        return "Morocco_Marrakech_Hero_16x9_UpdatedLogo_wv2yxv";
-      case "jewish-heritage":
-        return "Morocco_Fez_Hero_16x9_UpdatedLogo_z5b24u";
-      case "premium-tour":
-        return "Morocco_Marrakech_Hero_16x9_UpdatedLogo_wv2yxv";
-      case "dakhla":
-        return "Morocco_Dakhla_Hero_16x9_UpdatedLogo_cijwv8";
-      case "casablanca":
-        return "Morocco_Casablanca_Hero_16x9_UpdatedLogo_htz5pb";
-      case "11":
-      case "12":
-      case "13":
-        return "Morocco_Agadir_Hero_16x9_UpdatedLogo_btpcad";
-      case "14":
-      case "15":
-      case "16":
-        return "Morocco_Marrakech_Hero_16x9_UpdatedLogo_wv2yxv";
-      default:
-        return null;
-    }
-  })();
+  if (!tour) {
+    return (
+      <div className="min-h-screen bg-transparent text-[#1E1B18] flex flex-col justify-center items-center px-4">
+        <Navbar />
+        <div className="text-center py-24 space-y-4">
+          <h2 className="font-serif text-3xl font-bold text-stone-900">
+            {lang === "FR" ? "Itinéraire non trouvé" : "Itinerary Not Found"}
+          </h2>
+          <p className="text-stone-600 text-sm max-w-md mx-auto">
+            {lang === "FR" 
+              ? "Le circuit demandé est introuvable. Veuillez consulter notre catalogue complet de circuits au Maroc."
+              : "The requested circuit could not be found. Please explore our complete catalog of Morocco private tours."}
+          </p>
+          <Link
+            href="/#tours"
+            className="inline-flex items-center gap-2 rounded-full bg-[#4A3525] text-white px-7 py-3 text-xs font-bold uppercase tracking-wider hover:bg-[#322318] transition-colors"
+          >
+            <span>{lang === "FR" ? "Voir tous les circuits" : "View All Circuits"}</span>
+            <ArrowRight className="w-4 h-4" />
+          </Link>
+        </div>
+        <FooterEditorial />
+      </div>
+    );
+  }
 
   return (
-    <div className="min-h-screen bg-transparent text-zinc-900 font-body antialiased">
-      <Navbar />
+    <div className="min-h-screen bg-transparent text-[#1E1B18] font-sans antialiased selection:bg-amber-200 selection:text-stone-900 relative pb-28">
+      {/* Background Moroccan Arch Watermarks */}
+      <MoroccanArchWatermark 
+        className="fixed top-1/4 -left-32 xl:-left-40 w-[380px] xl:w-[460px] h-auto text-[#C05621] pointer-events-none -z-10 hidden xl:block" 
+        opacity={0.16} 
+      />
+      <MoroccanArchWatermark 
+        className="fixed top-2/3 -right-32 xl:-right-40 w-[380px] xl:w-[460px] h-auto text-[#D97706] pointer-events-none -z-10 hidden xl:block" 
+        opacity={0.15} 
+      />
 
-      {/* Hero Header Section */}
-      {theme ? (
-        <section className="relative w-full aspect-[16/10] md:aspect-[21/9] min-h-[500px] md:min-h-[600px] lg:min-h-[650px] overflow-hidden bg-zinc-950 flex flex-col justify-end">
-          <img
-            src={theme.heroBg}
-            alt={translate(theme.heroTitle, lang)}
-            className="absolute inset-0 w-full h-full object-cover object-center"
+      {/* Hanging Brass Lantern in Left Gutter */}
+      <div className="absolute top-36 left-4 z-30 pointer-events-none hidden 2xl:block">
+        <motion.div {...lanternSway} style={{ transformOrigin: "top center" }}>
+          <MoroccanLanternArt height={130} opacity={0.38} />
+        </motion.div>
+      </div>
+
+      {/* Sticky Top Header */}
+      <div className="sticky top-4 z-50 w-full max-w-[1360px] mx-auto px-3 sm:px-6 pt-2">
+        <Navbar />
+      </div>
+
+      {/* Main Subpage Container */}
+      <main className="relative max-w-6xl mx-auto px-4 sm:px-6 pt-6 sm:pt-8 space-y-8">
+        
+        {/* Breadcrumb Navigation Trail */}
+        <div className="px-1">
+          <Breadcrumbs items={crumbs} />
+        </div>
+
+        {/* =========================================================================
+            1. HERO HEADER CARD (Pixel-faithful to the pop-up modal, in high definition)
+           ========================================================================= */}
+        <motion.section 
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.75, ease: easeOutExpo }}
+          className="relative w-full h-[420px] sm:h-[480px] lg:h-[520px] rounded-[2.2rem] overflow-hidden shadow-[0_20px_50px_rgba(74,53,37,0.14)] border border-stone-200/80 bg-stone-900 flex flex-col justify-end p-6 sm:p-10 lg:p-12 text-white"
+        >
+          {/* Full Cover Backdrop Image */}
+          <Image
+            src={tour.image}
+            alt={tour.name}
+            fill
+            priority
+            className="object-cover object-center brightness-75 scale-100 hover:scale-105 transition-transform duration-10000 ease-out"
           />
-          <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-transparent to-black/60" />
+          {/* Cinematic Gradient Fade */}
+          <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/40 to-black/25 pointer-events-none" />
 
-          <div className="absolute inset-0 flex flex-col justify-end px-6 md:px-12 pb-24 max-w-7xl mx-auto z-10">
-            <Breadcrumbs items={crumbs} className="mb-6" />
-            <div className="max-w-2xl space-y-6">
-              <div className="flex flex-wrap items-center gap-3">
-                <span className="bg-brand-gold/15 text-brand-gold border border-brand-gold/30 px-4 py-1.5 font-mono text-[10px] tracking-[0.25em] uppercase rounded-full inline-block">
-                  {translate(itinerary.duration, lang)}
-                </span>
-                <div className="flex gap-0.5 select-none bg-black/45 backdrop-blur-md px-3 py-1.5 rounded-full border border-white/10 shadow-md">
-                  {[...Array(5)].map((_, i) => (
-                    <span key={i} className="text-[#C5A880] text-[12px] leading-none">★</span>
-                  ))}
-                </div>
-              </div>
-              <h1 className="font-serif text-3xl sm:text-4xl md:text-5xl lg:text-6xl tracking-wide uppercase leading-[1.1] font-bold text-white drop-shadow-lg max-w-4xl text-balance">
-                {translate(theme.heroTitle, lang)}
-              </h1>
-              <p className="text-[14px] sm:text-[16px] leading-relaxed text-zinc-300 font-light max-w-lg">
-                {translate(theme.heroSub, lang)}
+          {/* Content Lockup directly on Hero Image */}
+          <div className="relative z-10 space-y-4 max-w-4xl">
+            {/* Badges Row (Exact match to pop-up screenshot) */}
+            <div className="flex flex-wrap items-center gap-2.5">
+              <span className="px-3.5 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider bg-amber-400 text-stone-950 shadow-xs">
+                {tour.badge}
+              </span>
+              <span className="px-3.5 py-1.5 rounded-full text-xs font-semibold bg-black/55 text-white border border-white/25 backdrop-blur-md">
+                {tour.duration}
+              </span>
+              <span className="px-3.5 py-1.5 rounded-full text-xs font-medium bg-amber-500/20 text-amber-300 border border-amber-500/35 backdrop-blur-md flex items-center gap-1.5">
+                <ShieldCheck className="w-3.5 h-3.5" />
+                <span>Best Price Guarantee (+5% Match)</span>
+              </span>
+            </div>
+
+            {/* Title (Luxurious bold serif) */}
+            <h1 className="font-serif text-3xl sm:text-5xl lg:text-6xl font-bold text-white tracking-tight leading-[1.08] drop-shadow-md">
+              {tour.name}
+            </h1>
+
+            {/* Route MapPin Line */}
+            {tour.destinations && tour.destinations.length > 0 && (
+              <p className="text-xs sm:text-sm text-stone-200 flex items-center gap-2 flex-wrap font-light leading-relaxed drop-shadow">
+                <MapPin className="w-4 h-4 text-amber-400 shrink-0" />
+                <span>{tour.destinations.join(" · ")}</span>
               </p>
-              <a
-                href="#itinerary-details"
-                className="inline-flex items-center gap-2.5 rounded-full px-8 py-3.5 font-semibold text-[11px] tracking-[0.2em] uppercase transition-all duration-300 shadow-md cursor-pointer hover:scale-105"
-                style={{
-                  backgroundColor: theme.themeColor,
-                  color: "#faf9f5",
-                }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.backgroundColor = theme.themeColorHover;
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.backgroundColor = theme.themeColor;
-                }}
-              >
-                <span>{translate(theme.heroBtn, lang)}</span>
-                <span>&rarr;</span>
-              </a>
-            </div>
-          </div>
-
-          {/* Watercolor Divider Mask */}
-          <div className="absolute bottom-0 left-0 w-full overflow-hidden leading-none z-10 select-none pointer-events-none">
-            <svg
-              viewBox="0 0 1200 120"
-              preserveAspectRatio="none"
-              className="relative block w-full h-[60px] md:h-[100px]"
-              style={{ fill: "#faf9f5" }}
-            >
-              <path d="M0,0 C150,90 350,10 500,70 C650,110 850,20 1000,80 C1100,110 1150,90 1200,60 L1200,120 L0,120 Z" />
-              <path d="M0,20 C180,70 320,30 480,90 C620,10 800,100 950,50 C1080,20 1150,80 1200,40 L1200,120 L0,120 Z" opacity="0.3" />
-              <path d="M0,40 C200,30 380,80 520,40 C700,90 880,30 1020,70 C1120,40 1160,60 1200,50 L1200,120 L0,120 Z" opacity="0.15" />
-            </svg>
-          </div>
-        </section>
-      ) : (
-        <section className="relative w-full aspect-[16/10] md:aspect-[21/9] min-h-[400px] md:min-h-[500px] lg:min-h-[550px] overflow-hidden bg-zinc-950 flex flex-col justify-end">
-          {videoUrl ? (
-            <video
-              className="absolute inset-0 w-full h-full object-cover object-center opacity-45 pointer-events-none animate-kenburns"
-              autoPlay
-              muted
-              loop
-              playsInline
-              preload="auto"
-              poster={videoAsset(videoUrl).poster}
-              onTimeUpdate={(e) => { const v = e.currentTarget; if (v.currentTime >= 60) v.currentTime = 0; }}
-              style={{
-                backgroundImage: `url('${videoAsset(videoUrl).poster}')`
-              }}
-            >
-              <source src={videoAsset(videoUrl).mp4Mobile} type="video/mp4" media="(max-width: 768px)" />
-              <source src={videoAsset(videoUrl).mp4} type="video/mp4" />
-            </video>
-          ) : (
-            <img
-              src={itinerary.image}
-              alt={translate(itinerary.title, lang)}
-              className="absolute inset-0 w-full h-full object-cover object-center opacity-40"
-            />
-          )}
-          <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-transparent to-[#FAF8F5]" />
-
-          <div className="absolute inset-0 flex flex-col justify-end px-6 md:px-12 pb-12 max-w-7xl mx-auto z-10">
-            <Breadcrumbs items={crumbs} className="mb-6" />
-            <div className="space-y-4">
-              <div className="flex flex-wrap items-center gap-3">
-                <span className="bg-brand-gold/15 text-brand-gold border border-brand-gold/30 px-4 py-1.5 font-mono text-[10px] tracking-[0.25em] uppercase rounded-full inline-block">
-                  {translate(itinerary.duration, lang)}
-                </span>
-                <div className="flex gap-0.5 select-none bg-black/45 backdrop-blur-md px-3 py-1.5 rounded-full border border-white/10 shadow-md">
-                  {[...Array(5)].map((_, i) => (
-                    <span key={i} className="text-[#C5A880] text-[12px] leading-none">★</span>
-                  ))}
-                </div>
-              </div>
-              <h1 className="font-serif text-3xl sm:text-4xl md:text-5xl lg:text-6xl tracking-wide uppercase leading-[1.1] font-bold text-white drop-shadow-lg max-w-4xl text-balance">
-                {translate(itinerary.title, lang)}
-              </h1>
-            </div>
-          </div>
-        </section>
-      )}
-
-      {/* Discovery Section (with Map pins) */}
-      {theme && (
-        <div className="relative bg-transparent">
-          <div className="py-12">
-            <MapSection countryId={id === "4" ? "2" : id === "5" ? "3" : "1"} itineraryId={id} />
-          </div>
-
-          {/* Experience Grid Section */}
-          <section className="py-16 px-6 max-w-7xl mx-auto border-t border-zinc-200/50">
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
-              {/* Text block */}
-              <div className="lg:col-span-4 flex flex-col justify-center items-start space-y-6">
-                <span className="w-12 h-1 border-t-2" style={{ borderColor: theme.themeColor }} />
-                <h2 className="font-serif text-3xl md:text-4xl font-bold text-zinc-900 leading-tight uppercase">
-                  {translate(theme.experienceTitle, lang)}
-                </h2>
-                <p className="text-[14px] leading-relaxed text-zinc-600 font-light">
-                  {translate(theme.experienceDesc, lang)}
-                </p>
-              </div>
-              {/* Featured Experience Cover */}
-              <div className="lg:col-span-8 rounded-[2rem] overflow-hidden relative group min-h-[300px] md:min-h-[400px] shadow-md border border-zinc-200/50">
-                <img
-                  src={theme.experienceGrid[0].img}
-                  alt={translate(theme.experienceGrid[0].label, lang)}
-                  className="absolute inset-0 w-full h-full object-cover group-hover:scale-[1.03] transition-transform duration-700 ease-out"
-                />
-                <div className="absolute inset-0 bg-black/35 group-hover:bg-black/25 transition-colors duration-500" />
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <h3 className="font-serif text-3xl md:text-4xl lg:text-5xl text-white font-bold tracking-wide uppercase">
-                    {translate(theme.experienceGrid[0].label, lang)}
-                  </h3>
-                </div>
-              </div>
-            </div>
-
-            {/* Other Experience Cards */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mt-8">
-              {theme.experienceGrid.slice(1).map((card, idx) => (
-                <div key={idx} className="rounded-[1.5rem] overflow-hidden relative group aspect-[4/3] sm:aspect-[16/10] lg:aspect-[4/3] shadow-sm border border-zinc-200/50">
-                  <img
-                    src={card.img}
-                    alt={translate(card.label, lang)}
-                    className="absolute inset-0 w-full h-full object-cover group-hover:scale-[1.04] transition-transform duration-700 ease-out"
-                  />
-                  <div className="absolute inset-0 bg-black/35 group-hover:bg-black/25 transition-colors duration-500" />
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    <h3 className="font-serif text-xl sm:text-2xl text-white font-bold tracking-wide uppercase">
-                      {translate(card.label, lang)}
-                    </h3>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </section>
-        </div>
-      )}
-
-      {/* Main Content Layout */}
-      <section className="py-16 px-6 max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 relative z-20 bg-transparent">
-
-        {/* Left Side: Overview and Day-by-Day Timeline */}
-        <div className="lg:col-span-8 space-y-16" id="itinerary-details">
-          {!theme ? (
-            <>
-              <div className="space-y-6">
-                <h3 className="font-serif text-2xl md:text-3xl text-zinc-900 border-b border-zinc-200 pb-4">
-                  {lang === "FR" ? "Aperçu de l'Itinéraire" : "Trip Overview"}
-                </h3>
-                <p className="text-[14px] md:text-[15px] leading-relaxed text-zinc-600 font-light">
-                  {translate(itinerary.overview, lang)}
-                </p>
-
-                {itinerary.dates && (
-                  <div className="bg-zinc-50 border border-zinc-200/60 p-6 rounded-2xl space-y-4 my-6">
-                    <span className="text-brand-gold font-mono text-[10px] tracking-[0.2em] uppercase block font-semibold">
-                      {lang === "FR" ? "Dates de départ disponibles" : "Available Departure Dates"}
-                    </span>
-                    <ul className="grid grid-cols-1 md:grid-cols-2 gap-3 text-xs md:text-sm text-zinc-800">
-                      {translate(itinerary.dates, lang).map((d: string, i: number) => (
-                        <li key={i} className="flex items-center gap-2">
-                          <span className="w-1.5 h-1.5 rounded-full bg-brand-gold shrink-0" />
-                          <span>{d}</span>
-                        </li>
-                      ))}
-                    </ul>
-                    <p className="text-[11px] md:text-xs text-zinc-500 font-light italic border-t border-zinc-200/60 pt-3">
-                      {lang === "FR"
-                        ? "D'autres dates de départ sont disponibles sur demande — notre conciergerie se fera un plaisir d'organiser un séjour parfaitement adapté à votre horaire. Contactez-nous pour planifier votre voyage."
-                        : "Additional departure dates are available upon request — our concierge team will gladly arrange a departure tailored to your schedule. Contact us to plan your trip."}
-                    </p>
-                  </div>
-                )}
-
-                <a
-                  href="#booking-form"
-                  className="inline-flex items-center gap-2 rounded-full bg-[#8B2635] text-[#faf9f5] font-semibold text-[11px] tracking-[0.2em] uppercase px-8 py-3.5 transition-luxury hover:bg-[#72202b] shadow-md cursor-pointer mt-4"
-                >
-                  {lang === "FR" ? "Réserver ce voyage" : "Book this Journey"} &rarr;
-                </a>
-              </div>
-
-              {/* Destination Showcase — city-matched SmartVideo tile */}
-              <motion.div
-                initial={{ opacity: 0, y: 25 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6 }}
-                className="w-full rounded-2xl overflow-hidden border border-zinc-100 shadow-sm bg-black"
-              >
-                <SmartVideo
-                  variant="tile"
-                  source={videoSources[getCityKey(itinerary.id)]}
-                  className="h-[320px] md:h-[420px]"
-                />
-              </motion.div>
-
-              {/* Image Gallery for Golf & Travel Packages */}
-              {getGalleryImages(itinerary.id).length > 0 && (
-                <div className="space-y-6 pt-10 border-t border-zinc-100">
-                  <h3 className="font-serif text-2xl md:text-3xl text-zinc-900 border-b border-zinc-200 pb-4">
-                    {lang === "FR" ? "Galerie Photos" : "Photo Gallery"}
-                  </h3>
-                  
-                  {/* Gallery Grid */}
-                  <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-                    {getGalleryImages(itinerary.id).map((imgSrc, idx) => (
-                      <div
-                        key={idx}
-                        onClick={() => setActiveImageIndex(idx)}
-                        className="relative aspect-video overflow-hidden cursor-pointer group border border-zinc-200"
-                      >
-                        <img
-                          src={imgSrc}
-                          alt={`${translate(itinerary.title, lang)} - View ${idx + 1}`}
-                          loading="lazy"
-                          className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105 rounded-sm"
-                        />
-                        {/* Gold hover overlay */}
-                        <div className="absolute inset-0 bg-brand-gold/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              )}
-            </>
-          ) : null}
-
-          {/* Day plans */}
-          <div className="space-y-10">
-            <h3 className="font-serif text-2xl md:text-3xl text-zinc-900 border-b border-zinc-200 pb-4">
-              {lang === "FR" ? "Programme Jour par Jour" : "Day-by-Day Journey"}
-            </h3>
-
-            <div className="relative border-l border-zinc-200 pl-6 md:pl-10 ml-4 space-y-12">
-              {itinerary.timeline.map((item, idx) => (
-                <motion.div
-                  key={item.day}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.5, delay: (idx % 4) * 0.1 }}
-                  className="relative group"
-                >
-                  {/* Timeline bullet dot */}
-                  <div className="absolute -left-[31px] md:-left-[47px] top-1.5 w-4 h-4 rounded-full bg-white border-2 border-brand-gold group-hover:bg-brand-gold transition-colors duration-300 z-10" />
-
-                  <div className="space-y-2">
-                    <span className="font-mono text-[10px] tracking-[0.3em] text-brand-gold uppercase font-semibold">
-                      {lang === "FR" ? `JOUR ${item.day}` : `DAY ${item.day}`}
-                    </span>
-                    <h4 className="font-serif text-lg md:text-xl text-zinc-800 leading-snug group-hover:text-brand-gold transition-colors duration-300">
-                      {translate(item.title, lang)}
-                    </h4>
-                    <p className="text-[12px] md:text-[13px] leading-relaxed text-zinc-500 font-light pt-1">
-                      {translate(item.desc, lang)}
-                    </p>
-                  </div>
-                </motion.div>
-              ))}
-            </div>
-          </div>
-
-          {/* Inclusions & Exclusions */}
-          <motion.div
-            initial={{ opacity: 0, y: 25 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="space-y-8 pt-10 border-t border-zinc-100"
-          >
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-              {/* Inclusions */}
-              <div className="space-y-4">
-                <h4 className="font-serif text-xl md:text-2xl text-zinc-900 flex items-center gap-2.5">
-                  <CheckCircle className="w-5 h-5 text-emerald-600 shrink-0" />
-                  <span>{lang === "FR" ? "Ce qui est compris" : "What's Included"}</span>
-                </h4>
-                <ul className="space-y-3 pl-1">
-                  {translate(itinerary.inclusions, lang).map((item, idx) => (
-                    <li key={idx} className="text-zinc-600 text-[13px] md:text-[14px] leading-relaxed font-light flex items-start gap-2.5">
-                      <span className="text-emerald-500 font-bold mt-1 text-sm">•</span>
-                      <span>{item}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-
-              {/* Exclusions */}
-              <div className="space-y-4">
-                <h4 className="font-serif text-xl md:text-2xl text-red-600 flex items-center gap-2.5">
-                  <span className="w-5 h-5 rounded-full border border-red-400 flex items-center justify-center text-[10px] text-red-500 font-bold shrink-0">✕</span>
-                  <span>{lang === "FR" ? "Non inclus" : "Not Included"}</span>
-                </h4>
-                <ul className="space-y-3 pl-1">
-                  {translate(itinerary.exclusions, lang).map((item, idx) => (
-                    <li key={idx} className="text-zinc-700 text-[13px] md:text-[14px] leading-relaxed font-light flex items-start gap-2.5">
-                      <span className="text-zinc-400 mt-1 text-sm">•</span>
-                      <span>{item}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </div>
-          </motion.div>
-
-          {/* Premium Options */}
-          {itinerary.options && translate(itinerary.options, lang)?.length > 0 && (
-            <motion.div
-              initial={{ opacity: 0, y: 25 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6 }}
-              className="space-y-5 pt-10 border-t border-zinc-100"
-            >
-              <h4 className="font-serif text-xl md:text-2xl text-zinc-900 flex items-center gap-2.5">
-                <span className="bg-brand-gold/10 text-brand-gold border border-brand-gold/20 px-2.5 py-0.5 font-mono text-[9px] uppercase tracking-wider rounded">$$$</span>
-                <span>{lang === "FR" ? "Options à la carte" : "A La Carte Options"}</span>
-              </h4>
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-                {translate(itinerary.options, lang).map((opt, idx) => (
-                  <div key={idx} className="p-5 bg-white/80 border border-stone-200/80 rounded-2xl flex flex-col justify-between hover:border-brand-gold/40 transition-luxury duration-300">
-                    <span className="text-zinc-800 text-[13px] font-medium leading-snug">{opt.name}</span>
-                    <span className="text-brand-gold font-mono text-xs font-semibold mt-3 tabular-nums">{opt.price}</span>
-                  </div>
-                ))}
-              </div>
-            </motion.div>
-          )}
-
-          {/* Featured Accommodations */}
-          {itinerary.hotels && itinerary.hotels.length > 0 && (
-            <motion.div
-              initial={{ opacity: 0, y: 25 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6 }}
-              className="space-y-6 pt-10 border-t border-zinc-100"
-            >
-              <h4 className="font-serif text-xl md:text-2xl text-zinc-900 flex items-center gap-2.5">
-                <Hotel className="w-5 h-5 text-brand-gold shrink-0" />
-                <span>{lang === "FR" ? "Hébergements d'Exception" : "Featured Accommodations"}</span>
-              </h4>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                {itinerary.hotels.map((hotel, idx) => (
-                  <div key={idx} className="bg-white/90 border border-stone-200/80 rounded-2xl overflow-hidden hover:shadow-md transition-luxury duration-300 flex flex-col h-full">
-                    <div className="p-6 flex-1 flex flex-col justify-between space-y-4">
-                      <div className="space-y-2">
-                        <div className="flex items-center justify-between">
-                          <span className="text-zinc-900 font-serif text-[16px] font-bold leading-tight">{hotel.name}</span>
-                          <div className="flex items-center gap-0.5 text-brand-gold text-[11px]">
-                            {"★".repeat(hotel.stars)}
-                          </div>
-                        </div>
-                        <p className="text-zinc-500 text-[13px] leading-relaxed font-light">
-                          {translate(hotel.desc, lang)}
-                        </p>
-                      </div>
-                      {/* Render link only if it is not '#' and not empty */}
-                      {hotel.link && hotel.link !== "#" && (
-                        <a href={hotel.link} target="_blank" rel="noopener noreferrer" className="text-brand-gold hover:text-zinc-950 font-mono text-[9px] tracking-widest uppercase inline-flex items-center gap-1.5 transition-colors pt-2">
-                          <span>{lang === "FR" ? "DÉCOUVRIR LE SITE" : "VIEW PROPERTY"}</span>
-                          <span>→</span>
-                        </a>
-                      )}
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </motion.div>
-          )}
-
-          {/* Booking CTA */}
-          <motion.div
-            initial={{ opacity: 0, y: 25 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="flex flex-col sm:flex-row gap-4 justify-center items-center pt-8 border-t border-zinc-100"
-          >
-            <a
-              href="#booking-form"
-              className="inline-flex items-center justify-center gap-2 rounded-full bg-[#8B2635] text-[#faf9f5] font-semibold text-[11px] tracking-[0.2em] uppercase px-10 py-5 transition-luxury hover:bg-[#72202b] shadow-md cursor-pointer min-w-[200px]"
-            >
-              {lang === "FR" ? "RÉSERVER VOTRE PASSAGE" : "RESERVE YOUR JOURNEY"} &rarr;
-            </a>
-            {INSURANCE_LINK_URL && (
-              <a
-                href={INSURANCE_LINK_URL}
-                className="inline-flex items-center justify-center gap-2 rounded-full border border-zinc-300 bg-white text-zinc-700 font-semibold text-[11px] tracking-[0.2em] uppercase px-10 py-5 transition-luxury hover:bg-zinc-50 shadow-sm cursor-pointer min-w-[200px]"
-              >
-                {lang === "FR" ? "ASSURANCE VOYAGE" : "TRAVEL INSURANCE"}
-              </a>
             )}
-          </motion.div>
+          </div>
+        </motion.section>
 
-        </div>
-
-        {/* Right Side: Video + Booking Panel */}
-        <div className="lg:col-span-4 space-y-6">
-
-          {/* Video Block — only for Marrakech & Sahara Expedition (ID 1) */}
-          {itinerary.id === 1 && (
-            <div className="w-full rounded-2xl overflow-hidden border border-zinc-200/60 shadow-md bg-black">
-              <video
-                src="https://v1.pinimg.com/videos/iht/expMp4/81/24/b8/8124b8c7cd11c22123a7b75cfabf32fc_720w.mp4"
-                className="w-full h-auto block bg-black"
-                autoPlay
-                muted
-                loop
-                playsInline
-                preload="auto"
-                onTimeUpdate={(e) => { const v = e.currentTarget; if (v.currentTime >= 60) v.currentTime = 0; }}
-              />
+        {/* =========================================================================
+            2. QUICK INFO FEATURE GRID (3 Columns in White / Off-White Theme)
+           ========================================================================= */}
+        <section className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6">
+          {/* Card 1: Duration */}
+          <div className="bg-white/95 backdrop-blur-md rounded-2xl p-5 sm:p-6 border border-stone-200/90 shadow-[0_8px_30px_rgba(74,53,37,0.05)] flex items-start gap-4">
+            <div className="p-3 rounded-xl bg-amber-500/10 text-[#C05621] shrink-0 border border-amber-500/20">
+              <Calendar className="w-5 h-5" />
             </div>
-          )}
+            <div className="space-y-1">
+              <span className="text-[11px] font-bold uppercase tracking-wider text-stone-400 block">
+                Duration
+              </span>
+              <span className="font-bold text-[#1E1B18] text-sm sm:text-base leading-snug block">
+                {tour.duration}
+              </span>
+            </div>
+          </div>
 
-          {/* Contact Form Block */}
-          <motion.div
-            id="booking-form"
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.1 }}
-            className="bg-white/95 backdrop-blur-md p-6 md:p-8 border border-stone-200/90 shadow-[0_16px_45px_rgba(74,53,37,0.08)] rounded-[1.8rem] relative overflow-hidden lg:sticky lg:top-28 scroll-mt-28"
-          >
-            <div className="absolute top-0 right-0 w-32 h-32 bg-[#C05621]/5 blur-[50px] rounded-full pointer-events-none" />
-            <div className="absolute -bottom-6 -right-6 pointer-events-none opacity-10 text-[#C05621]">
-              <MoroccanMedallionArt size={110} />
+          {/* Card 2: Transportation */}
+          <div className="bg-white/95 backdrop-blur-md rounded-2xl p-5 sm:p-6 border border-stone-200/90 shadow-[0_8px_30px_rgba(74,53,37,0.05)] flex items-start gap-4">
+            <div className="p-3 rounded-xl bg-amber-500/10 text-[#C05621] shrink-0 border border-amber-500/20">
+              <Car className="w-5 h-5" />
+            </div>
+            <div className="space-y-1">
+              <span className="text-[11px] font-bold uppercase tracking-wider text-stone-400 block">
+                Transportation
+              </span>
+              <span className="font-bold text-[#1E1B18] text-sm sm:text-base leading-snug block">
+                {tour.vehicles}
+              </span>
+            </div>
+          </div>
+
+          {/* Card 3: Lodging */}
+          <div className="bg-white/95 backdrop-blur-md rounded-2xl p-5 sm:p-6 border border-stone-200/90 shadow-[0_8px_30px_rgba(74,53,37,0.05)] flex items-start gap-4">
+            <div className="p-3 rounded-xl bg-amber-500/10 text-[#C05621] shrink-0 border border-amber-500/20">
+              <Hotel className="w-5 h-5" />
+            </div>
+            <div className="space-y-1">
+              <span className="text-[11px] font-bold uppercase tracking-wider text-stone-400 block">
+                Lodging
+              </span>
+              <span className="font-bold text-[#1E1B18] text-sm sm:text-base leading-snug block">
+                {tour.hotels}
+              </span>
+            </div>
+          </div>
+        </section>
+
+        {/* =========================================================================
+            3. PACKAGE PRICING BANNER (Off-White & Warm Beige)
+           ========================================================================= */}
+        <section className="rounded-2xl bg-white/95 backdrop-blur-md p-6 sm:p-8 border border-stone-200/90 shadow-[0_10px_35px_rgba(74,53,37,0.06)] flex flex-col md:flex-row md:items-center justify-between gap-6">
+          <div className="space-y-1.5">
+            <span className="text-[10.5px] font-bold uppercase tracking-[0.22em] text-[#C05621] block">
+              PACKAGE PRICING
+            </span>
+            <div className="font-serif text-2xl sm:text-3xl font-bold text-[#1E1B18] tracking-tight">
+              {tour.price}
+            </div>
+            <p className="text-xs text-stone-500 font-light">
+              {tour.priceSub}
+            </p>
+          </div>
+
+          <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4">
+            <p className="text-xs sm:text-sm text-stone-600 max-w-sm font-light leading-relaxed">
+              Private departures can be adjusted to any dates, hotel tiers, and group size.
+            </p>
+            <button
+              type="button"
+              onClick={scrollToBooking}
+              className="inline-flex items-center gap-2 rounded-full bg-[#4A3525] hover:bg-[#322318] px-7 py-3 text-xs font-bold uppercase tracking-wider text-white transition-all shadow-sm hover:shadow-md cursor-pointer shrink-0"
+            >
+              <span>Request Quote</span>
+              <ArrowRight className="w-3.5 h-3.5" />
+            </button>
+          </div>
+        </section>
+
+        {/* =========================================================================
+            4. MAIN DETAIL SECTION: Day-by-Day Timeline + In-Page Booking Sidebar
+           ========================================================================= */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 pt-4 items-start">
+          
+          {/* LEFT COLUMN: Day-by-Day Timeline & Inclusions (lg:col-span-8) */}
+          <div className="lg:col-span-8 space-y-10">
+            
+            {/* Section Header: Day-by-Day Itinerary */}
+            <div className="flex items-center justify-between border-b border-stone-200/80 pb-4">
+              <h2 className="font-serif text-2xl sm:text-3xl font-bold text-[#1E1B18] tracking-tight">
+                Day-by-Day Itinerary <span className="text-stone-400 font-light text-xl">({tour.itinerary.length} Days)</span>
+              </h2>
+              <span className="text-xs font-semibold text-[#C05621] uppercase tracking-wider hidden sm:inline-block">
+                Licensed Ministry Guides
+              </span>
             </div>
 
-            {!isSubmitted ? (
-              <form onSubmit={handleBookingSubmit} suppressHydrationWarning className="space-y-6 relative z-10">
-                <div className="text-center md:text-left border-b border-zinc-200/60 pb-4">
-                  <span className="text-[#C05621] font-mono text-[9px] tracking-[0.25em] uppercase block mb-1 font-semibold">
-                    {lang === "FR" ? "Frais de Voyage Estimés" : "Estimated Trip Cost"}
-                  </span>
-                  <div className="flex items-start justify-between">
-                    {(() => {
-                      const costText = translate(itinerary.cost, lang);
-                      const isRequest = costText.toLowerCase().includes("devis") || costText.toLowerCase().includes("demande") || costText.toLowerCase().includes("request");
-                      const originalCostText = itinerary.originalCost ? translate(itinerary.originalCost, lang) : null;
-                      return (
-                        <div className="flex flex-col items-start">
-                          {originalCostText && (
-                            <span className="text-sm line-through text-zinc-400 font-serif mb-1">
-                              {originalCostText}
-                            </span>
-                          )}
-                          <h3 className={`text-3xl font-bold font-serif tabular-nums ${originalCostText ? 'text-[#8B2635]' : 'text-zinc-900'}`}>
-                            {costText}
-                            {!isRequest && (
-                              <span className="text-[10px] font-mono text-zinc-400 ml-1">
-                                {lang === "FR" ? "CAD / pers." : "CAD / guest"}
-                              </span>
-                            )}
-                          </h3>
-                        </div>
-                      );
-                    })()}
-                    <span className="text-[9px] font-mono text-[#faf9f5] uppercase bg-[#8B2635] px-2.5 py-0.5 rounded-full shadow-sm font-semibold">
-                      {itinerary.planLabel ? translate(itinerary.planLabel, lang) : (lang === "FR" ? "Haut de Gamme" : "All Inclusive")}
-                    </span>
+            {/* Vertical Timeline Track */}
+            <div className="relative pl-12 sm:pl-16 space-y-6 before:absolute before:left-[17px] sm:before:left-[21px] before:top-4 before:bottom-4 before:w-0.5 before:bg-amber-300/60">
+              {tour.itinerary.map((day) => (
+                <div key={day.day} className="relative group">
+                  {/* Amber Medallion Circle on the timeline track (Matching pop-up) */}
+                  <div className="absolute -left-12 sm:-left-16 top-3 w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-amber-400 text-stone-950 font-bold text-sm sm:text-base flex items-center justify-center shadow-md ring-4 ring-[#FAF8F5] shrink-0">
+                    {day.day}
+                  </div>
+
+                  {/* Day Detail Card in Light / Beige Tone */}
+                  <div className="bg-white/95 backdrop-blur-sm rounded-2xl p-6 sm:p-7 border border-stone-200/90 shadow-[0_4px_20px_rgba(74,53,37,0.04)] group-hover:shadow-[0_8px_30px_rgba(74,53,37,0.08)] group-hover:border-amber-300/80 transition-all duration-300">
+                    <div className="flex items-center justify-between gap-4 border-b border-stone-100 pb-3 mb-3.5">
+                      <h3 className="font-serif text-base sm:text-lg font-bold text-[#1E1B18] tracking-tight uppercase">
+                        {day.title}
+                      </h3>
+                      <span className="px-2.5 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider bg-stone-100 text-stone-600 border border-stone-200 shrink-0">
+                        Day {day.day}
+                      </span>
+                    </div>
+
+                    <p className="text-stone-700 text-xs sm:text-sm leading-relaxed font-light">
+                      {day.desc}
+                    </p>
                   </div>
                 </div>
+              ))}
+            </div>
 
-                <div className="space-y-4">
+            <MoroccanFriezeDivider className="opacity-40 py-2" />
+
+            {/* Inclusions & Exclusions Side-by-Side Cards */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              {/* Inclusions Card */}
+              <div className="bg-white/95 rounded-2xl p-6 sm:p-7 border border-stone-200/90 shadow-xs space-y-4">
+                <div className="flex items-center gap-2.5 text-[#059669]">
+                  <CheckCircle2 className="w-5 h-5 shrink-0" />
+                  <h4 className="font-serif text-lg font-bold text-stone-900">
+                    What&apos;s Included
+                  </h4>
+                </div>
+                <ul className="space-y-2.5 text-xs sm:text-sm text-stone-700 font-light">
+                  {tour.inclusions.map((item, idx) => (
+                    <li key={idx} className="flex items-start gap-2.5">
+                      <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 shrink-0 mt-2" />
+                      <span>{item}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              {/* Exclusions Card */}
+              <div className="bg-white/95 rounded-2xl p-6 sm:p-7 border border-stone-200/90 shadow-xs space-y-4">
+                <div className="flex items-center gap-2.5 text-stone-600">
+                  <div className="w-5 h-5 rounded-full bg-stone-100 border border-stone-300 flex items-center justify-center text-stone-500 shrink-0 text-xs font-bold">
+                    ✕
+                  </div>
+                  <h4 className="font-serif text-lg font-bold text-stone-900">
+                    What&apos;s Not Included
+                  </h4>
+                </div>
+                <ul className="space-y-2.5 text-xs sm:text-sm text-stone-600 font-light">
+                  {tour.exclusions.map((item, idx) => (
+                    <li key={idx} className="flex items-start gap-2.5">
+                      <span className="w-1.5 h-1.5 rounded-full bg-stone-300 shrink-0 mt-2" />
+                      <span>{item}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+
+            {/* Curated Hotels / Accommodations Spotlight */}
+            {tour.hotelList && tour.hotelList.length > 0 && (
+              <div className="bg-white/95 rounded-2xl p-6 sm:p-8 border border-stone-200/90 shadow-xs space-y-4">
+                <div className="flex items-center gap-2.5 text-[#C05621]">
+                  <Hotel className="w-5 h-5 shrink-0" />
+                  <h4 className="font-serif text-lg font-bold text-stone-900">
+                    Handpicked Luxury Accommodations
+                  </h4>
+                </div>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
+                  {tour.hotelList.map((hotel, idx) => (
+                    <div key={idx} className="p-4 rounded-xl bg-stone-50/80 border border-stone-200/70 space-y-2">
+                      <div className="flex items-center justify-between">
+                        <span className="font-serif font-bold text-sm text-[#1E1B18]">
+                          {hotel.name}
+                        </span>
+                        <span className="text-amber-500 text-xs">
+                          {"★".repeat(hotel.stars)}
+                        </span>
+                      </div>
+                      <p className="text-xs text-stone-600 font-light leading-relaxed">
+                        {hotel.desc}
+                      </p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+          </div>
+
+          {/* RIGHT COLUMN: Dedicated Sticky In-Page Booking Form (lg:col-span-4) */}
+          <div className="lg:col-span-4 sticky top-24" id="booking-form">
+            <div className="rounded-[2rem] bg-white/98 backdrop-blur-xl border border-stone-200/95 shadow-[0_16px_45px_rgba(74,53,37,0.08)] p-6 sm:p-7 relative overflow-hidden">
+              {/* Subtle Moroccan Rosette Hallmark watermark */}
+              <div className="absolute -top-6 -right-6 pointer-events-none opacity-10">
+                <MoroccanMedallionArt size={110} />
+              </div>
+
+              {/* Form Title & Context */}
+              <div className="space-y-1 mb-5 relative z-10">
+                <span className="text-[10px] font-bold uppercase tracking-[0.22em] text-[#C05621] block">
+                  FAST INQUIRY
+                </span>
+                <h3 className="font-serif text-xl sm:text-2xl font-bold text-[#1E1B18]">
+                  Plan This Itinerary
+                </h3>
+                <p className="text-xs text-stone-500 font-light leading-relaxed">
+                  Personalized response within 24h by certified Moroccan travel directors.
+                </p>
+              </div>
+
+              {isSubmitted ? (
+                <motion.div
+                  initial={{ opacity: 0, scale: 0.95 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  className="py-10 text-center space-y-4"
+                >
+                  <div className="w-14 h-14 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center mx-auto shadow-sm">
+                    <CheckCircle2 className="w-7 h-7" />
+                  </div>
+                  <h4 className="font-serif text-xl font-bold text-stone-900">
+                    Quote Request Received!
+                  </h4>
+                  <p className="text-xs text-stone-600 font-light max-w-xs mx-auto leading-relaxed">
+                    Thank you, <strong>{bookingName}</strong>. Our director has received your request for <strong>{tour.name}</strong> and will contact you directly via <strong>{bookingEmail}</strong>.
+                  </p>
+                  <button
+                    type="button"
+                    onClick={() => setIsSubmitted(false)}
+                    className="text-xs text-[#C05621] font-bold uppercase tracking-wider hover:underline pt-2 cursor-pointer"
+                  >
+                    Send another request
+                  </button>
+                </motion.div>
+              ) : (
+                <form onSubmit={handleBookingSubmit} className="space-y-4 relative z-10">
+                  {/* Input: Full Name */}
                   <div>
-                    <label htmlFor="booking-name-input" className="block text-[9px] font-mono tracking-widest uppercase mb-1.5 text-zinc-500 font-semibold">
-                      {lang === "FR" ? "Votre nom *" : "Your name *"}
+                    <label htmlFor="client-name" className="block text-[11px] font-semibold uppercase tracking-wider text-stone-600 mb-1">
+                      Full Name *
                     </label>
                     <input
-                      id="booking-name-input"
+                      id="client-name"
                       type="text"
                       required
-                      suppressHydrationWarning
+                      placeholder="e.g. Sterling Hunt"
                       value={bookingName}
                       onChange={(e) => setBookingName(e.target.value)}
-                      placeholder="e.g. Sterling Hunt"
-                      aria-label={lang === "FR" ? "Votre nom" : "Your name"}
-                      className="w-full bg-white border border-stone-200/90 rounded-xl px-4 py-3 text-xs text-zinc-800 placeholder-zinc-400 focus:outline-none focus:border-[#C05621] focus:ring-2 focus:ring-[#C05621]/20 transition-[border-color,box-shadow] duration-300 shadow-xs"
+                      className="w-full rounded-xl bg-stone-50 border border-stone-200 px-3.5 py-2.5 text-xs sm:text-sm text-stone-900 placeholder-stone-400 focus:bg-white focus:outline-none focus:border-[#C05621] transition-colors"
                     />
                   </div>
+
+                  {/* Input: Email */}
                   <div>
-                    <label htmlFor="booking-email-input" className="block text-[9px] font-mono tracking-widest uppercase mb-1.5 text-zinc-500 font-semibold">
-                      {lang === "FR" ? "Votre adresse courriel *" : "Your email address *"}
+                    <label htmlFor="client-email" className="block text-[11px] font-semibold uppercase tracking-wider text-stone-600 mb-1">
+                      Email Address *
                     </label>
                     <input
-                      id="booking-email-input"
+                      id="client-email"
                       type="email"
                       required
-                      suppressHydrationWarning
+                      placeholder="e.g. sterling@example.com"
                       value={bookingEmail}
                       onChange={(e) => setBookingEmail(e.target.value)}
-                      placeholder="e.g. sterling@portfolio.com"
-                      aria-label={lang === "FR" ? "Votre adresse courriel" : "Your email address"}
-                      className="w-full bg-white border border-stone-200/90 rounded-xl px-4 py-3 text-xs text-zinc-800 placeholder-zinc-400 focus:outline-none focus:border-[#C05621] focus:ring-2 focus:ring-[#C05621]/20 transition-[border-color,box-shadow] duration-300 shadow-xs"
+                      className="w-full rounded-xl bg-stone-50 border border-stone-200 px-3.5 py-2.5 text-xs sm:text-sm text-stone-900 placeholder-stone-400 focus:bg-white focus:outline-none focus:border-[#C05621] transition-colors"
                     />
                   </div>
+
+                  {/* Input: Phone */}
                   <div>
-                    <label htmlFor="booking-phone-input" className="block text-[9px] font-mono tracking-widest uppercase mb-1.5 text-zinc-500 font-semibold">
-                      {lang === "FR" ? "Votre numéro de téléphone *" : "Your phone number *"}
+                    <label htmlFor="client-phone" className="block text-[11px] font-semibold uppercase tracking-wider text-stone-600 mb-1">
+                      Phone Number *
                     </label>
                     <input
-                      id="booking-phone-input"
+                      id="client-phone"
                       type="tel"
                       required
-                      suppressHydrationWarning
+                      placeholder="e.g. +1 (514) 123-4567"
                       value={bookingPhone}
                       onChange={(e) => setBookingPhone(e.target.value)}
-                      placeholder="e.g. +1 (514) 123-4567"
-                      aria-label={lang === "FR" ? "Votre numéro de téléphone" : "Your phone number"}
-                      className="w-full bg-white border border-stone-200/90 rounded-xl px-4 py-3 text-xs text-zinc-800 placeholder-zinc-400 focus:outline-none focus:border-[#C05621] focus:ring-2 focus:ring-[#C05621]/20 transition-[border-color,box-shadow] duration-300 shadow-xs"
+                      className="w-full rounded-xl bg-stone-50 border border-stone-200 px-3.5 py-2.5 text-xs sm:text-sm text-stone-900 placeholder-stone-400 focus:bg-white focus:outline-none focus:border-[#C05621] transition-colors"
                     />
                   </div>
-                  {itinerary.dates && (
+
+                  {/* Row: Travel Date & Guests */}
+                  <div className="grid grid-cols-2 gap-3">
                     <div>
-                      <label htmlFor="booking-date-select" className="block text-[9px] font-mono tracking-widest uppercase mb-1.5 text-zinc-500 font-semibold">
-                        {lang === "FR" ? "Date de départ souhaitée" : "Desired Departure Date"}
+                      <label htmlFor="client-date" className="block text-[11px] font-semibold uppercase tracking-wider text-stone-600 mb-1">
+                        Travel Window
                       </label>
-                      <select
-                        id="booking-date-select"
-                        required
-                        suppressHydrationWarning
+                      <input
+                        id="client-date"
+                        type="text"
+                        placeholder="e.g. Oct 2026"
                         value={selectedDate}
                         onChange={(e) => setSelectedDate(e.target.value)}
-                        aria-label={lang === "FR" ? "Date de départ souhaitée" : "Desired Departure Date"}
-                        className="w-full bg-white border border-stone-200/90 rounded-xl px-4 py-3 text-xs text-zinc-800 placeholder-zinc-400 focus:outline-none focus:border-[#C05621] focus:ring-2 focus:ring-[#C05621]/20 transition-[border-color,box-shadow] duration-300 cursor-pointer shadow-xs"
-                      >
-                        <option value="">
-                          {lang === "FR" ? "-- Sélectionnez une date de départ --" : "-- Select a departure date --"}
-                        </option>
-                        {translate(itinerary.dates, lang).map((d: string) => (
-                          <option key={d} value={d}>
-                            {d}
-                          </option>
-                        ))}
-                      </select>
+                        className="w-full rounded-xl bg-stone-50 border border-stone-200 px-3 py-2 text-xs text-stone-900 placeholder-stone-400 focus:bg-white focus:outline-none focus:border-[#C05621] transition-colors"
+                      />
                     </div>
-                  )}
+                    <div>
+                      <label htmlFor="client-guests" className="block text-[11px] font-semibold uppercase tracking-wider text-stone-600 mb-1">
+                        Guests
+                      </label>
+                      <div className="flex items-center rounded-xl bg-stone-50 border border-stone-200 p-1">
+                        <button
+                          type="button"
+                          onClick={() => setPassengerCount(Math.max(1, passengerCount - 1))}
+                          className="w-7 h-7 rounded-lg bg-white border border-stone-200 text-stone-700 font-bold hover:bg-stone-100 flex items-center justify-center text-xs cursor-pointer"
+                        >
+                          -
+                        </button>
+                        <span className="flex-1 text-center font-bold text-xs text-stone-800">
+                          {passengerCount}
+                        </span>
+                        <button
+                          type="button"
+                          onClick={() => setPassengerCount(Math.min(16, passengerCount + 1))}
+                          className="w-7 h-7 rounded-lg bg-white border border-stone-200 text-stone-700 font-bold hover:bg-stone-100 flex items-center justify-center text-xs cursor-pointer"
+                        >
+                          +
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Input: Special Requests / Notes */}
                   <div>
-                    <label htmlFor="booking-message-input" className="block text-[9px] font-mono tracking-widest uppercase mb-1.5 text-zinc-500 text-wrap leading-tight font-semibold">
-                      {lang === "FR" ? "Vos souhaits particuliers, besoins alimentaires ou occasions spéciales ?" : "Any special wishes, dietary needs, or occasions we should know about?"}
+                    <label htmlFor="client-notes" className="block text-[11px] font-semibold uppercase tracking-wider text-stone-600 mb-1">
+                      Wishes &amp; Dietary Requests
                     </label>
                     <textarea
-                      id="booking-message-input"
-                      rows={4}
-                      suppressHydrationWarning
+                      id="client-notes"
+                      rows={3}
+                      placeholder="e.g. Vegetarian diet, luxury riad upgrade, private airport transfer..."
                       value={bookingMessage}
                       onChange={(e) => setBookingMessage(e.target.value)}
-                      placeholder={lang === "FR" ? "Ex. Régimes alimentaires, hélicoptère privé, guide francophone..." : "e.g. Jet charter transfers, close protection, dietaries, private celebrations..."}
-                      aria-label={lang === "FR" ? "Vos souhaits particuliers" : "Special wishes"}
-                      className="w-full bg-white border border-stone-200/90 rounded-xl px-4 py-3 text-xs text-zinc-800 placeholder-zinc-400 focus:outline-none focus:border-[#C05621] focus:ring-2 focus:ring-[#C05621]/20 transition-[border-color,box-shadow] duration-300 resize-none shadow-xs"
+                      className="w-full rounded-xl bg-stone-50 border border-stone-200 px-3.5 py-2.5 text-xs text-stone-900 placeholder-stone-400 focus:bg-white focus:outline-none focus:border-[#C05621] transition-colors resize-none"
                     />
                   </div>
-                </div>
 
-                {/* Travelling party (Passengers) */}
-                <div className="bg-white/80 border border-stone-200/90 rounded-2xl px-5 py-4 space-y-4 shadow-2xs">
-                  <div className="flex items-center justify-between">
-                    <label className="text-[9px] font-mono tracking-widest uppercase text-[#C05621] font-bold">
-                      {lang === "FR" ? "Groupe de voyage" : "Travelling party"}
-                    </label>
-                    <div className="flex items-center gap-2">
-                      <button
-                        type="button"
-                        suppressHydrationWarning
-                        onClick={() => updatePassengerCount(-1)}
-                        className="w-7 h-7 rounded-full border border-zinc-200 bg-zinc-50 hover:bg-zinc-100 flex items-center justify-center text-zinc-700 font-bold text-sm transition-colors cursor-pointer"
-                      >−</button>
-                      <span className="text-[14px] font-bold text-zinc-900 font-heading tabular-nums w-5 text-center">{passengerCount}</span>
-                      <button
-                        type="button"
-                        suppressHydrationWarning
-                        onClick={() => updatePassengerCount(1)}
-                        className="w-7 h-7 rounded-full border border-zinc-200 bg-zinc-50 hover:bg-zinc-100 flex items-center justify-center text-zinc-700 font-bold text-sm transition-colors cursor-pointer"
-                      >+</button>
-                    </div>
+                  {/* Submit Button */}
+                  <motion.button
+                    whileHover={{ scale: 1.02 }}
+                    whileTap={{ scale: 0.98 }}
+                    disabled={isSubmitting}
+                    type="submit"
+                    className="w-full rounded-full bg-[#4A3525] hover:bg-[#322318] py-3.5 px-6 text-xs font-bold uppercase tracking-wider text-white shadow-md hover:shadow-lg transition-all duration-300 flex items-center justify-center gap-2 cursor-pointer disabled:opacity-60"
+                  >
+                    <span>{isSubmitting ? "Sending Request..." : "Request Booking for this Tour"}</span>
+                    <Send className="w-3.5 h-3.5" />
+                  </motion.button>
+
+                  <div className="flex items-center justify-center gap-1.5 text-[10.5px] text-stone-500 pt-1">
+                    <ShieldCheck className="w-3.5 h-3.5 text-emerald-600" />
+                    <span>No advance payment required · Instant confirmation</span>
                   </div>
-
-                  {/* Per-passenger age inputs */}
-                  <div className="grid grid-cols-2 gap-2">
-                    {passengerAges.map((age, idx) => (
-                      <div key={idx} className="flex flex-col gap-0.5">
-                        <span className="text-[8px] font-mono text-zinc-400 uppercase tracking-wider">
-                          {lang === "FR" ? `Passager ${idx + 1}` : `Passenger ${idx + 1}`}
-                        </span>
-                        <div className="flex items-center gap-1.5 bg-zinc-50 border border-zinc-200 rounded-lg px-2.5 py-1.5">
-                          <input
-                            type="number"
-                            min={0}
-                            max={120}
-                            suppressHydrationWarning
-                            value={age === 0 ? "" : age}
-                            onChange={(e) => updatePassengerAge(idx, parseInt(e.target.value) || 0)}
-                            placeholder="Age"
-                            className="w-full bg-transparent text-xs text-zinc-800 placeholder-zinc-300 focus:outline-none tabular-nums"
-                          />
-                          <span className="text-[9px] text-zinc-400 font-mono shrink-0">{lang === "FR" ? "ans" : "yrs"}</span>
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-
-                {/* Submit and Reassurance */}
-                <div className="space-y-4">
-                  <div className="flex items-start space-x-2 text-[10px] text-zinc-500 font-mono leading-relaxed">
-                    <Shield className="text-[#C05621] w-4 h-4 shrink-0 mt-0.5" />
-                    <span>{lang === "FR" ? "Aucun paiement n'est exigé à ce stade. Notre équipe locale vous répondra sous 24h pour affiner chaque détail de votre circuit." : "No payment is taken at this stage. Our local Moroccan travel team will respond within 24 hours to fine-tune your itinerary."}</span>
-                  </div>
-                  <div className="flex flex-col gap-3">
-                    <button
-                      type="submit"
-                      disabled={isSubmitting}
-                      suppressHydrationWarning
-                      className="w-full bg-[#4A3525] hover:bg-[#322318] text-white font-semibold text-[11px] tracking-[0.2em] uppercase py-4 rounded-full transition-all duration-300 hover:-translate-y-0.5 shadow-md cursor-pointer disabled:opacity-50"
-                    >
-                      {isSubmitting 
-                        ? (lang === "FR" ? "ENVOI EN COURS..." : "TRANSMITTING...") 
-                        : (lang === "FR" ? "DEMANDE POUR SOUMISSION" : "REQUEST A QUOTE")
-                      }
-                    </button>
-                    {INSURANCE_LINK_URL && (
-                      <a
-                        href={INSURANCE_LINK_URL}
-                        className="w-full inline-flex items-center justify-center gap-2 rounded-full border border-stone-300 bg-white text-zinc-700 font-semibold text-[11px] tracking-[0.2em] uppercase py-4 transition-luxury hover:bg-stone-50 shadow-xs cursor-pointer text-center"
-                      >
-                        {lang === "FR" ? "ASSURANCE VOYAGE" : "TRAVEL INSURANCE"}
-                      </a>
-                    )}
-                  </div>
-                </div>
-              </form>
-            ) : (
-              <div className="text-center py-12 flex flex-col items-center justify-center space-y-6 relative z-10">
-                <div className="w-16 h-16 rounded-full bg-[#C05621]/10 flex items-center justify-center border border-[#C05621]/30">
-                  <CheckCircle className="text-[#C05621] w-8 h-8" />
-                </div>
-                <div className="space-y-1">
-                  <span className="text-[#C05621] font-mono text-[10px] tracking-[0.25em] uppercase block font-semibold">
-                    {lang === "FR" ? "Demande Reçue avec Succès" : "Inquiry Successfully Received"}
-                  </span>
-                  <h3 className="font-serif text-2xl text-zinc-900 tracking-wide uppercase font-bold">
-                    {lang === "FR" ? "Demande Envoyée" : "Request Received"}
-                  </h3>
-                </div>
-                <p className="text-zinc-600 text-xs leading-relaxed max-w-[280px] mx-auto font-light">
-                  {lang === "FR"
-                    ? `Merci, ${bookingName}. Votre conseiller chez Best of Morocco Tours a bien reçu votre demande pour ${itinerary.title.FR} et vous contactera sous 24 heures pour finaliser votre itinéraire.`
-                    : `Thank you, ${bookingName}. Your dedicated travel architect at Best of Morocco Tours has received your request for ${itinerary.title.EN} and will contact you within 24 hours to customize your private journey.`
-                  }
-                </p>
-                <button
-                  onClick={() => setIsSubmitted(false)}
-                  suppressHydrationWarning
-                  className="border border-stone-200 bg-white hover:bg-[#4A3525] hover:text-white hover:border-[#4A3525] text-stone-700 font-mono text-[9px] tracking-[0.15em] uppercase px-6 py-2.5 transition-all duration-300 rounded-full shadow-xs cursor-pointer"
-                >
-                  {lang === "FR" ? "Modifier la requête" : "Modify inquiry"}
-                </button>
-              </div>
-            )}
-
-            {/* Conditions Disclaimer */}
-            <div className="mt-8 pt-6 border-t border-zinc-200/60 text-center select-none">
-              <h4 className="font-serif text-sm font-bold text-zinc-900 mb-3 uppercase tracking-wider">
-                {lang === "FR" ? "Conditions" : "Terms & Conditions"}
-              </h4>
-              <p className="text-[10px] md:text-[11px] leading-relaxed text-zinc-500 italic font-light mb-4">
-                {lang === "FR"
-                  ? "Tarif calculé le 1 juin 2026. Les dates et composantes sont modifiables à votre guise. Les hôtels et activités proposés le sont à titre indicatif et peuvent être modifiés selon vos besoins."
-                  : "Rate calculated on June 1, 2026. Dates and components can be modified at your convenience. Proposed hotels and activities are indicative and can be modified according to your needs."
-                }
-              </p>
-              <p className="text-[10px] md:text-[11px] leading-relaxed text-zinc-500 italic font-light mb-4">
-                {lang === "FR"
-                  ? "Les tarifs sont sujets à changement selon la tarification dynamique du jour. Aucune place n'est réservée d'avance et les disponibilités sont sujettes à changement selon les fournisseurs."
-                  : "Rates are subject to change based on daily dynamic pricing. No spots are reserved in advance and availability is subject to change by suppliers."
-                }
-              </p>
-              <p className="text-[10px] md:text-[11px] leading-relaxed text-zinc-500 font-light">
-                {lang === "FR" ? "Consultez nos conditions complètes au " : "Consult our full conditions at the "}
-                <Link href="/conditions" className="text-brand-gold hover:underline font-semibold">
-                  {lang === "FR" ? "lien suivant" : "following link"}
-                </Link>
-                {translate({ FR: ".", EN: "." }, lang)}
-              </p>
-            </div>
-          </motion.div>
-        </div>
-
-      </section>
-
-      <Footer />
-
-      {/* Fullscreen Lightbox Modal */}
-      {activeImageIndex !== null && (() => {
-        const images = getGalleryImages(itinerary.id);
-        if (images.length === 0) return null;
-        
-        return (
-          <div 
-            className="fixed inset-0 z-[9999] bg-zinc-950/95 backdrop-blur-md flex flex-col items-center justify-center p-4 select-none"
-            onClick={() => setActiveImageIndex(null)}
-          >
-            {/* Close Button */}
-            <button
-              onClick={() => setActiveImageIndex(null)}
-              className="absolute top-6 right-6 text-white hover:text-brand-gold text-2xl font-sans cursor-pointer transition-colors p-2 bg-black/40 hover:bg-black/60 rounded-full focus:outline-none z-50"
-              aria-label="Close lightbox"
-            >
-              ✕
-            </button>
-
-            {/* Previous button */}
-            <button
-              onClick={(e) => {
-                e.stopPropagation();
-                setActiveImageIndex((prev) => (prev !== null ? (prev - 1 + images.length) % images.length : null));
-              }}
-              className="absolute left-6 text-white hover:text-brand-gold text-3xl font-mono cursor-pointer transition-colors p-3 bg-black/40 hover:bg-black/60 rounded-full focus:outline-none z-50"
-              aria-label="Previous image"
-            >
-              ‹
-            </button>
-
-            {/* Next button */}
-            <button
-              onClick={(e) => {
-                e.stopPropagation();
-                setActiveImageIndex((prev) => (prev !== null ? (prev + 1) % images.length : null));
-              }}
-              className="absolute right-6 text-white hover:text-brand-gold text-3xl font-mono cursor-pointer transition-colors p-3 bg-black/40 hover:bg-black/60 rounded-full focus:outline-none z-50"
-              aria-label="Next image"
-            >
-              ›
-            </button>
-
-            {/* Large Image container to catch click and stop propagation */}
-            <div 
-              className="relative max-w-5xl max-h-[80vh] w-full flex items-center justify-center"
-              onClick={(e) => e.stopPropagation()}
-            >
-              <img
-                src={images[activeImageIndex]}
-                alt={`${translate(itinerary.title, lang)} - View Large`}
-                className="max-w-full max-h-[80vh] object-contain border border-zinc-800 rounded-sm shadow-2xl"
-              />
-            </div>
-
-            {/* Counter */}
-            <div className="text-zinc-400 font-mono text-xs mt-6 z-50 bg-black/30 px-3 py-1 rounded-full">
-              {activeImageIndex + 1} / {images.length}
+                </form>
+              )}
             </div>
           </div>
-        );
-      })()}
+        </div>
+      </main>
+
+      {/* =========================================================================
+          5. BOTTOM STICKY ACTION BAR (Exact match to pop-up screenshot bottom bar)
+         ========================================================================= */}
+      <div className="fixed bottom-0 left-0 right-0 z-40 bg-[#1E1B18]/95 backdrop-blur-xl border-t border-stone-800 py-3 sm:py-3.5 px-4 sm:px-8 text-white flex items-center justify-between shadow-[0_-10px_30px_rgba(0,0,0,0.25)]">
+        {/* Left: Questions? Call direct */}
+        <div className="flex items-center gap-2 text-xs sm:text-sm text-stone-300">
+          <Phone className="w-4 h-4 text-amber-400 shrink-0" />
+          <span className="hidden sm:inline">Questions? Call us direct:</span>
+          <a
+            href={`tel:${siteConfig.phoneUsCa.replace(/\s+/g, '')}`}
+            className="font-bold text-white hover:text-amber-300 transition-colors underline-offset-2 hover:underline"
+          >
+            {siteConfig.phoneUsCa}
+          </a>
+        </div>
+
+        {/* Right: Request Booking Button */}
+        <div className="flex items-center gap-3 sm:gap-5">
+          <Link
+            href="/#tours"
+            className="text-xs font-semibold text-stone-300 hover:text-white transition-colors underline-offset-4 hover:underline"
+          >
+            All Tours
+          </Link>
+          <button
+            type="button"
+            onClick={scrollToBooking}
+            className="inline-flex items-center gap-2 rounded-full bg-amber-400 hover:bg-amber-300 text-stone-950 px-4 sm:px-7 py-2 sm:py-2.5 text-xs font-bold uppercase tracking-wider transition-all duration-300 shadow-md hover:shadow-lg cursor-pointer transform hover:scale-105"
+          >
+            <Sparkles className="w-3.5 h-3.5" />
+            <span>REQUEST BOOKING FOR THIS TOUR</span>
+          </button>
+        </div>
+      </div>
+
+      {/* Footer */}
+      <div className="mt-20">
+        <FooterEditorial />
+      </div>
     </div>
   );
 }
