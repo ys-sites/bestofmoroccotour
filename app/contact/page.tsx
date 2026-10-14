@@ -21,10 +21,7 @@ export default function ContactPage() {
           { name: "Contact", path: "/contact" },
         ])}
       />
-      {/* Dark header band — same pattern as heritage page */}
-      <div className="relative bg-[#1C1A17]" style={{ height: "76px" }}>
-        <Navbar />
-      </div>
+      <Navbar />
 
       <main>
         <HomeContactForm />

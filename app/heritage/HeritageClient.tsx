@@ -128,11 +128,8 @@ export default function HeritageClient() {
   const [isYoutubePlaying, setIsYoutubePlaying] = useState(false);
 
   return (
-    <div className="min-h-screen bg-[#FAF8F5] text-[#1C1A17] font-body antialiased selection:bg-[#C5A880] selection:text-white overflow-x-hidden">
-      {/* Dark header band — gives the shared transparent Navbar a solid dark background on this page only */}
-      <div className="relative bg-[#1C1A17]" style={{ height: "76px" }}>
-        <Navbar />
-      </div>
+    <div className="min-h-screen bg-[#FAF8F5] text-[#1C1A17] font-body antialiased selection:bg-[#C5A880] selection:text-white overflow-x-clip">
+      <Navbar />
 
       {/* Hero Section */}
       <section className="relative pt-16 pb-24 md:pt-20 md:pb-32 px-6 md:px-12 bg-gradient-to-b from-[#F4F0EA] via-[#FAF8F5] to-[#FAF8F5] text-[#1C1A17] overflow-hidden border-b border-[#E8E2D8]">
@@ -198,7 +195,7 @@ export default function HeritageClient() {
             >
               <motion.div whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.98 }}>
                 <Link
-                  href="/#contact-form"
+                  href="/contact"
                   className="bg-[#1C1A17] hover:bg-[#36332E] text-white font-semibold text-xs tracking-[0.2em] uppercase px-8 py-4 rounded-full transition-all duration-300 shadow-md hover:shadow-xl flex items-center gap-2.5 group"
                 >
                   <span>{lang === "FR" ? "Créer Mon Voyage Sur Mesure" : "Design Custom Journey"}</span>
@@ -421,7 +418,7 @@ export default function HeritageClient() {
                   {/* Card Footer Action */}
                   <div className="px-6 pb-6 pt-2 border-t border-[#FAF8F5]">
                     <Link
-                      href="/#contact-form"
+                      href="/contact"
                       className="inline-flex items-center gap-2 font-mono text-[11px] font-bold text-[#1C1A17] uppercase tracking-wider group-hover:text-[#B8975A] transition-colors"
                     >
                       <span>{lang === "FR" ? "Explorer cette région →" : "Explore This Region →"}</span>
@@ -572,7 +569,7 @@ export default function HeritageClient() {
                     {translate(item.caption, lang)}
                   </p>
                   <Link
-                    href="/#contact-form"
+                    href="/contact"
                     className="inline-flex items-center gap-1.5 text-xs font-mono font-bold text-[#1C1A17] uppercase tracking-wider group-hover:text-[#B8975A] transition-colors pt-2"
                   >
                     <span>{lang === "FR" ? "Explorer ce paysage →" : "Explore Landscape →"}</span>
@@ -791,7 +788,7 @@ export default function HeritageClient() {
 
                   <div className="px-6 pb-6 pt-2 border-t border-[#FAF8F5]">
                     <Link
-                      href="/#contact-form"
+                      href="/contact"
                       className="inline-flex items-center gap-1.5 font-mono text-[11px] font-bold text-[#1C1A17] uppercase tracking-wider group-hover:text-[#B8975A] transition-colors"
                     >
                       <span>{lang === "FR" ? "Réserver une table privée →" : "Book Private Dining →"}</span>
@@ -885,7 +882,7 @@ export default function HeritageClient() {
                   </p>
                 </div>
                 <Link
-                  href="/#contact-form"
+                  href="/contact"
                   className="inline-flex items-center gap-2 font-mono text-xs font-bold text-[#1C1A17] uppercase tracking-wider group-hover:text-[#B8975A] transition-colors"
                 >
                   <span>{lang === "FR" ? "Personnaliser Mon Circuit →" : "Customize Cultural Tour →"}</span>
@@ -1018,7 +1015,7 @@ export default function HeritageClient() {
           <div className="flex flex-col sm:flex-row gap-4 items-center justify-center pt-4">
             <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.98 }}>
               <Link
-                href="/#contact-form"
+                href="/contact"
                 className="bg-[#B8975A] hover:bg-[#9E7F44] text-zinc-950 font-bold text-xs tracking-[0.2em] uppercase px-10 py-4 rounded-full transition-all duration-300 shadow-xl shadow-[#B8975A]/20 block"
               >
                 {lang === "FR" ? "Demander Mon Devis Sur Mesure" : "Request Custom Quote"}

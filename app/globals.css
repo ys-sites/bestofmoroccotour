@@ -88,6 +88,13 @@ body {
   --morocco-gold: #C5A880;
   --morocco-sand: #FAF8F5;
   --morocco-sand-dark: #F3EFEA;
+
+  /* Brand tokens referenced by @theme (--color-brand-*); without these every
+     text-brand-gold / bg-brand-gold utility resolved to nothing */
+  --brand-gold: #C5A880;
+  --brand-gold-dark: #A8875A;
+  --brand-black: #1C1A17;
+  --brand-gray: #71717A;
 }
 
 @theme {

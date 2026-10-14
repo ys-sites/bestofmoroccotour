@@ -21,12 +21,12 @@ export default function Breadcrumbs({ items, className = "" }: { items: Breadcru
           return (
             <li key={item.path} className="flex items-center gap-2">
               {isLast ? (
-                <span aria-current="page" className="text-white/80">
+                <span aria-current="page" className="text-stone-700">
                   {translate(item.name, lang)}
                 </span>
               ) : (
                 <>
-                  <Link href={item.path} className="text-brand-gold hover:text-white transition-colors">
+                  <Link href={item.path} className="text-[#C05621] hover:text-stone-900 transition-colors">
                     {translate(item.name, lang)}
                   </Link>
                   <ChevronRight className="w-3 h-3 text-brand-gold/60" aria-hidden="true" />

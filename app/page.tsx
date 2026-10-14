@@ -10,7 +10,6 @@ import TestimonialsEditorial from "./components/testimonials-editorial";
 import BookingInquiryForm from "./components/booking-inquiry-form";
 import FaqAndPolicies from "./components/faq-and-policies";
 import FooterEditorial from "./components/footer-editorial";
-import CallFloatingButton from "./components/CallFloatingButton";
 import { MoroccanArchWatermark, MoroccanLanternArt, MoroccanMedallionArt, MoroccanFriezeDivider } from "./components/moroccan-art-motifs";
 import { motion } from "motion/react";
 import { lanternSway } from "@/lib/animations";
@@ -32,7 +31,7 @@ export default function Home() {
   };
 
   return (
-    <div className="min-h-screen bg-transparent text-[#1E1B18] font-sans antialiased selection:bg-amber-200 selection:text-stone-900 relative overflow-x-hidden">
+    <div className="min-h-screen bg-transparent text-[#1E1B18] font-sans antialiased selection:bg-amber-200 selection:text-stone-900 relative overflow-x-clip">
       {/* Authentic Moroccan Background Ambient Accents */}
       {/* Hanging Brass Lantern 1 (Top-Left Gutter) */}
       <div className="absolute top-28 left-2 sm:left-4 z-40 pointer-events-none hidden xl:block">
@@ -70,9 +69,7 @@ export default function Home() {
       />
 
       {/* Sticky Top Header with Dedicated Padding */}
-      <div className="sticky top-4 z-50 w-full max-w-[1360px] mx-auto px-3 sm:px-6 pt-2">
-        <Navbar />
-      </div>
+      <Navbar />
 
       {/* Main Container Framing Hero Window with Space from Header */}
       <div className="relative mx-auto max-w-[1360px] px-3 sm:px-6 pt-6 sm:pt-8">
@@ -115,9 +112,6 @@ export default function Home() {
 
       {/* Footer */}
       <FooterEditorial />
-
-      {/* Floating Support & WhatsApp Hotlines */}
-      <CallFloatingButton />
     </div>
   );
 }

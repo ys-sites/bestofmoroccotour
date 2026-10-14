@@ -174,15 +174,15 @@ export default function FooterEditorial() {
 
           {/* Right: Legal links */}
           <div className="flex justify-center md:justify-end items-center gap-4 text-zinc-400 order-2 md:order-none">
-            <a href="#faq" className="hover:text-amber-400 transition-colors">
+            <a href="/#faq" className="hover:text-amber-400 transition-colors">
               Terms &amp; Conditions
             </a>
             <span>·</span>
-            <a href="#faq" className="hover:text-amber-400 transition-colors">
+            <a href="/#faq" className="hover:text-amber-400 transition-colors">
               Cancellation Policy
             </a>
             <span>·</span>
-            <a href="#guides" className="hover:text-amber-400 transition-colors">
+            <a href="/#guides" className="hover:text-amber-400 transition-colors">
               Founder Profile
             </a>
           </div>

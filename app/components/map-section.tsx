@@ -686,7 +686,7 @@ export default function MapSection({ countryId = "1", itineraryId }: { countryId
         {/* Action Button Links */}
         <div className="flex flex-col sm:flex-row gap-4 items-center w-full mt-8">
           <Link
-            href="/#portfolios"
+            href="/portfolio"
             className="w-full sm:w-auto border border-zinc-900 bg-zinc-900 text-white hover:bg-transparent hover:text-zinc-900 font-semibold text-[10px] tracking-[0.2em] uppercase px-8 py-3.5 transition-luxury rounded-full shadow-sm text-center cursor-pointer"
           >
             {translate(mapConfig.exploreBtn, lang)}

@@ -211,7 +211,7 @@ export default function HeroEditorial({ onSearch }: HeroProps) {
             <input
               suppressHydrationWarning
               type="text"
-              placeholder="Enter tour name or city (e.g. Rabat, Marrakech, Fes, Merzouga...)"
+              placeholder="Tour name or city (e.g. Fes, Merzouga)"
               value={searchQuery}
               onFocus={() => setIsDropdownOpen(true)}
               onChange={(e) => {

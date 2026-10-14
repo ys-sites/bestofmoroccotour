@@ -215,7 +215,7 @@ export default function AgadirGolfClient() {
           </p>
           <div>
             <Link
-              href="/#contacts"
+              href="/contact"
               className="inline-flex items-center gap-2 rounded-full bg-[#8B2635] hover:bg-[#72202b] text-[#faf9f5] font-semibold text-[11px] tracking-[0.2em] uppercase px-8 py-3.5 transition-luxury shadow-md cursor-pointer"
             >
               {translate(text.customBtn, lang)} &rarr;

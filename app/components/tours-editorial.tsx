@@ -102,7 +102,7 @@ export default function ToursEditorial({ onSelectTourToBook, searchFilter = "", 
   };
 
   return (
-    <section id="tours" className="bg-transparent pt-12 sm:pt-20 pb-16 sm:pb-20 px-3 sm:px-6 lg:px-8 text-stone-900 relative overflow-hidden">
+    <section id="tours" className="bg-transparent pt-28 md:pt-20 pb-16 sm:pb-20 px-3 sm:px-6 lg:px-8 text-stone-900 relative overflow-hidden">
       {/* Subtle authentic Moroccan Archway Watermark in Tours Section */}
       <MoroccanArchWatermark className="absolute -top-10 -right-24 w-96 h-auto pointer-events-none text-[#C05621] -z-10 hidden lg:block" opacity={0.25} />
 

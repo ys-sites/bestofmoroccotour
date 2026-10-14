@@ -15,11 +15,19 @@ export default function SmartVideo({ source, variant, className = "" }: SmartVid
   const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
   const [isLoaded, setIsLoaded] = useState(false);
   const [hasError, setHasError] = useState(false);
+  const [posterFailed, setPosterFailed] = useState(false);
   // Resolved at runtime so SSR always matches client
   const [isMobile, setIsMobile] = useState(false);
 
   const containerRef = useRef<HTMLDivElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
+  const posterRef = useRef<HTMLImageElement>(null);
+
+  // A poster that 404s before hydration never reaches onError, so check it on mount
+  useEffect(() => {
+    const img = posterRef.current;
+    if (img && img.complete && img.naturalWidth === 0) setPosterFailed(true);
+  }, []);
 
   // 1. Detect prefers-reduced-motion + mobile width
   useEffect(() => {
@@ -103,23 +111,26 @@ export default function SmartVideo({ source, variant, className = "" }: SmartVid
   const aspectClass = variant === "hero" ? "h-full w-full" : "aspect-video w-full";
   const shouldRenderVideo = variant === "hero" || (isInView && !prefersReducedMotion && !hasError);
 
-  // Pick the correct resolution based on actual device width
-  const mp4Src  = isMobile ? source.mp4Mobile  : source.mp4;
+  // Mobile tries the lighter file first; the browser falls through to the next <source>
+  // when it is missing (the CDN does not have _mobile renditions for every asset)
+  const mp4Sources = isMobile ? [source.mp4Mobile, source.mp4] : [source.mp4];
 
   return (
     <div
       ref={containerRef}
       className={`relative overflow-hidden ${aspectClass} ${className}`}
     >
-      {/* Poster — always visible, fades when video loads */}
-      <img
+      {/* Poster — always visible, fades when video loads; hidden if the file is missing */}
+      {!posterFailed && <img
+        ref={posterRef}
         src={source.poster}
         alt={`${source.id} destination`}
         className={`absolute inset-0 w-full h-full z-0 transition-opacity duration-500 ${
           isLoaded ? "opacity-30" : "opacity-100"
         }`}
         style={{ objectFit: "cover", width: "100%", height: "100%", filter: "brightness(0.95)" }}
-      />
+        onError={() => setPosterFailed(true)}
+      />}
 
       {/* Video — rendered only when in-view, motion allowed, no error */}
       {shouldRenderVideo && (
@@ -137,15 +148,23 @@ export default function SmartVideo({ source, variant, className = "" }: SmartVid
           disablePictureInPicture
           disableRemotePlayback
           preload="metadata"
-          poster={source.poster}
+          poster={posterFailed ? undefined : source.poster}
           // @ts-ignore — fetchpriority is a valid HTML attribute not yet in React types
           fetchpriority={variant === "hero" ? "high" : "auto"}
           onLoadedData={handleLoadedData}
           onError={handleError}
           onTimeUpdate={handleTimeUpdate}
         >
-          {/* MP4 (H.264 — universal) */}
-          <source src={mp4Src} type="video/mp4" />
+          {/* MP4 (H.264 — universal). <video onError> does not fire for <source> failures,
+              so the last source reports the error once every candidate has failed. */}
+          {mp4Sources.map((src, i) => (
+            <source
+              key={src}
+              src={src}
+              type="video/mp4"
+              onError={i === mp4Sources.length - 1 ? handleError : undefined}
+            />
+          ))}
           {/* Captions track for accessibility */}
           <track kind="captions" srcLang="fr" label="Français" default />
         </video>

@@ -198,7 +198,8 @@ export default function ItineraryClient({ id, crumbs }: { id: string; crumbs: Br
     if (el) {
       el.scrollIntoView({ behavior: "smooth" });
       const nameInput = document.getElementById("client-name");
-      if (nameInput) nameInput.focus();
+      // preventScroll keeps the smooth scroll from being cut short by the focus jump
+      if (nameInput) nameInput.focus({ preventScroll: true });
     }
   };
 
@@ -248,9 +249,7 @@ export default function ItineraryClient({ id, crumbs }: { id: string; crumbs: Br
       </div>
 
       {/* Sticky Top Header */}
-      <div className="sticky top-4 z-50 w-full max-w-[1360px] mx-auto px-3 sm:px-6 pt-2">
-        <Navbar />
-      </div>
+      <Navbar />
 
       {/* Main Subpage Container */}
       <main className="relative max-w-6xl mx-auto px-4 sm:px-6 pt-6 sm:pt-8 space-y-8">
@@ -267,7 +266,7 @@ export default function ItineraryClient({ id, crumbs }: { id: string; crumbs: Br
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.75, ease: easeOutExpo }}
-          className="relative w-full h-[420px] sm:h-[480px] lg:h-[520px] rounded-[2.2rem] overflow-hidden shadow-[0_20px_50px_rgba(74,53,37,0.14)] border border-stone-200/80 bg-stone-900 flex flex-col justify-end p-6 sm:p-10 lg:p-12 text-white"
+          className="relative w-full min-h-[420px] sm:min-h-[480px] lg:min-h-[520px] rounded-[2.2rem] overflow-hidden shadow-[0_20px_50px_rgba(74,53,37,0.14)] border border-stone-200/80 bg-stone-900 flex flex-col justify-end p-6 sm:p-10 lg:p-12 text-white"
         >
           {/* Full Cover Backdrop Image */}
           <Image
@@ -493,11 +492,11 @@ export default function ItineraryClient({ id, crumbs }: { id: string; crumbs: Br
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
                   {tour.hotelList.map((hotel, idx) => (
                     <div key={idx} className="p-4 rounded-xl bg-stone-50/80 border border-stone-200/70 space-y-2">
-                      <div className="flex items-center justify-between">
+                      <div className="flex items-start justify-between gap-3">
                         <span className="font-serif font-bold text-sm text-[#1E1B18]">
                           {hotel.name}
                         </span>
-                        <span className="text-amber-500 text-xs">
+                        <span className="text-amber-500 text-xs shrink-0">
                           {"★".repeat(hotel.stars)}
                         </span>
                       </div>
@@ -512,7 +511,7 @@ export default function ItineraryClient({ id, crumbs }: { id: string; crumbs: Br
           </div>
 
           {/* RIGHT COLUMN: Dedicated Sticky In-Page Booking Form (lg:col-span-4) */}
-          <div className="lg:col-span-4 sticky top-24" id="booking-form">
+          <div className="lg:col-span-4 lg:sticky lg:top-32 scroll-mt-28" id="booking-form">
             <div className="rounded-[2rem] bg-white/98 backdrop-blur-xl border border-stone-200/95 shadow-[0_16px_45px_rgba(74,53,37,0.08)] p-6 sm:p-7 relative overflow-hidden">
               {/* Subtle Moroccan Rosette Hallmark watermark */}
               <div className="absolute -top-6 -right-6 pointer-events-none opacity-10">
@@ -687,7 +686,7 @@ export default function ItineraryClient({ id, crumbs }: { id: string; crumbs: Br
       {/* =========================================================================
           5. BOTTOM STICKY ACTION BAR (Exact match to pop-up screenshot bottom bar)
          ========================================================================= */}
-      <div className="fixed bottom-0 left-0 right-0 z-40 bg-[#1E1B18]/95 backdrop-blur-xl border-t border-stone-800 py-2.5 sm:py-3.5 px-3 sm:px-8 text-white flex items-center justify-between shadow-[0_-10px_30px_rgba(0,0,0,0.25)]">
+      <div className="fixed bottom-0 left-0 right-0 z-40 bg-[#1E1B18]/95 backdrop-blur-xl border-t border-stone-800 py-2.5 sm:py-3.5 px-3 sm:px-8 pb-[max(0.625rem,env(safe-area-inset-bottom))] text-white flex items-center justify-between gap-2 shadow-[0_-10px_30px_rgba(0,0,0,0.25)]">
         {/* Left: Questions? Call direct */}
         <div className="flex items-center gap-1.5 sm:gap-2 text-xs sm:text-sm text-stone-300 shrink-0">
           <Phone className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-amber-400 shrink-0" />
