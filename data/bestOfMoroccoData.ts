@@ -546,7 +546,7 @@ export const masterTours: TourItem[] = [
       {
         "day": 1,
         "title": "MARRAKECH",
-        "desc": "Upon arrival at Menara Airport in Marrakech you will find your guide waiting for you to greet you then transfer you to your hotel for check-in. Known as the "Pearl of the South," this unique city was founded in the 11th century by the Almoravides Dynasty and is situated where the desert meets the mountains. Today's sightseeing includes the Saadian tombs, the Dar Si Said Museum, the Menara Gardens, and the focal point of the city: the 12 century Koutoubia Minaret. After lunch you will have an opportunity to visit the amazing souks, a maze of alleyways and multicolored shops, and lastly the Djemaa El Fna Square, where snake charmers, acrobats, and fortune tellers put on a never-ending show. Dinner and accommodations in the Hotel."
+        "desc": "Upon arrival at Menara Airport in Marrakech you will find your guide waiting for you to greet you then transfer you to your hotel for check-in. Known as the 'Pearl of the South,' this unique city was founded in the 11th century by the Almoravides Dynasty and is situated where the desert meets the mountains. Today's sightseeing includes the Saadian tombs, the Dar Si Said Museum, the Menara Gardens, and the focal point of the city: the 12 century Koutoubia Minaret. After lunch you will have an opportunity to visit the amazing souks, a maze of alleyways and multicolored shops, and lastly the Djemaa El Fna Square, where snake charmers, acrobats, and fortune tellers put on a never-ending show. Dinner and accommodations in the Hotel."
       },
       {
         "day": 2,

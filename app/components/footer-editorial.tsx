@@ -58,39 +58,39 @@ export default function FooterEditorial() {
             </h4>
             <ul className="space-y-2.5 text-xs text-zinc-400 font-light">
               <li>
-                <a href="#tours" className="hover:text-amber-400 transition-colors">
+                <Link href="/itineraries/imperial-cities" className="hover:text-amber-400 transition-colors">
                   Imperial Cities of Morocco (8 Days)
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="#tours" className="hover:text-amber-400 transition-colors">
-                  Morocco Imperial Cities & Sahara (10 Days)
-                </a>
+                <Link href="/itineraries/imperial-sahara" className="hover:text-amber-400 transition-colors">
+                  Morocco Imperial Cities &amp; Sahara (10 Days)
+                </Link>
               </li>
               <li>
-                <a href="#tours" className="hover:text-amber-400 transition-colors">
-                  North & South of Morocco (10 Days)
-                </a>
+                <Link href="/itineraries/north-south" className="hover:text-amber-400 transition-colors">
+                  North &amp; South of Morocco (10 Days)
+                </Link>
               </li>
               <li>
-                <a href="#tours" className="hover:text-amber-400 transition-colors">
+                <Link href="/itineraries/atlantic-ocean" className="hover:text-amber-400 transition-colors">
                   Morocco Atlantic Ocean Journey (10 Days)
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="#tours" className="hover:text-amber-400 transition-colors">
-                  Morocco Great South & Kasbahs (8 Days)
-                </a>
+                <Link href="/itineraries/south-kasbahs" className="hover:text-amber-400 transition-colors">
+                  Morocco Great South &amp; Kasbahs (8 Days)
+                </Link>
               </li>
               <li>
-                <a href="#tours" className="hover:text-amber-400 transition-colors">
+                <Link href="/itineraries/jewish-heritage" className="hover:text-amber-400 transition-colors">
                   Jewish Heritage of Morocco (10 Days)
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="#tours" className="hover:text-amber-400 transition-colors">
-                  Premium Morocco Tour (9 Days - €999)
-                </a>
+                <Link href="/itineraries/premium-tour" className="hover:text-amber-400 transition-colors">
+                  Premium Morocco Tour (9 Days)
+                </Link>
               </li>
             </ul>
           </div>

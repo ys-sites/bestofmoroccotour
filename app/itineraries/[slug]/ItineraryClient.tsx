@@ -267,24 +267,7 @@ export default function ItineraryClient({ id, crumbs }: { id: string; crumbs: Br
 // TODO(JAY): set NEXT_PUBLIC_INSURANCE_URL in Vercel once client provides insurance partner link
 const INSURANCE_LINK_URL = process.env.NEXT_PUBLIC_INSURANCE_URL ?? "";
 
-  const itinerary = (() => {
-    switch (id) {
-      case "6": return itinerariesData["6"];
-      case "7": return itinerariesData["7"];
-      case "8": return itinerariesData["8"];
-      case "9": return itinerariesData["9"];
-      case "10": return itinerariesData["10"];
-      case "11": return itinerariesData["11"];
-      case "12": return itinerariesData["12"];
-      case "13": return itinerariesData["13"];
-      case "14": return itinerariesData["14"];
-      case "15": return itinerariesData["15"];
-      case "16": return itinerariesData["16"];
-      case "17": return itinerariesData["17"];
-      case "18": return itinerariesData["18"];
-      default: return null;
-    }
-  })();
+  const itinerary = itinerariesData[id] || null;
 
   const [bookingName, setBookingName] = useState("");
   const [bookingEmail, setBookingEmail] = useState("");
@@ -393,28 +376,32 @@ const INSURANCE_LINK_URL = process.env.NEXT_PUBLIC_INSURANCE_URL ?? "";
 
   const videoUrl = (() => {
     switch (id) {
+      case "north-south":
       case "7":
         return "Morocco_Chefchaouen_Hero_16x9_Final.mov_eushqt";
+      case "imperial-cities":
       case "6":
       case "9":
       case "fez":
       case "fes":
         return "Morocco_Fez_Hero_16x9_UpdatedLogo_z5b24u";
+      case "atlantic-ocean":
       case "essaouira":
         return "Morocco_Essaouira_Hero_16x9_UpdatedLogo_k4v9gz";
+      case "south-kasbahs":
       case "ouarzazate":
         return "Morocco_Ouarzazate_Hero_16x9_UpdatedLogo_jhmnuj";
+      case "imperial-sahara":
+      case "marrakech":
+        return "Morocco_Marrakech_Hero_16x9_UpdatedLogo_wv2yxv";
+      case "jewish-heritage":
+        return "Morocco_Fez_Hero_16x9_UpdatedLogo_z5b24u";
+      case "premium-tour":
+        return "Morocco_Marrakech_Hero_16x9_UpdatedLogo_wv2yxv";
       case "dakhla":
         return "Morocco_Dakhla_Hero_16x9_UpdatedLogo_cijwv8";
       case "casablanca":
         return "Morocco_Casablanca_Hero_16x9_UpdatedLogo_htz5pb";
-      case "tangier":
-      case "tanger":
-      case "17":
-      case "18":
-        return null;
-      case "10":
-        return null;
       case "11":
       case "12":
       case "13":
