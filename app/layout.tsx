@@ -103,7 +103,7 @@ export default function RootLayout({
                   "founder": {
                     "@type": "Person",
                     "name": "Ayoub Sadeddine",
-                    "jobTitle": "CEO & Licensed Tour Guide (Licence No. 2816)"
+                    "jobTitle": "CEO & Founder"
                   },
                   "knowsAbout": [
                     "Customized Morocco Tours",
@@ -120,7 +120,7 @@ export default function RootLayout({
           }}
         />
       </head>
-      <body className="min-h-full flex flex-col">
+      <body className="relative min-h-full flex flex-col">
         {/* Google Tag Manager (noscript) */}
         <noscript>
           <iframe

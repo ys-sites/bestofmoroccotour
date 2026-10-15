@@ -69,7 +69,7 @@ export default function FounderClient() {
                 className="object-cover object-center"
               />
               <span className="absolute left-4 bottom-4 px-3.5 py-1.5 rounded-full text-xs font-bold bg-black/65 text-amber-300 border border-amber-400/30 backdrop-blur-md">
-                {lang === "FR" ? "Licence n° 2816" : "Licence No. 2816"}
+                {lang === "FR" ? "PDG et fondateur" : "CEO & Founder"}
               </span>
             </div>
           </div>
@@ -83,8 +83,8 @@ export default function FounderClient() {
             </h1>
             <p className="text-stone-600 text-sm sm:text-base font-light leading-relaxed">
               {lang === "FR"
-                ? "Guide touristique agréé par le ministère du Tourisme du Maroc et fondateur de Best of Morocco Tours."
-                : "Licensed tour guide from the Ministry of Tourism of Morocco and founder of Best of Morocco Tours."}
+                ? "PDG et fondateur de Best of Morocco Tours, spécialiste des circuits privés sur mesure au Maroc."
+                : "CEO & Founder of Best of Morocco Tours, specialist in customized, tailor-made private Morocco tours."}
             </p>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
               {facts.map(({ icon: Icon, label, value }) => (

@@ -10,7 +10,7 @@ import { siteConfig } from "@/data/bestOfMoroccoData";
 const NAV_LINKS = [
   { href: "/#tours", label: "Circuits", mobileLabel: "Circuits & Tours" },
   { href: "/#why-choose-us", label: "Why Choose Us", mobileLabel: "Why Choose Us" },
-  { href: "/#guides", label: "Our Tour Guides", mobileLabel: "Our Tour Guides" },
+  { href: "/#guides", label: "Our CEO", mobileLabel: "Our CEO Philosophy" },
   { href: "/#reviews", label: "Reviews", mobileLabel: "Verified Reviews" },
   { href: "/#faq", label: "FAQ", mobileLabel: "FAQ & Policies" },
   { href: "/#custom-trip", label: "Contact", mobileLabel: "Contact & Inquiry" },

@@ -16,7 +16,7 @@ const personJsonLd = {
   "@type": "Person",
   "@id": `${SITE_URL}/founder#person`,
   name: "Ayoub Sadeddine",
-  jobTitle: "CEO & Founder, Licensed Tour Guide (Licence No. 2816)",
+  jobTitle: "CEO & Founder",
   image: `${SITE_URL}/images/bestofmorocco/img_team_team-1.jpg`,
   url: `${SITE_URL}/founder`,
   birthPlace: { "@type": "Place", name: "Marrakech, Morocco" },

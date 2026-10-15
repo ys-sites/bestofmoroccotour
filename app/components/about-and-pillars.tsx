@@ -1,7 +1,8 @@
 'use client';
 
 import Image from "next/image";
-import { ShieldCheck, Award, Users, HeartHandshake, MapPin, GraduationCap } from "lucide-react";
+import Link from "next/link";
+import { ShieldCheck, Award, Users, HeartHandshake, MapPin, GraduationCap, ArrowRight } from "lucide-react";
 import { siteConfig } from "@/data/bestOfMoroccoData";
 import { MoroccanArchWatermark, MoroccanTeapotArt, MoroccanCamelDuneArt, MoroccanMedallionArt } from "./moroccan-art-motifs";
 import { motion } from "motion/react";
@@ -117,7 +118,7 @@ export default function AboutAndPillars() {
         </div>
 
         {/* =========================================================================
-            SECTION 2: FOUNDER & LICENSED TOUR GUIDES SPOTLIGHT
+            SECTION 2: OUR CEO PHILOSOPHY (from the original about page)
            ========================================================================= */}
         <motion.div 
           initial={{ opacity: 0, y: 30 }}
@@ -125,19 +126,19 @@ export default function AboutAndPillars() {
           viewport={{ once: true, margin: "-40px" }}
           transition={{ duration: 0.7, ease: easeOutExpo }}
           id="guides" 
-          className="pt-12 border-t border-stone-200/80 space-y-8"
+          className="scroll-mt-28 pt-12 border-t border-stone-200/80 space-y-8"
         >
           <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4">
             <div>
               <span className="text-xs font-semibold uppercase tracking-widest text-[#C5A880]">
-                The Human Touch
+                Leadership
               </span>
               <h3 className="font-serif text-3xl sm:text-4xl font-bold text-stone-900 mt-1">
-                Official Ministry Tour Guides
+                Our CEO Philosophy
               </h3>
             </div>
             <p className="text-xs sm:text-sm text-stone-500 max-w-md font-light">
-              Every city guide and desert trekker in our roster is licensed by the Moroccan Ministry of Tourism, multilingual, and passionate about cultural storytelling.
+              Your local expert for classic and luxury private Morocco tours.
             </p>
           </div>
 
@@ -150,19 +151,19 @@ export default function AboutAndPillars() {
             <div className="lg:col-span-4 relative h-72 sm:h-80 w-full rounded-2xl overflow-hidden shadow-md group">
               <Image
                 src="/images/bestofmorocco/img_team_team-1.jpg"
-                alt="Ayoub Sadeddine - CEO & Licensed National Tour Guide"
+                alt="Ayoub Sadeddine - CEO & Founder of Best of Morocco Tours"
                 fill
                 className="object-cover object-top transition-transform duration-700 group-hover:scale-105"
               />
               <div className="absolute bottom-3 left-3 bg-black/75 backdrop-blur-md px-3 py-1 rounded-full text-[10px] font-bold text-amber-300 border border-amber-400/30">
-                Licence No. 2816
+                CEO &amp; Founder
               </div>
             </div>
 
             <div className="lg:col-span-8 space-y-4">
               <div className="space-y-1">
                 <span className="text-xs font-mono font-bold tracking-wider uppercase text-[#C05621]">
-                  CEO &amp; Founder · Licensed National Tour Guide
+                  CEO &amp; Founder
                 </span>
                 <h4 className="font-serif text-2xl sm:text-3xl font-bold text-stone-900">
                   Ayoub Sadeddine
@@ -174,8 +175,16 @@ export default function AboutAndPillars() {
               </div>
 
               <p className="text-xs sm:text-sm text-stone-600 leading-relaxed font-light">
-                &ldquo;Working in tourism since childhood for over 20 years, starting in my grandfather&apos;s restaurant in the heart of the Old Medina of Marrakech, then serving as a licensed guide for prominent tour operators worldwide. My mission is to share our Amazigh culture, architecture, and living history with genuine warmth.&rdquo;
+                &ldquo;I am a travel enthusiast who has travelled a great deal around the world and especially in Morocco, getting to know the north, the south and the Atlas. My aim is to provide the best experience Morocco has to offer, taking you a step closer to understanding its people and culture. I specialize in customized, tailor-made Morocco tours: as your travel adviser, I plan and organize your trip to fit your needs and expectations, with all the tips and recommendations you need to create lifelong memories of this great experience called Morocco.&rdquo;
               </p>
+
+              <Link
+                href="/founder"
+                className="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-[#C05621] hover:text-[#4A3525] transition-colors"
+              >
+                <span>View Founder Profile</span>
+                <ArrowRight className="w-3.5 h-3.5" />
+              </Link>
 
               <div className="pt-3 border-t border-stone-200 grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs text-stone-600 font-light">
                 <div className="flex items-center gap-2">

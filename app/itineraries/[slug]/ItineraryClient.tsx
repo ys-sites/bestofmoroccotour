@@ -230,7 +230,7 @@ export default function ItineraryClient({ id, crumbs }: { id: string; crumbs: Br
   }
 
   return (
-    <div className="min-h-screen bg-transparent text-[#1E1B18] font-sans antialiased selection:bg-amber-200 selection:text-stone-900 relative">
+    <div className="min-h-screen bg-transparent text-[#1E1B18] font-sans antialiased selection:bg-amber-200 selection:text-stone-900 relative overflow-x-clip">
       {/* Background Moroccan Arch Watermarks */}
       <MoroccanArchWatermark 
         className="absolute top-[640px] -left-20 w-[200px] xl:w-[240px] h-auto text-[#C05621] pointer-events-none -z-10 hidden xl:block" 
